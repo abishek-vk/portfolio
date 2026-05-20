@@ -38,13 +38,13 @@ export default function Contact() {
           <h2 className="mb-4">
             Let's Build Something <span className="gradient-text">Amazing Together</span>
           </h2>
-          <p className="text-[var(--text-secondary)] text-lg max-w-2xl mx-auto">
+          <p className="text-[var(--text-secondary)] text-sm md:text-base lg:text-lg max-w-2xl mx-auto">
             Open to new opportunities, collaborations, and exciting projects. I'd love to hear from you.
           </p>
         </motion.div>
 
         {/* Content Grid */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-10 items-stretch mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 items-stretch mb-16">
           {/* Contact Methods */}
           <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="space-y-5">
             {contactInfo.map((info, i) => (
@@ -74,12 +74,12 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
             onSubmit={handleSubmit}
-            className="md:col-span-2 rounded-3xl p-10 space-y-6 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300"
+            className="md:col-span-2 rounded-3xl p-6 md:p-8 lg:p-10 space-y-6 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300"
           >
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {/* Name Input */}
               <div>
-                <label className="block text-sm font-medium mb-3 text-[var(--text-primary)]">Your Name</label>
+                <label className="block text-xs md:text-sm font-medium mb-2 md:mb-3 text-[var(--text-primary)]">Your Name</label>
                 <motion.input
                   type="text"
                   value={form.name}
@@ -87,13 +87,13 @@ export default function Contact() {
                   placeholder="John Doe"
                   required
                   whileFocus={{ scale: 1.01 }}
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 text-sm"
                 />
               </div>
 
               {/* Email Input */}
               <div>
-                <label className="block text-sm font-medium mb-3 text-[var(--text-primary)]">Your Email</label>
+                <label className="block text-xs md:text-sm font-medium mb-2 md:mb-3 text-[var(--text-primary)]">Your Email</label>
                 <motion.input
                   type="email"
                   value={form.email}
@@ -101,14 +101,14 @@ export default function Contact() {
                   placeholder="john@example.com"
                   required
                   whileFocus={{ scale: 1.01 }}
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 text-sm"
                 />
               </div>
             </div>
 
             {/* Message Textarea */}
             <div>
-              <label className="block text-sm font-medium mb-3 text-[var(--text-primary)]">Message</label>
+              <label className="block text-xs md:text-sm font-medium mb-2 md:mb-3 text-[var(--text-primary)]">Message</label>
               <motion.textarea
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -116,7 +116,7 @@ export default function Contact() {
                 rows={4}
                 required
                 whileFocus={{ scale: 1.01 }}
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 resize-none"
+                className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 resize-none text-sm"
               />
             </div>
 

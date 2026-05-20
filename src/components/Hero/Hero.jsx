@@ -51,7 +51,7 @@ export default function Hero() {
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-[var(--accent-purple)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl blob opacity-30" />
 
       <div className="container-max relative z-10">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="mb-4">
@@ -60,23 +60,23 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-2">
+            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-2 text-3xl md:text-4xl lg:text-5xl">
               Hi, I'm <span className="gradient-text">Abishek V</span>
             </motion.h1>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="text-2xl md:text-3xl font-semibold mb-6 h-10">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 h-auto md:h-10">
               <TypingText texts={roles} speed={80} />
             </motion.div>
 
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-[var(--text-secondary)] text-lg leading-relaxed mb-8 max-w-lg">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-[var(--text-secondary)] text-sm md:text-base lg:text-lg leading-relaxed mb-8 max-w-lg">
               Crafting elegant, scalable solutions through clean code and innovative design. Passionate about building exceptional digital experiences that make an impact.
             </motion.p>
 
             {/* CTA Buttons */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="flex flex-wrap gap-4 mb-10">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 mb-10">
               <motion.a
                 href="#projects"
-                className="glow-button px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 group"
+                className="glow-button px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold text-white transition-all duration-300 group text-sm md:text-base"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -84,7 +84,7 @@ export default function Hero() {
               </motion.a>
               <motion.a
                 href="#contact"
-                className="px-8 py-4 rounded-full font-semibold text-[var(--text-primary)] border border-white/20 hover:border-[var(--accent-cyan)] hover:glow-text transition-all duration-300"
+                className="px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold text-[var(--text-primary)] border border-white/20 hover:border-[var(--accent-cyan)] hover:glow-text transition-all duration-300 text-sm md:text-base text-center"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -93,8 +93,8 @@ export default function Hero() {
             </motion.div>
 
             {/* Social Links */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="flex items-center gap-6">
-              <span className="text-[var(--text-tertiary)] text-sm">Connect with me</span>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
+              <span className="text-[var(--text-tertiary)] text-xs md:text-sm">Connect with me</span>
               <div className="flex gap-4">
                 <motion.a
                   href="https://github.com/abishek-vk"
@@ -140,9 +140,9 @@ export default function Hero() {
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2">
           <div className="flex flex-col items-center gap-2">
-            <span className="text-[var(--text-tertiary)] text-sm">Scroll to explore</span>
+            <span className="text-[var(--text-tertiary)] text-xs md:text-sm">Scroll to explore</span>
             <FaArrowDown className="text-[var(--accent-cyan)] animate-pulse" />
           </div>
         </motion.div>

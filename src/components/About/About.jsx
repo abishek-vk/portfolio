@@ -51,7 +51,7 @@ export default function About() {
       <div className="absolute -left-32 top-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-[var(--accent-purple)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl opacity-20" />
       
       <div className="container-max relative z-10">
-        <div className="grid md:grid-cols-2 gap-16 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 lg:gap-20 items-start">
           {/* Left - Text Content */}
           <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mb-6">
@@ -65,27 +65,27 @@ export default function About() {
             </motion.h2>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="space-y-6 mb-10">
-              <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
+              <p className="text-[var(--text-secondary)] text-sm md:text-base lg:text-lg leading-relaxed">
                 I'm an aspiring Software Developer with a passion for web development and building modern, user-centric applications. With hands-on experience in React, TypeScript, Python, and UI/UX design principles, I focus on delivering responsive interfaces and seamless experiences.
               </p>
-              <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
+              <p className="text-[var(--text-secondary)] text-sm md:text-base lg:text-lg leading-relaxed">
                 My journey spans building scalable backend systems to crafting intuitive frontend interfaces. I'm driven by solving complex problems through clean code, innovative thinking, and continuous learning.
               </p>
             </motion.div>
 
             {/* Quick Stats */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.25 }} className="flex gap-8">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.25 }} className="flex flex-col sm:flex-row gap-6 md:gap-8">
               <div>
-                <p className="text-3xl font-bold gradient-text">5+</p>
-                <p className="text-[var(--text-tertiary)] text-sm mt-1">Projects Completed</p>
+                <p className="text-2xl md:text-3xl font-bold gradient-text">5+</p>
+                <p className="text-[var(--text-tertiary)] text-xs md:text-sm mt-1">Projects Completed</p>
               </div>
               <div>
-                <p className="text-3xl font-bold gradient-text">3+</p>
-                <p className="text-[var(--text-tertiary)] text-sm mt-1">Years Learning</p>
+                <p className="text-2xl md:text-3xl font-bold gradient-text">3+</p>
+                <p className="text-[var(--text-tertiary)] text-xs md:text-sm mt-1">Years Learning</p>
               </div>
               <div>
-                <p className="text-3xl font-bold gradient-text">15+</p>
-                <p className="text-[var(--text-tertiary)] text-sm mt-1">Tech Skills</p>
+                <p className="text-2xl md:text-3xl font-bold gradient-text">15+</p>
+                <p className="text-[var(--text-tertiary)] text-xs md:text-sm mt-1">Tech Skills</p>
               </div>
             </motion.div>
           </motion.div>

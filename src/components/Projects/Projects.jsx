@@ -80,13 +80,13 @@ export default function Projects() {
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="mb-4">
             Showcase of <span className="gradient-text">Projects</span>
           </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-[var(--text-secondary)] text-lg max-w-2xl">
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-[var(--text-secondary)] text-sm md:text-base lg:text-lg max-w-2xl">
             Full-stack projects demonstrating expertise in building scalable, user-focused applications with modern architecture.
           </motion.p>
         </motion.div>
 
         {/* Projects Grid - 2 Columns with Extra Spacing */}
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16">
           {projects.map((project, i) => (
             <motion.div
               key={i}
@@ -96,21 +96,21 @@ export default function Projects() {
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className="group"
             >
-              <div className="border border-white/10 rounded-2xl p-10 lg:p-14 hover:border-[var(--accent-cyan)] transition-all duration-300 h-full flex flex-col">
+              <div className="border border-white/10 rounded-2xl p-6 md:p-8 lg:p-10 xl:p-14 hover:border-[var(--accent-cyan)] transition-all duration-300 h-full flex flex-col">
 
                 {/* Title */}
-                <h3 className="text-2xl lg:text-3xl font-bold mb-6 group-hover:gradient-text transition-all leading-tight">{project.title}</h3>
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 group-hover:gradient-text transition-all leading-tight">{project.title}</h3>
                 
                 {/* Description */}
-                <p className="text-[var(--text-secondary)] text-base lg:text-lg leading-relaxed mb-10">
+                <p className="text-[var(--text-secondary)] text-sm md:text-base lg:text-lg leading-relaxed mb-6 md:mb-8 lg:mb-10">
                   {project.desc}
                 </p>
 
                 {/* Divider */}
-                <div className="h-px bg-gradient-to-r from-white/10 to-transparent mb-10" />
+                <div className="h-px bg-gradient-to-r from-white/10 to-transparent mb-6 md:mb-8 lg:mb-10" />
 
                 {/* Highlights as List */}
-                <div className="mb-12 space-y-5 flex-grow">
+                <div className="mb-8 md:mb-10 lg:mb-12 space-y-3 md:space-y-4 lg:space-y-5 flex-grow">
                   <p className="text-xs font-semibold text-[var(--text-tertiary)] uppercase tracking-wide">Key Features</p>
                   {project.highlights.map((highlight, j) => (
                     <motion.div 
@@ -123,21 +123,21 @@ export default function Projects() {
                       <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-gradient-to-r from-[var(--accent-cyan)]/30 to-[var(--accent-teal)]/20 mt-0.5">
                         <span className="text-xs text-[var(--accent-cyan)] font-bold">✓</span>
                       </div>
-                      <span className="text-[var(--text-secondary)] text-sm leading-relaxed group-hover/feature:text-white/90 transition-colors">{highlight}</span>
+                      <span className="text-[var(--text-secondary)] text-xs md:text-sm leading-relaxed group-hover/feature:text-white/90 transition-colors">{highlight}</span>
                     </motion.div>
                   ))}
                 </div>
 
                 {/* Divider */}
-                <div className="h-px bg-gradient-to-r from-white/10 to-transparent mb-10 mt-auto" />
+                <div className="h-px bg-gradient-to-r from-white/10 to-transparent mb-6 md:mb-8 lg:mb-10 mt-auto" />
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                   <motion.a
                     href="https://github.com/abishek-vk"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all font-medium text-sm"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2.5 md:py-3.5 rounded-xl bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all font-medium text-xs md:text-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -147,7 +147,7 @@ export default function Projects() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/10 text-[var(--text-primary)] hover:border-[var(--accent-cyan)] hover:bg-white/5 transition-all font-medium text-sm"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2.5 md:py-3.5 rounded-xl border border-white/10 text-[var(--text-primary)] hover:border-[var(--accent-cyan)] hover:bg-white/5 transition-all font-medium text-xs md:text-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
