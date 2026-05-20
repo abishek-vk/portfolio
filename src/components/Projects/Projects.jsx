@@ -4,6 +4,7 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 const projects = [
   {
     title: "CodingPlatform",
+    liveUrl: "https://codelab.612151820.xyz/",
     desc: "Full-stack institutional coding and assessment platform with role-based access and advanced features.",
     highlights: [
       "Role-based system for students, teachers, coordinators, and admins",
@@ -16,6 +17,7 @@ const projects = [
   },
   {
     title: "Bloodflowhub",
+    liveUrl: "https://bloodflow-hub.onrender.com/",
     desc: "Comprehensive blood bank and donor management platform for streamlined operations.",
     highlights: [
       "Real-time blood request processing and inventory tracking",
@@ -28,6 +30,7 @@ const projects = [
   },
   {
     title: "AutoML",
+    liveUrl: "#",
     desc: "Automated machine learning platform for model selection and hyperparameter optimization.",
     highlights: [
       "Intelligent model selection with performance ranking",
@@ -82,66 +85,75 @@ export default function Projects() {
           </motion.p>
         </motion.div>
 
-        {/* Horizontal Projects - Alternating Layout */}
-        <div className="space-y-12">
+        {/* Projects Grid - 2 Columns with Extra Spacing */}
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
           {projects.map((project, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className="group"
             >
-              <div>
-                {/* Content */}
-                <motion.div>
-                  <div className="mb-6">
-                    <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 text-[var(--accent-cyan)] uppercase tracking-wide">
-                      Project {i + 1}
-                    </span>
-                  </div>
+              <div className="border border-white/10 rounded-2xl p-10 lg:p-14 hover:border-[var(--accent-cyan)] transition-all duration-300 h-full flex flex-col">
 
-                  <h3 className="text-3xl font-bold mb-4 group-hover:gradient-text transition-all">{project.title}</h3>
-                  <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-                    {project.desc}
-                  </p>
+                {/* Title */}
+                <h3 className="text-2xl lg:text-3xl font-bold mb-6 group-hover:gradient-text transition-all leading-tight">{project.title}</h3>
+                
+                {/* Description */}
+                <p className="text-[var(--text-secondary)] text-base lg:text-lg leading-relaxed mb-10">
+                  {project.desc}
+                </p>
 
-                  {/* Highlights as List */}
-                  <div className="mb-8 space-y-3">
-                    <p className="text-sm font-semibold text-[var(--text-tertiary)] uppercase tracking-wide">Key Features</p>
-                    {project.highlights.map((highlight, j) => (
-                      <motion.div key={j} className="flex gap-3 items-start" whileHover={{ x: 4 }}>
-                        <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-gradient-to-r from-[var(--accent-cyan)]/30 to-[var(--accent-teal)]/20">
-                          <span className="text-xs text-[var(--accent-cyan)]">✓</span>
-                        </div>
-                        <span className="text-[var(--text-secondary)] text-sm leading-relaxed">{highlight}</span>
-                      </motion.div>
-                    ))}
-                  </div>
+                {/* Divider */}
+                <div className="h-px bg-gradient-to-r from-white/10 to-transparent mb-10" />
 
-                  {/* Action Buttons */}
-                  <div className="flex flex-wrap gap-4">
-                    <motion.a
-                      href="https://github.com/abishek-vk"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all font-medium"
-                      whileHover={{ scale: 1.05 }}
+                {/* Highlights as List */}
+                <div className="mb-12 space-y-5 flex-grow">
+                  <p className="text-xs font-semibold text-[var(--text-tertiary)] uppercase tracking-wide">Key Features</p>
+                  {project.highlights.map((highlight, j) => (
+                    <motion.div 
+                      key={j} 
+                      className="flex gap-4 items-start group/feature"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: j * 0.05 }}
                     >
-                      <FaGithub /> View Code
-                    </motion.a>
-                    <motion.a
-                      href="#"
-                      className="flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-all font-medium"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <FaExternalLinkAlt /> Live Demo
-                    </motion.a>
-                  </div>
-                </motion.div>
+                      <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-gradient-to-r from-[var(--accent-cyan)]/30 to-[var(--accent-teal)]/20 mt-0.5">
+                        <span className="text-xs text-[var(--accent-cyan)] font-bold">✓</span>
+                      </div>
+                      <span className="text-[var(--text-secondary)] text-sm leading-relaxed group-hover/feature:text-white/90 transition-colors">{highlight}</span>
+                    </motion.div>
+                  ))}
+                </div>
 
-                {/* Visual Card - Removed */}
+                {/* Divider */}
+                <div className="h-px bg-gradient-to-r from-white/10 to-transparent mb-10 mt-auto" />
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <motion.a
+                    href="https://github.com/abishek-vk"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all font-medium text-sm"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FaGithub className="text-sm" /> View Code
+                  </motion.a>
+                  <motion.a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/10 text-[var(--text-primary)] hover:border-[var(--accent-cyan)] hover:bg-white/5 transition-all font-medium text-sm"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FaExternalLinkAlt className="text-sm" /> Live Demo
+                  </motion.a>
+                </div>
               </div>
             </motion.div>
           ))}

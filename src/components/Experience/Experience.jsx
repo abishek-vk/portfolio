@@ -65,7 +65,7 @@ export default function Experience() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="relative max-w-3xl"
+          className="relative max-w-4xl mx-auto"
         >
           {timeline.map((item, i) => (
             <motion.div key={i} variants={itemVariants} className="relative mb-12 last:mb-0 group">
