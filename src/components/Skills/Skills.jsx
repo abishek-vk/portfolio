@@ -1,46 +1,22 @@
 import { motion } from "framer-motion";
-import { FaCode, FaServer, FaDatabase, FaTools, FaUsers } from "react-icons/fa";
 
 const skillCategories = [
   {
-    icon: FaCode,
-    title: "Frontend",
-    color: "from-cyan-500/20 to-blue-500/10",
-    accentColor: "cyan",
-    skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML/CSS", "Framer Motion"]
+    column: "Professional",
+    skills: ["Python", "React", "TypeScript", "Docker", "MongoDB"]
   },
   {
-    icon: FaServer,
-    title: "Backend",
-    color: "from-purple-500/20 to-pink-500/10",
-    accentColor: "purple",
-    skills: ["Node.js", "Python", "Express", "REST APIs", "Authentication", "Microservices"]
+    column: "Professional",
+    skills: ["PostgreSQL", "Git", "C", "Java", "Testing & Debugging"]
   },
   {
-    icon: FaDatabase,
-    title: "Database",
-    color: "from-green-500/20 to-emerald-500/10",
-    accentColor: "green",
-    skills: ["MongoDB", "PostgreSQL", "MySQL", "Firebase", "SQL", "NoSQL"]
-  },
-  {
-    icon: FaTools,
-    title: "Tools",
-    color: "from-orange-500/20 to-red-500/10",
-    accentColor: "orange",
-    skills: ["Git", "Docker", "VS Code", "Figma", "Postman", "Linux"]
-  },
-  {
-    icon: FaUsers,
-    title: "Soft Skills",
-    color: "from-indigo-500/20 to-violet-500/10",
-    accentColor: "indigo",
-    skills: ["Leadership", "Communication", "Problem-Solving", "Teamwork", "Adaptability", "Time Management"]
+    column: "Personal",
+    skills: ["Leadership & Teamwork", "Communication Skills", "Time Management", "Problem-Solving"]
   }
 ];
 
 // Render Icon Component
-const IconRenderer = ({ IconComponent, className }) => <IconComponent className={className} />;
+// const IconRenderer = ({ IconComponent, className }) => <IconComponent className={className} />;
 
 export default function Skills() {
   const containerVariants = {
@@ -48,17 +24,38 @@ export default function Skills() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.1,
+        delayChildren: 0.2
       }
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+  const columnVariants = {
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 }
+      transition: { 
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const skillVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (i) => ({
+      opacity: 1,
+      x: 0,
+      transition: { 
+        delay: i * 0.08,
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }),
+    hover: {
+      x: 8,
+      transition: { duration: 0.2 }
     }
   };
 
@@ -83,45 +80,103 @@ export default function Skills() {
           </motion.p>
         </motion.div>
 
-        {/* Responsive Grid Layout - Compact with Auto Heights */}
+        {/* Clean 3-Column Skills Layout */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12"
         >
-          {skillCategories.map((category, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group"
-            >
-              <div className={`glass rounded-2xl p-6 bg-gradient-to-br ${category.color} backdrop-blur-xl border border-[var(--glass-border)] hover:border-[var(--accent-cyan)] transition-all duration-300 group-hover:shadow-[0_0_40px_rgba(0,217,255,0.2)]`}>
-                {/* Header with Icon */}
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="p-2.5 rounded-xl bg-gradient-to-br from-white/10 to-white/5 group-hover:from-white/15 group-hover:to-white/10 transition-all group-hover:scale-110">
-                    <IconRenderer IconComponent={category.icon} className="text-lg text-[var(--accent-cyan)]" />
-                  </div>
-                  <h3 className="font-bold text-lg leading-none">{category.title}</h3>
-                </div>
+          {/* Professional Column 1 */}
+          <motion.div
+            variants={columnVariants}
+            className="space-y-6"
+          >
+            <div className="flex items-center gap-3 pb-4 border-b border-white/10">
+              <div className="w-2 h-2 rounded-full bg-[var(--accent-cyan)]" />
+              <h3 className="font-bold text-lg text-white">Professional</h3>
+            </div>
+            <div className="space-y-3">
+              {skillCategories[0].skills.map((skill, i) => (
+                <motion.div
+                  key={i}
+                  custom={i}
+                  variants={skillVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
+                  viewport={{ once: true }}
+                  className="flex items-center gap-3 group cursor-default"
+                >
+                  <span className="text-[var(--accent-cyan)] font-bold">•</span>
+                  <span className="text-white/80 group-hover:text-white transition-colors duration-200">
+                    {skill}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
 
-                {/* Skills Pills Container */}
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, j) => (
-                    <motion.span
-                      key={j}
-                      whileHover={{ scale: 1.08, y: -1 }}
-                      transition={{ duration: 0.2 }}
-                      className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/8 border border-white/12 text-white/85 hover:bg-white/12 hover:border-white/25 hover:text-white transition-all duration-300 backdrop-blur-sm"
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          {/* Professional Column 2 */}
+          <motion.div
+            variants={columnVariants}
+            className="space-y-6"
+          >
+            <div className="flex items-center gap-3 pb-4 border-b border-white/10">
+              <div className="w-2 h-2 rounded-full bg-[var(--accent-cyan)]" />
+              <h3 className="font-bold text-lg text-white">Professional</h3>
+            </div>
+            <div className="space-y-3">
+              {skillCategories[1].skills.map((skill, i) => (
+                <motion.div
+                  key={i}
+                  custom={i}
+                  variants={skillVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
+                  viewport={{ once: true }}
+                  className="flex items-center gap-3 group cursor-default"
+                >
+                  <span className="text-[var(--accent-cyan)] font-bold">•</span>
+                  <span className="text-white/80 group-hover:text-white transition-colors duration-200">
+                    {skill}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Personal Column */}
+          <motion.div
+            variants={columnVariants}
+            className="space-y-6"
+          >
+            <div className="flex items-center gap-3 pb-4 border-b border-white/10">
+              <div className="w-2 h-2 rounded-full bg-[var(--accent-cyan)]" />
+              <h3 className="font-bold text-lg text-white">Personal</h3>
+            </div>
+            <div className="space-y-3">
+              {skillCategories[2].skills.map((skill, i) => (
+                <motion.div
+                  key={i}
+                  custom={i}
+                  variants={skillVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
+                  viewport={{ once: true }}
+                  className="flex items-center gap-3 group cursor-default"
+                >
+                  <span className="text-[var(--accent-cyan)] font-bold">•</span>
+                  <span className="text-white/80 group-hover:text-white transition-colors duration-200">
+                    {skill}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
