@@ -31,7 +31,7 @@ export default function Contact() {
       <div className="container-max relative z-10">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="inline-block px-3 py-1 glass rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-wide mb-4">
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-wide mb-4 border border-[var(--accent-cyan)]/30">
             Get In Touch
           </motion.span>
           
@@ -54,7 +54,7 @@ export default function Contact() {
                 target={info.href.startsWith("http") ? "_blank" : "_self"}
                 rel={info.href.startsWith("http") ? "noreferrer" : ""}
                 whileHover={{ x: 8 }}
-                className="group glass rounded-2xl p-6 flex items-start gap-4 cursor-pointer transition-all duration-300 hover:border-[var(--accent-cyan)] hover:glow-text"
+                className="group rounded-2xl p-6 flex items-start gap-4 cursor-pointer transition-all duration-300 border border-transparent hover:border-[var(--accent-cyan)] hover:glow-text"
               >
                 <div className="p-3.5 rounded-xl bg-gradient-to-br from-[var(--accent-cyan)]/30 to-[var(--accent-teal)]/20 group-hover:from-[var(--accent-cyan)]/50 group-hover:to-[var(--accent-teal)]/30 transition-all group-hover:scale-110 flex-shrink-0">
                   <info.icon className="text-2xl text-[var(--accent-cyan)]" />
@@ -74,7 +74,7 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
             onSubmit={handleSubmit}
-            className="md:col-span-2 glass rounded-3xl p-10 space-y-6 border border-[var(--glass-border)] hover:border-[var(--accent-cyan)]/30 transition-all duration-300"
+            className="md:col-span-2 rounded-3xl p-10 space-y-6 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300"
           >
             <div className="grid md:grid-cols-2 gap-6">
               {/* Name Input */}

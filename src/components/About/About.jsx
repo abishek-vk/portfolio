@@ -55,7 +55,7 @@ export default function About() {
           {/* Left - Text Content */}
           <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mb-6">
-              <span className="inline-block px-3 py-1 glass rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-wide">
+              <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-wide border border-[var(--accent-cyan)]/30">
                 About Me
               </span>
             </motion.div>
@@ -104,7 +104,7 @@ export default function About() {
                 {/* Glow Effect */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 blur" />
                 
-                <div className="glass rounded-2xl p-6 md:p-8 relative group-hover:border-[var(--accent-cyan)] transition-all duration-300 h-full">
+                <div className="rounded-2xl p-6 md:p-8 relative border border-white/10 group-hover:border-[var(--accent-cyan)] transition-all duration-300 h-full">
                   <div className="flex items-start gap-4">
                     <div className="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 group-hover:from-[var(--accent-cyan)]/30 group-hover:to-[var(--accent-teal)]/20 transition-all flex-shrink-0 group-hover:scale-110">
                       <feature.icon className="text-2xl text-[var(--accent-cyan)]" />

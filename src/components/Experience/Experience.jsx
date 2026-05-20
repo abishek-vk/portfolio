@@ -47,7 +47,7 @@ export default function Experience() {
       <div className="container-max relative z-10">
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mb-20">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mb-4">
-            <span className="inline-block px-3 py-1 glass rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-wide">
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-wide border border-[var(--accent-cyan)]/30">
               Learning Path
             </span>
           </motion.div>
@@ -85,7 +85,7 @@ export default function Experience() {
               </div>
 
               {/* Content Card */}
-              <div className="ml-12 glass rounded-2xl p-8 group-hover:border-[var(--accent-cyan)] transition-all duration-300">
+              <div className="ml-12 rounded-2xl p-8 border border-white/10 group-hover:border-[var(--accent-cyan)] transition-all duration-300">
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3 className="text-2xl font-bold mb-2">{item.title}</h3>

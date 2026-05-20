@@ -45,14 +45,14 @@ export default function Footer() {
                 href="https://github.com/abishek-vk"
                 target="_blank"
                 rel="noreferrer"
-                className="p-3 glass rounded-full text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:bg-white/10 transition-all"
+                className="p-3 rounded-full text-[var(--accent-cyan)] border border-white/10 hover:border-[var(--accent-cyan)] hover:bg-white/10 transition-all"
                 whileHover={{ y: -4, scale: 1.1 }}
               >
                 <FaGithub className="text-lg" />
               </motion.a>
               <motion.a
                 href="mailto:abishekvankatachalam2007@gmail.com"
-                className="p-3 glass rounded-full text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:bg-white/10 transition-all"
+                className="p-3 rounded-full text-[var(--accent-cyan)] border border-white/10 hover:border-[var(--accent-cyan)] hover:bg-white/10 transition-all"
                 whileHover={{ y: -4, scale: 1.1 }}
               >
                 <FaEnvelope className="text-lg" />
@@ -72,7 +72,7 @@ export default function Footer() {
 
           <motion.button
             onClick={scrollToTop}
-            className="p-3 glass rounded-full text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:bg-white/10 transition-all"
+            className="p-3 rounded-full text-[var(--accent-cyan)] border border-white/10 hover:border-[var(--accent-cyan)] hover:bg-white/10 transition-all"
             whileHover={{ y: -4, scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >

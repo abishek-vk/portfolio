@@ -55,7 +55,7 @@ export default function Hero() {
           {/* Left Content */}
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="mb-4">
-              <span className="inline-block px-4 py-2 glass rounded-full text-sm font-medium text-[var(--accent-cyan)]">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/30">
                 🚀 Welcome to my portfolio
               </span>
             </motion.div>
@@ -84,7 +84,7 @@ export default function Hero() {
               </motion.a>
               <motion.a
                 href="#contact"
-                className="glass px-8 py-4 rounded-full font-semibold text-[var(--text-primary)] border border-[var(--glass-border)] hover:border-[var(--accent-cyan)] hover:glow-text transition-all duration-300"
+                className="px-8 py-4 rounded-full font-semibold text-[var(--text-primary)] border border-white/20 hover:border-[var(--accent-cyan)] hover:glow-text transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -100,14 +100,14 @@ export default function Hero() {
                   href="https://github.com/abishek-vk"
                   target="_blank"
                   rel="noreferrer"
-                  className="p-3 glass rounded-full hover:glow-border transition-all duration-300"
+                  className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
                   whileHover={{ y: -4 }}
                 >
                   <FaGithub className="text-xl text-[var(--accent-cyan)]" />
                 </motion.a>
                 <motion.a
                   href="mailto:abishekvankatachalam2007@gmail.com"
-                  className="p-3 glass rounded-full hover:glow-border transition-all duration-300"
+                  className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
                   whileHover={{ y: -4 }}
                 >
                   <FaEnvelope className="text-xl text-[var(--accent-cyan)]" />
@@ -126,7 +126,7 @@ export default function Hero() {
 
             {/* Profile Card */}
             <motion.div
-              className="glass rounded-3xl p-8 w-72 h-80 flex items-center justify-center relative z-10"
+              className="rounded-3xl p-8 w-72 h-80 flex items-center justify-center relative z-10 border border-white/10"
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >

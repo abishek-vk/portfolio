@@ -26,7 +26,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass backdrop-blur-xl py-3 shadow-lg' : 'bg-transparent py-6'
+        isScrolled ? 'border-b border-white/10 bg-black/50 py-3' : 'bg-transparent py-6'
       }`}
     >
       <div className="container-max flex justify-between items-center">
@@ -79,7 +79,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass mt-2 mx-4 rounded-xl overflow-hidden"
+            className="md:hidden border border-white/10 bg-black/50 mt-2 mx-4 rounded-xl overflow-hidden"
           >
             <div className="py-4 px-6 flex flex-col gap-3">
               {navLinks.map((link) => (
