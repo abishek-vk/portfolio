@@ -1,53 +1,152 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
+import { FaGithub, FaEnvelope, FaArrowDown } from "react-icons/fa";
 
-const TypingText = ({ texts, speed = 100 }) => {
+const TypingText = ({ texts, speed = 80 }) => {
   const [displayText, setDisplayText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!isDeleting) {
-        if (charIndex < texts[textIndex].length) { setDisplayText(texts[textIndex].substring(0, charIndex + 1)); setCharIndex(charIndex + 1); }
-        else { setTimeout(() => setIsDeleting(true), 2000); }
+        if (charIndex < texts[textIndex].length) {
+          setDisplayText(texts[textIndex].substring(0, charIndex + 1));
+          setCharIndex(charIndex + 1);
+        } else {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
       } else {
-        if (charIndex > 0) { setDisplayText(texts[textIndex].substring(0, charIndex - 1)); setCharIndex(charIndex - 1); }
-        else { setIsDeleting(false); setTextIndex((prev) => (prev + 1) % texts.length); }
+        if (charIndex > 0) {
+          setDisplayText(texts[textIndex].substring(0, charIndex - 1));
+          setCharIndex(charIndex - 1);
+        } else {
+          setIsDeleting(false);
+          setTextIndex((prev) => (prev + 1) % texts.length);
+        }
       }
     }, speed);
     return () => clearTimeout(timer);
   }, [charIndex, isDeleting, textIndex, texts, speed]);
-  return <span className="gradient-text">{displayText}<span className="cursor"/></span>;
+
+  return (
+    <span className="gradient-text font-semibold">
+      {displayText}
+      <span className="inline-block w-1 h-6 bg-gradient-to-b from-[var(--accent-cyan)] to-[var(--accent-teal)] ml-1 animate-pulse" />
+    </span>
+  );
 };
 
 export default function Hero() {
-  const roles = ["Full Stack Developer", "UI/UX Enthusiast", "Problem Solver", "CSE Student"];
+  const roles = ["Full Stack Developer", "UI/UX Enthusiast", "Problem Solver", "Tech Innovator"];
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 animated-gradient opacity-30"/>
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center z-10">
-        <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
-          <motion.p className="text-[var(--accent-primary)] font-semibold mb-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>Hi, I am</motion.p>
-          <motion.h1 className="text-5xl md:text-7xl font-bold mb-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>Abishek Venkat<span className="gradient-text"> Kumar</span></motion.h1>
-          <motion.div className="text-xl md:text-2xl text-[var(--text-secondary)] mb-6 h-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}><TypingText texts={roles} speed={80}/></motion.div>
-          <motion.p className="text-[var(--text-secondary)] text-lg max-w-lg mb-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>Passionate about crafting innovative solutions through code. Specializing in building exceptional digital experiences.</motion.p>
-          <motion.div className="flex flex-wrap gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
-            <motion.a href="#projects" className="px-8 py-3 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-full font-semibold hover:shadow-lg hover:shadow-[var(--accent-primary)]/50 transition-all" whileHover={{ scale: 1.05 }}>View Projects</motion.a>
-            <motion.button className="px-8 py-3 glass rounded-full font-semibold flex items-center gap-2 hover:bg-white/10 transition-all" whileHover={{ scale: 1.05 }}><FaDownload/>Download Resume</motion.button>
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 animated-gradient opacity-40" />
+
+      {/* Floating Blobs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[var(--accent-cyan)]/10 to-[var(--accent-teal)]/5 rounded-full blur-3xl blob opacity-40" />
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-[var(--accent-purple)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl blob opacity-30" />
+
+      <div className="container-max relative z-10">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          {/* Left Content */}
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="mb-4">
+              <span className="inline-block px-4 py-2 glass rounded-full text-sm font-medium text-[var(--accent-cyan)]">
+                🚀 Welcome to my portfolio
+              </span>
+            </motion.div>
+
+            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-2">
+              Hi, I'm <span className="gradient-text">Abishek V</span>
+            </motion.h1>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="text-2xl md:text-3xl font-semibold mb-6 h-10">
+              <TypingText texts={roles} speed={80} />
+            </motion.div>
+
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-[var(--text-secondary)] text-lg leading-relaxed mb-8 max-w-lg">
+              Crafting elegant, scalable solutions through clean code and innovative design. Passionate about building exceptional digital experiences that make an impact.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="flex flex-wrap gap-4 mb-10">
+              <motion.a
+                href="#projects"
+                className="glow-button px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 group"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View My Work
+              </motion.a>
+              <motion.a
+                href="#contact"
+                className="glass px-8 py-4 rounded-full font-semibold text-[var(--text-primary)] border border-[var(--glass-border)] hover:border-[var(--accent-cyan)] hover:glow-text transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get In Touch
+              </motion.a>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="flex items-center gap-6">
+              <span className="text-[var(--text-tertiary)] text-sm">Connect with me</span>
+              <div className="flex gap-4">
+                <motion.a
+                  href="https://github.com/abishek-vk"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-3 glass rounded-full hover:glow-border transition-all duration-300"
+                  whileHover={{ y: -4 }}
+                >
+                  <FaGithub className="text-xl text-[var(--accent-cyan)]" />
+                </motion.a>
+                <motion.a
+                  href="mailto:abishekvankatachalam2007@gmail.com"
+                  className="p-3 glass rounded-full hover:glow-border transition-all duration-300"
+                  whileHover={{ y: -4 }}
+                >
+                  <FaEnvelope className="text-xl text-[var(--accent-cyan)]" />
+                </motion.a>
+              </div>
+            </motion.div>
           </motion.div>
-          <motion.div className="flex gap-6 mt-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}>{[FaGithub, FaLinkedin, FaEnvelope].map((Icon, i) => (<motion.a key={i} href="#" className="text-2xl text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors" whileHover={{ y: -5 }}><Icon/></motion.a>))}</motion.div>
-        </motion.div>
-        <motion.div className="hidden md:block" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>
-          <motion.div className="relative w-96 h-96 mx-auto" animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }}>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] blur-3xl opacity-30"/>
-            <div className="absolute inset-8 rounded-full bg-gradient-to-r from-[var(--accent-secondary)] to-[var(--accent-cyan)] blur-2xl opacity-40"/>
-            <motion.div className="absolute inset-16 rounded-full bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)] flex items-center justify-center glass" animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }}><span className="text-8xl">👨‍💻</span></motion.div>
+
+          {/* Right - Profile Image */}
+          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative hidden md:flex justify-center items-center">
+            {/* Glowing Ring */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div className="absolute w-80 h-80 border border-[var(--accent-cyan)]/30 rounded-full glow-pulse" animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} />
+              <motion.div className="absolute w-96 h-96 border border-[var(--accent-teal)]/20 rounded-full" animate={{ rotate: -360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} />
+            </div>
+
+            {/* Profile Card */}
+            <motion.div
+              className="glass rounded-3xl p-8 w-72 h-80 flex items-center justify-center relative z-10"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="text-center">
+                <span className="text-8xl block mb-4">👨‍💻</span>
+                <h3 className="font-bold text-lg mb-1">Abishek V</h3>
+                <p className="text-[var(--text-tertiary)] text-sm">Full Stack Developer</p>
+              </div>
+            </motion.div>
           </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-8 left-1/2 -translate-x-1/2">
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-[var(--text-tertiary)] text-sm">Scroll to explore</span>
+            <FaArrowDown className="text-[var(--accent-cyan)] animate-pulse" />
+          </div>
         </motion.div>
       </div>
-      <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2" animate={{ y: [0, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity }}><div className="w-6 h-10 border-2 border-[var(--text-secondary)] rounded-full flex justify-center pt-2"><div className="w-1.5 h-3 bg-[var(--accent-primary)] rounded-full"/></div></motion.div>
     </section>
   );
 }

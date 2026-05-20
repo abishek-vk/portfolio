@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaEnvelope, FaPhone, FaGithub } from "react-icons/fa";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -9,33 +9,160 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus("Sending...");
-    setTimeout(() => { setStatus("Message sent successfully!"); setForm({ name: "", email: "", message: "" }); }, 1500);
+    setTimeout(() => {
+      setStatus("Message sent successfully!");
+      setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setStatus(""), 3000);
+    }, 1500);
   };
 
+  const contactInfo = [
+    { icon: FaEnvelope, label: "Email", value: "abishekvankatachalam2007@gmail.com", href: "mailto:abishekvankatachalam2007@gmail.com" },
+    { icon: FaPhone, label: "Phone", value: "+91 82203 87244", href: "tel:+918220387244" },
+    { icon: FaGithub, label: "GitHub", value: "@abishek-vk", href: "https://github.com/abishek-vk" }
+  ];
+
   return (
-    <section id="contact" className="py-20 relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-4xl font-bold text-center mb-16">Get In <span className="gradient-text">Touch</span></motion.h2>
-        <div className="grid md:grid-cols-2 gap-12">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <h3 className="text-2xl font-bold mb-6">Let us talk about everything</h3>
-            <p className="text-[var(--text-secondary)] mb-8">Feel free to reach out for collaborations, freelance projects, or just a friendly chat about technology and innovation.</p>
-            <div className="space-y-6">
-              {[{ icon: FaEnvelope, label: "Email", value: "abishek@example.com" }, { icon: FaMapMarkerAlt, label: "Location", value: "Chennai, India" }, { icon: FaPhone, label: "Phone", value: "+91 98765 43210" }].map((item, i) => (
-                <div key={i} className="flex items-center gap-4"><div className="p-3 rounded-xl glass"><item.icon className="text-xl text-[var(--accent-primary)]"/></div><div><p className="text-sm text-[var(--text-secondary)]">{item.label}</p><p className="font-medium">{item.value}</p></div></div>
-              ))}
-            </div>
-            <div className="flex gap-4 mt-8">
-              {[FaGithub, FaLinkedin, FaTwitter].map((Icon, i) => (<motion.a key={i} href="#" className="p-3 glass rounded-full hover:bg-white/10 transition-all" whileHover={{ y: -5 }}><Icon/></motion.a>))}
-            </div>
+    <section id="contact" className="py-40 relative overflow-hidden">
+      {/* Decorative Backgrounds */}
+      <div className="absolute -right-32 top-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-cyan)]/10 to-[var(--accent-purple)]/5 rounded-full blur-3xl opacity-20" />
+      <div className="absolute -left-32 bottom-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-teal)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl opacity-20" />
+
+      <div className="container-max relative z-10">
+        {/* Header */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="inline-block px-3 py-1 glass rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-wide mb-4">
+            Get In Touch
+          </motion.span>
+          
+          <h2 className="mb-4">
+            Let's Build Something <span className="gradient-text">Amazing Together</span>
+          </h2>
+          <p className="text-[var(--text-secondary)] text-lg max-w-2xl mx-auto">
+            Open to new opportunities, collaborations, and exciting projects. I'd love to hear from you.
+          </p>
+        </motion.div>
+
+        {/* Content Grid */}
+        <div className="grid md:grid-cols-3 gap-8 lg:gap-10 items-stretch mb-16">
+          {/* Contact Methods */}
+          <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="space-y-5">
+            {contactInfo.map((info, i) => (
+              <motion.a
+                key={i}
+                href={info.href}
+                target={info.href.startsWith("http") ? "_blank" : "_self"}
+                rel={info.href.startsWith("http") ? "noreferrer" : ""}
+                whileHover={{ x: 8 }}
+                className="group glass rounded-2xl p-6 flex items-start gap-4 cursor-pointer transition-all duration-300 hover:border-[var(--accent-cyan)] hover:glow-text"
+              >
+                <div className="p-3.5 rounded-xl bg-gradient-to-br from-[var(--accent-cyan)]/30 to-[var(--accent-teal)]/20 group-hover:from-[var(--accent-cyan)]/50 group-hover:to-[var(--accent-teal)]/30 transition-all group-hover:scale-110 flex-shrink-0">
+                  <info.icon className="text-2xl text-[var(--accent-cyan)]" />
+                </div>
+                <div>
+                  <p className="text-[var(--text-tertiary)] text-xs font-semibold uppercase tracking-wide mb-1">{info.label}</p>
+                  <p className="font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-cyan)] transition-colors text-sm md:text-base break-all">{info.value}</p>
+                </div>
+              </motion.a>
+            ))}
           </motion.div>
-          <motion.form initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} onSubmit={handleSubmit} className="glass rounded-2xl p-8 space-y-6">
-            <div><label className="block text-sm font-medium mb-2">Name</label><input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors" placeholder="Your Name" required/></div>
-            <div><label className="block text-sm font-medium mb-2">Email</label><input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors" placeholder="your.email@example.com" required/></div>
-            <div><label className="block text-sm font-medium mb-2">Message</label><textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} rows="5" className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors resize-none" placeholder="Your message..." required/></div>
-            <motion.button type="submit" className="w-full py-3 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-xl font-semibold hover:shadow-lg hover:shadow-[var(--accent-primary)]/50 transition-all" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>{status || "Send Message"}</motion.button>
+
+          {/* Contact Form */}
+          <motion.form
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            onSubmit={handleSubmit}
+            className="md:col-span-2 glass rounded-3xl p-10 space-y-6 border border-[var(--glass-border)] hover:border-[var(--accent-cyan)]/30 transition-all duration-300"
+          >
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Name Input */}
+              <div>
+                <label className="block text-sm font-medium mb-3 text-[var(--text-primary)]">Your Name</label>
+                <motion.input
+                  type="text"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="John Doe"
+                  required
+                  whileFocus={{ scale: 1.01 }}
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300"
+                />
+              </div>
+
+              {/* Email Input */}
+              <div>
+                <label className="block text-sm font-medium mb-3 text-[var(--text-primary)]">Your Email</label>
+                <motion.input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  placeholder="john@example.com"
+                  required
+                  whileFocus={{ scale: 1.01 }}
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300"
+                />
+              </div>
+            </div>
+
+            {/* Message Textarea */}
+            <div>
+              <label className="block text-sm font-medium mb-3 text-[var(--text-primary)]">Message</label>
+              <motion.textarea
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                placeholder="Tell me about your project..."
+                rows={4}
+                required
+                whileFocus={{ scale: 1.01 }}
+                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 resize-none"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <motion.button
+              type="submit"
+              className="w-full glow-button px-8 py-4 rounded-lg font-bold text-white transition-all duration-300 relative overflow-hidden group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="relative z-10">{status || "Send Message"}</span>
+            </motion.button>
+
+            {/* Status Message */}
+            {status && (
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center text-sm font-medium text-[var(--accent-cyan)]">
+                {status}
+              </motion.div>
+            )}
           </motion.form>
         </div>
+
+        {/* CTA Section */}
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center">
+          <p className="text-[var(--text-secondary)] mb-6">
+            Or connect with me on social platforms
+          </p>
+          <div className="flex justify-center gap-4">
+            <motion.a
+              href="https://github.com/abishek-vk"
+              target="_blank"
+              rel="noreferrer"
+              className="p-4 glass rounded-full hover:border-[var(--accent-cyan)] transition-all duration-300 group hover:glow-text"
+              whileHover={{ scale: 1.1, y: -4 }}
+            >
+              <FaGithub className="text-2xl text-[var(--accent-cyan)] group-hover:scale-110 transition-transform" />
+            </motion.a>
+            <motion.a
+              href="mailto:abishekvankatachalam2007@gmail.com"
+              className="p-4 glass rounded-full hover:border-[var(--accent-cyan)] transition-all duration-300 group hover:glow-text"
+              whileHover={{ scale: 1.1, y: -4 }}
+            >
+              <FaEnvelope className="text-2xl text-[var(--accent-cyan)] group-hover:scale-110 transition-transform" />
+            </motion.a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
