@@ -93,9 +93,9 @@ export default function Projects() {
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className="group"
             >
-              <div className={`grid md:grid-cols-2 gap-8 lg:gap-12 items-center ${i % 2 === 1 ? 'md:auto-cols-reverse' : ''}`}>
-                {/* Content - Alternates position */}
-                <motion.div className={`${i % 2 === 1 ? 'md:order-2' : ''}`}>
+              <div>
+                {/* Content */}
+                <motion.div>
                   <div className="mb-6">
                     <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 text-[var(--accent-cyan)] uppercase tracking-wide">
                       Project {i + 1}
@@ -133,7 +133,7 @@ export default function Projects() {
                     </motion.a>
                     <motion.a
                       href="#"
-                      className="flex items-center gap-2 px-6 py-3 rounded-xl glass border border-[var(--glass-border)] text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-all font-medium"
+                      className="flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-all font-medium"
                       whileHover={{ scale: 1.05 }}
                     >
                       <FaExternalLinkAlt /> Live Demo
@@ -141,43 +141,7 @@ export default function Projects() {
                   </div>
                 </motion.div>
 
-                {/* Visual Card */}
-                <motion.div
-                  className={`relative group/card h-96 md:h-full min-h-96 ${i % 2 === 1 ? 'md:order-1' : ''}`}
-                  whileHover={{ y: -8 }}
-                >
-                  {/* Glowing Border */}
-                  <div className="absolute -inset-0.5 bg-gradient-to-r rounded-3xl opacity-0 group/card-hover:opacity-100 transition-all duration-300 blur" style={{
-                    backgroundImage: `linear-gradient(135deg, rgba(0, 217, 255, 0.4), rgba(6, 182, 212, 0.2))`
-                  }} />
-
-                  {/* Main Card */}
-                  <div className={`glass rounded-3xl p-8 h-full bg-gradient-to-br ${project.gradient} backdrop-blur-xl border border-[var(--glass-border)] group/card-hover:border-[var(--accent-cyan)] relative transition-all duration-300 flex flex-col`}>
-                    {/* Top Gradient Border */}
-                    <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${project.borderColor} rounded-t-3xl opacity-0 group/card-hover:opacity-100 transition-all duration-300`} />
-
-                    {/* Icon */}
-                    <div className="mb-6">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--accent-cyan)]/30 to-[var(--accent-teal)]/20 group/card-hover:from-[var(--accent-cyan)]/50 group/card-hover:to-[var(--accent-teal)]/30 transition-all group/card-hover:scale-110">
-                        <span className="text-4xl">
-                          {i === 0 ? '💻' : i === 1 ? '🩸' : '🤖'}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Tech Stack Preview */}
-                    <div className="mt-auto">
-                      <p className="text-xs font-semibold text-[var(--text-tertiary)] uppercase tracking-wide mb-3">Tech Stack</p>
-                      <div className="flex flex-wrap gap-2">
-                        {['React', 'Node.js', 'MongoDB'].map((tech, j) => (
-                          <span key={j} className="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 border border-[var(--glass-border)] text-[var(--text-secondary)]">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
+                {/* Visual Card - Removed */}
               </div>
             </motion.div>
           ))}
