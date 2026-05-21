@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaEnvelope, FaArrowDown } from "react-icons/fa";
+import { FaGithub, FaEnvelope, FaArrowDown, FaLinkedin } from "react-icons/fa";
 import abiImage from "../../assets/abi image.jpeg";
 
 const TypingText = ({ texts, speed = 80 }) => {
@@ -101,7 +101,16 @@ export default function Hero() {
                   <FaGithub className="text-xl text-[var(--accent-cyan)]" />
                 </motion.a>
                 <motion.a
-                  href="mailto:abishekvankatachalam2007@gmail.com"
+                  href="https://www.linkedin.com/in/vabishek13/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
+                  whileHover={{ y: -4 }}
+                >
+                  <FaLinkedin className="text-xl text-[var(--accent-cyan)]" />
+                </motion.a>
+                <motion.a
+                  href="mailto:abishekvenkatachalam2007@gmail.com"
                   className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
                   whileHover={{ y: -4 }}
                 >

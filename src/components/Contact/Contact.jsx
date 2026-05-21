@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaPhone, FaGithub } from "react-icons/fa";
+import { FaEnvelope, FaPhone, FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -17,9 +17,10 @@ export default function Contact() {
   };
 
   const contactInfo = [
-    { icon: FaEnvelope, label: "Email", value: "abishekvankatachalam2007@gmail.com", href: "mailto:abishekvankatachalam2007@gmail.com" },
+    { icon: FaEnvelope, label: "Email", value: "abishekvenkatachalam2007@gmail.com", href: "mailto:abishekvenkatachalam2007@gmail.com" },
     { icon: FaPhone, label: "Phone", value: "+91 82203 87244", href: "tel:+918220387244" },
-    { icon: FaGithub, label: "GitHub", value: "@abishek-vk", href: "https://github.com/abishek-vk" }
+    { icon: FaGithub, label: "GitHub", value: "@abishek-vk", href: "https://github.com/abishek-vk" },
+    { icon: FaLinkedin, label: "LinkedIn", value: "@vabishek13", href: "https://www.linkedin.com/in/vabishek13/" }
   ];
 
   return (
@@ -155,7 +156,16 @@ export default function Contact() {
               <FaGithub className="text-2xl text-[var(--accent-cyan)] group-hover:scale-110 transition-transform" />
             </motion.a>
             <motion.a
-              href="mailto:abishekvankatachalam2007@gmail.com"
+              href="https://www.linkedin.com/in/vabishek13/"
+              target="_blank"
+              rel="noreferrer"
+              className="p-4 glass rounded-full hover:border-[var(--accent-cyan)] transition-all duration-300 group hover:glow-text"
+              whileHover={{ scale: 1.1, y: -4 }}
+            >
+              <FaLinkedin className="text-2xl text-[var(--accent-cyan)] group-hover:scale-110 transition-transform" />
+            </motion.a>
+            <motion.a
+              href="mailto:abishekvenkatachalam2007@gmail.com"
               className="p-4 glass rounded-full hover:border-[var(--accent-cyan)] transition-all duration-300 group hover:glow-text"
               whileHover={{ scale: 1.1, y: -4 }}
             >

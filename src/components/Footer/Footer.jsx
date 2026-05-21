@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaGithub, FaEnvelope, FaArrowUp } from "react-icons/fa";
+import { FaGithub, FaEnvelope, FaArrowUp, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -51,7 +51,16 @@ export default function Footer() {
                 <FaGithub className="text-lg" />
               </motion.a>
               <motion.a
-                href="mailto:abishekvankatachalam2007@gmail.com"
+                href="https://www.linkedin.com/in/vabishek13/"
+                target="_blank"
+                rel="noreferrer"
+                className="p-3 rounded-full text-[var(--accent-cyan)] border border-white/10 hover:border-[var(--accent-cyan)] hover:bg-white/10 transition-all"
+                whileHover={{ y: -4, scale: 1.1 }}
+              >
+                <FaLinkedin className="text-lg" />
+              </motion.a>
+              <motion.a
+                href="mailto:abishekvenkatachalam2007@gmail.com"
                 className="p-3 rounded-full text-[var(--accent-cyan)] border border-white/10 hover:border-[var(--accent-cyan)] hover:bg-white/10 transition-all"
                 whileHover={{ y: -4, scale: 1.1 }}
               >
@@ -67,7 +76,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-sm text-[var(--text-tertiary)]">
-            &copy; {year} Abishek V. All rights reserved.
+            
           </motion.p>
 
           <motion.button
