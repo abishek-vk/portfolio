@@ -4,6 +4,7 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 const projects = [
   {
     title: "CodingLabPlatform",
+    githubUrl: "https://github.com/jebarson-caleb/CodingLabPlatform",
     liveUrl: "https://codelab.612151820.xyz/",
     desc: "Full-stack institutional coding and assessment platform with role-based access and advanced features.",
     highlights: [
@@ -17,6 +18,7 @@ const projects = [
   },
   {
     title: "Bloodflowhub",
+    githubUrl: "https://github.com/geeve-b/Bloodflow-Hub",
     liveUrl: "https://bloodflow-hub.onrender.com/",
     desc: "Comprehensive blood bank and donor management platform for streamlined operations.",
     highlights: [
@@ -30,6 +32,7 @@ const projects = [
   },
   {
     title: "AutoML",
+    githubUrl: "https://github.com/ReginSamRobinson/AutoML",
     liveUrl: "#",
     desc: "Automated machine learning platform for model selection and hyperparameter optimization.",
     highlights: [
@@ -136,7 +139,7 @@ export default function Projects() {
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-5 md:gap-6">
                   <motion.a
-                    href="https://github.com/abishek-vk"
+                    href={project.githubUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="flex-1 flex items-center justify-center gap-3 px-7 md:px-9 py-4 md:py-5 rounded-xl bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all font-semibold text-base md:text-lg"
