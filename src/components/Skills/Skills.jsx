@@ -11,7 +11,7 @@ const skillCategories = [
   },
   {
     column: "Personal",
-    skills: ["Leadership & Teamwork", "Communication Skills", "Time Management", "Problem-Solving"]
+    skills: ["Leadership & Teamwork", "Communication Skills", "Time Management", "Problem-Solving", "Quick Learner"]
   }
 ];
 
@@ -155,10 +155,10 @@ export default function Skills() {
                   whileInView="visible"
                   whileHover="hover"
                   viewport={{ once: true }}
-                  className="flex items-center gap-4 group cursor-default"
+                  className="flex items-center gap-5 group cursor-default"
                 >
-                  <span className="text-[var(--accent-cyan)] font-bold text-lg">•</span>
-                  <span className="text-white/80 group-hover:text-white transition-colors duration-200 text-base md:text-lg">
+                  <span className="text-[var(--accent-cyan)] font-bold text-xl">•</span>
+                  <span className="text-white/80 group-hover:text-white transition-colors duration-200 text-lg md:text-xl">
                     {skill}
                   </span>
                 </motion.div>
