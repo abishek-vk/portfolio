@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaEnvelope, FaArrowDown } from "react-icons/fa";
+import abiImage from "../../assets/abi image.jpeg";
 
 const TypingText = ({ texts, speed = 80 }) => {
   const [displayText, setDisplayText] = useState("");
@@ -120,14 +121,12 @@ export default function Hero() {
 
             {/* Profile Card */}
             <motion.div
-              className="rounded-3xl p-8 w-80 h-80 flex items-center justify-center relative z-10 border border-white/10 bg-gradient-to-br from-white/5 to-white/0"
+              className="rounded-3xl p-8 w-80 h-80 flex items-center justify-center relative z-10 border border-white/10 bg-gradient-to-br from-white/5 to-white/0 overflow-hidden"
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
-              <div className="text-center">
-                <div className="text-6xl font-bold gradient-text block mb-6">AV</div>
-                <h3 className="font-bold text-xl mb-2">Abishek V</h3>
-                <p className="text-[var(--text-tertiary)] text-sm">Full Stack Developer</p>
+              <div className="text-center w-full h-full flex flex-col items-center justify-center">
+                <img src={abiImage} alt="Abishek V" className="w-64 h-64 object-cover rounded-full mb-4 border-2 border-[var(--accent-cyan)]/30" />
               </div>
             </motion.div>
           </motion.div>
