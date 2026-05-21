@@ -46,52 +46,52 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="py-40 relative overflow-hidden">
+    <section id="about" className="py-40 lg:py-48 relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute -left-32 top-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-[var(--accent-purple)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl opacity-20" />
       
       <div className="container-max relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-14 lg:gap-20 items-start w-full">
           {/* Left - Text Content */}
           <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mb-6">
-              <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-wide border border-[var(--accent-cyan)]/30">
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mb-8">
+              <span className="inline-block px-4 py-2 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-widest border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/5">
                 About Me
               </span>
             </motion.div>
 
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="mb-6">
+            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="mb-8">
               Crafting Digital <span className="gradient-text">Excellence</span>
             </motion.h2>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="space-y-6 mb-10">
-              <p className="text-[var(--text-secondary)] text-sm md:text-base lg:text-lg leading-relaxed">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="space-y-8 mb-16">
+              <p className="text-[var(--text-secondary)] leading-relaxed">
                 I'm an aspiring Software Developer with a passion for web development and building modern, user-centric applications. With hands-on experience in React, TypeScript, Python, and UI/UX design principles, I focus on delivering responsive interfaces and seamless experiences.
               </p>
-              <p className="text-[var(--text-secondary)] text-sm md:text-base lg:text-lg leading-relaxed">
+              <p className="text-[var(--text-secondary)] leading-relaxed">
                 My journey spans building scalable backend systems to crafting intuitive frontend interfaces. I'm driven by solving complex problems through clean code, innovative thinking, and continuous learning.
               </p>
             </motion.div>
 
             {/* Quick Stats */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.25 }} className="flex flex-col sm:flex-row gap-6 md:gap-8">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.25 }} className="flex flex-col sm:flex-row gap-10 md:gap-12 w-full">
               <div>
-                <p className="text-2xl md:text-3xl font-bold gradient-text">5+</p>
-                <p className="text-[var(--text-tertiary)] text-xs md:text-sm mt-1">Projects Completed</p>
+                <p className="font-bold gradient-text mb-2">5+</p>
+                <p className="text-[var(--text-tertiary)] font-medium">Projects Completed</p>
               </div>
               <div>
-                <p className="text-2xl md:text-3xl font-bold gradient-text">3+</p>
-                <p className="text-[var(--text-tertiary)] text-xs md:text-sm mt-1">Years Learning</p>
+                <p className="font-bold gradient-text mb-2">3+</p>
+                <p className="text-[var(--text-tertiary)] font-medium">Years Learning</p>
               </div>
               <div>
-                <p className="text-2xl md:text-3xl font-bold gradient-text">15+</p>
-                <p className="text-[var(--text-tertiary)] text-xs md:text-sm mt-1">Tech Skills</p>
+                <p className="font-bold gradient-text mb-2">15+</p>
+                <p className="text-[var(--text-tertiary)] font-medium">Tech Skills</p>
               </div>
             </motion.div>
           </motion.div>
 
           {/* Right - Staggered Feature Cards */}
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 gap-8">
             {features.map((feature, i) => (
               <motion.div
                 key={i}
@@ -104,14 +104,14 @@ export default function About() {
                 {/* Glow Effect */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 blur" />
                 
-                <div className="rounded-2xl p-6 md:p-8 relative border border-white/10 group-hover:border-[var(--accent-cyan)] transition-all duration-300 h-full">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 group-hover:from-[var(--accent-cyan)]/30 group-hover:to-[var(--accent-teal)]/20 transition-all flex-shrink-0 group-hover:scale-110">
-                      <feature.icon className="text-2xl text-[var(--accent-cyan)]" />
+                <div className="rounded-2xl p-8 md:p-10 relative border border-white/10 group-hover:border-[var(--accent-cyan)] transition-all duration-300 h-full">
+                  <div className="flex items-start gap-5">
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 group-hover:from-[var(--accent-cyan)]/30 group-hover:to-[var(--accent-teal)]/20 transition-all flex-shrink-0 group-hover:scale-110">
+                      <feature.icon className="text-3xl text-[var(--accent-cyan)]" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg mb-2 group-hover:text-[var(--accent-cyan)] transition-colors">{feature.title}</h3>
-                      <p className="text-[var(--text-secondary)] text-sm leading-relaxed">{feature.desc}</p>
+                      <h3 className="font-bold text-lg md:text-xl mb-3 group-hover:text-[var(--accent-cyan)] transition-colors">{feature.title}</h3>
+                      <p className="text-[var(--text-secondary)] text-base md:text-lg leading-relaxed">{feature.desc}</p>
                     </div>
                   </div>
                 </div>

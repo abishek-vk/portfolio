@@ -39,23 +39,23 @@ const itemVariants = {
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-40 relative overflow-hidden">
+    <section id="experience" className="py-40 lg:py-48 relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[var(--accent-cyan)]/50 via-[var(--accent-teal)]/30 to-transparent opacity-20" />
       <div className="absolute -right-40 top-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-br from-[var(--accent-teal)]/10 to-[var(--accent-purple)]/5 rounded-full blur-3xl opacity-20" />
 
-      <div className="container-max relative z-10">
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mb-20">
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mb-4">
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-wide border border-[var(--accent-cyan)]/30">
+      <div className="container-max relative z-10 w-full">
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mb-32">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mb-8">
+            <span className="inline-block px-4 py-2 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-widest border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/5">
               Learning Path
             </span>
           </motion.div>
 
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="mb-4">
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="mb-8">
             Education & <span className="gradient-text">Background</span>
           </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-[var(--text-secondary)] text-lg max-w-2xl">
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-[var(--text-secondary)] leading-relaxed max-w-3xl">
             My academic journey and continuous learning path in Computer Science and technology.
           </motion.p>
         </motion.div>
@@ -68,34 +68,34 @@ export default function Experience() {
           className="relative max-w-4xl mx-auto"
         >
           {timeline.map((item, i) => (
-            <motion.div key={i} variants={itemVariants} className="relative mb-12 last:mb-0 group">
+            <motion.div key={i} variants={itemVariants} className="relative mb-20 last:mb-0 group">
               {/* Timeline Node */}
-              <div className="absolute -left-12 top-6 flex items-center justify-center">
+              <div className="absolute -left-12 top-8 flex items-center justify-center">
                 <motion.div
-                  className="relative w-8 h-8 rounded-full bg-gradient-to-br from-[var(--accent-cyan)] to-[var(--accent-teal)] flex items-center justify-center text-white border-4 border-[var(--bg-primary)] z-10 glow-pulse"
+                  className="relative w-10 h-10 rounded-full bg-gradient-to-br from-[var(--accent-cyan)] to-[var(--accent-teal)] flex items-center justify-center text-white border-4 border-[var(--bg-primary)] z-10 glow-pulse"
                   whileHover={{ scale: 1.2 }}
                 >
-                  <item.icon className="text-sm" />
+                  <item.icon className="text-lg" />
                 </motion.div>
 
                 {/* Connecting Line to Next Item */}
                 {i < timeline.length - 1 && (
-                  <div className="absolute top-8 left-3.5 w-0.5 h-32 bg-gradient-to-b from-[var(--accent-cyan)]/50 to-transparent" />
+                  <div className="absolute top-10 left-4 w-0.5 h-40 bg-gradient-to-b from-[var(--accent-cyan)]/50 to-transparent" />
                 )}
               </div>
 
               {/* Content Card */}
-              <div className="ml-12 rounded-2xl p-8 border border-white/10 group-hover:border-[var(--accent-cyan)] transition-all duration-300">
-                <div className="flex items-start justify-between mb-4">
+              <div className="ml-12 rounded-2xl p-10 md:p-12 border border-white/10 group-hover:border-[var(--accent-cyan)] transition-all duration-300">
+                <div className="flex items-start justify-between mb-6 gap-4">
                   <div>
-                    <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-[var(--accent-cyan)] font-semibold text-base">{item.org}</p>
+                    <h3 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">{item.title}</h3>
+                    <p className="text-[var(--accent-cyan)] font-bold text-lg">{item.org}</p>
                   </div>
-                  <span className="px-4 py-2 rounded-lg text-xs font-semibold bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/30 whitespace-nowrap">
+                  <span className="px-5 py-3 rounded-lg text-xs font-bold bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/30 whitespace-nowrap">
                     {item.period}
                   </span>
                 </div>
-                <p className="text-[var(--text-secondary)] leading-relaxed text-base">{item.desc}</p>
+                <p className="text-[var(--text-secondary)] leading-relaxed text-lg">{item.desc}</p>
               </div>
             </motion.div>
           ))}

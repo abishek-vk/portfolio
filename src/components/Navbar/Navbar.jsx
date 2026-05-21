@@ -26,30 +26,30 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'border-b border-white/10 bg-black/50 py-3' : 'bg-transparent py-6'
+        isScrolled ? 'border-b border-white/10 bg-black/50 py-4 md:py-5' : 'bg-transparent py-7 md:py-8'
       }`}
     >
       <div className="container-max flex justify-between items-center">
         {/* Logo */}
         <motion.a
           href="#home"
-          className="text-2xl font-bold gradient-text"
+          className="text-3xl md:text-4xl font-bold gradient-text"
           whileHover={{ scale: 1.05 }}
         >
           Abishek V
         </motion.a>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <motion.a
               key={link.name}
               href={link.href}
-              className="px-4 py-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors relative group"
+              className="px-1 py-2 text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors relative group"
               whileHover={{ y: -2 }}
             >
               {link.name}
-              <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-[var(--accent-cyan)] to-[var(--accent-teal)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <span className="absolute bottom-0 left-1 right-1 h-0.5 bg-gradient-to-r from-[var(--accent-cyan)] to-[var(--accent-teal)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </motion.a>
           ))}
         </div>
@@ -57,7 +57,7 @@ export default function Navbar() {
         {/* CTA Button */}
         <motion.a
           href="#contact"
-          className="hidden md:block px-6 py-2.5 rounded-full text-sm font-semibold bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)]/60 hover:bg-gradient-to-r hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all duration-300"
+          className="hidden md:block px-7 py-3 rounded-full text-base font-semibold bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)]/60 hover:bg-gradient-to-r hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all duration-300"
           whileHover={{ scale: 1.05 }}
         >
           Get In Touch

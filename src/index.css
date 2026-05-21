@@ -56,20 +56,47 @@ body {
   border: 3px solid var(--bg-primary);
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Poppins", "Inter", system-ui, sans-serif;
-  font-weight: 700;
+/* Typography Scaling */
+body {
+  font-size: clamp(0.95rem, 1vw, 1rem);
+  line-height: 1.6;
+}
+
+/* Text Size Utilities */
+.text-sm {
+  font-size: clamp(0.85rem, 0.8vw, 0.95rem);
+}
+
+.text-base {
+  font-size: clamp(0.95rem, 1vw, 1.1rem);
+}
+
+.text-lg {
+  font-size: clamp(1.05rem, 1.2vw, 1.25rem);
+}
+
+.text-xl {
+  font-size: clamp(1.15rem, 1.4vw, 1.5rem);
+}
+
+.text-2xl {
+  font-size: clamp(1.3rem, 1.8vw, 1.875rem);
+}
+
+.text-3xl {
+  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
 }
 
 h1 {
-  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-size: clamp(2rem, 6.5vw, 4.5rem);
   letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(1.75rem, 5.5vw, 3.5rem);
   letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
 /* Glassmorphism */
@@ -191,25 +218,13 @@ h2 {
   animation: fade-in-up 0.6s ease-out;
 }
 
-/* Container */
+/* Fluid Container - Responsive and Adaptive */
 .container-max {
-  max-width: 1440px;
+  width: 100%;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 32px;
-}
-
-@media (max-width: 1536px) {
-  .container-max {
-    max-width: 1280px;
-    padding: 0 28px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .container-max {
-    max-width: 100%;
-    padding: 0 24px;
-  }
+  padding: 0 clamp(1rem, 5vw, 4rem);
+  box-sizing: border-box;
 }
 
 /* Sections */
@@ -218,26 +233,14 @@ section {
   overflow: hidden;
 }
 
-/* Premium Spacing System */
+/* Fluid Premium Spacing System */
 section {
-  padding-top: 120px;
-  padding-bottom: 120px;
-}
-
-@media (max-width: 768px) {
-  section {
-    padding-top: 80px;
-    padding-bottom: 80px;
-  }
+  padding-top: clamp(3rem, 10vw, 8rem);
+  padding-bottom: clamp(3rem, 10vw, 8rem);
 }
 
 section:first-of-type {
   padding-top: 0;
-}
-
-/* Large Gaps Between Sections */
-section + section {
-  margin-top: 0;
 }
 
 /* Typography Spacing */
@@ -270,6 +273,49 @@ h3 {
 
 .space-y-tight {
   row-gap: 0.5rem;
+}
+
+/* Responsive Grid Utilities */
+.grid-responsive-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 100%, 400px), 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.grid-responsive-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(300px, 100%, 500px), 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.grid-responsive-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 100%, 350px), 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* Fluid Gap Utilities for Tailwind */
+.gap-fluid {
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+.gap-fluid-lg {
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.gap-fluid-xl {
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+/* Fluid Padding Utilities */
+.px-fluid {
+  padding-left: clamp(1rem, 5vw, 3rem);
+  padding-right: clamp(1rem, 5vw, 3rem);
+}
+
+.py-fluid {
+  padding-top: clamp(2rem, 8vw, 5rem);
+  padding-bottom: clamp(2rem, 8vw, 5rem);
 }
 
 /* Premium Transitions */
