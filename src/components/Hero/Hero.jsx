@@ -50,10 +50,10 @@ export default function Hero() {
       <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[var(--accent-cyan)]/10 to-[var(--accent-teal)]/5 rounded-full blur-3xl blob opacity-40" />
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-[var(--accent-purple)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl blob opacity-30" />
 
-      <div className="container-max relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+      <div className="container-max relative z-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
-          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="lg:col-span-7">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="mb-4">
               <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/30">
                 🚀 Welcome to my portfolio
@@ -117,7 +117,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Right - Profile Image */}
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative hidden md:flex justify-center items-center">
+          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative hidden lg:flex justify-center items-center lg:col-span-5">
             {/* Glowing Ring */}
             <div className="absolute inset-0 flex items-center justify-center">
               <motion.div className="absolute w-80 h-80 border border-[var(--accent-cyan)]/30 rounded-full glow-pulse" animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} />

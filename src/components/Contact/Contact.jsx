@@ -74,9 +74,9 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
             onSubmit={handleSubmit}
-            className="md:col-span-2 rounded-3xl p-6 md:p-8 lg:p-10 space-y-6 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300"
+            className="md:col-span-2 glass rounded-3xl p-8 md:p-10 lg:p-12 space-y-8 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {/* Name Input */}
               <div>
                 <label className="block text-xs md:text-sm font-medium mb-2 md:mb-3 text-[var(--text-primary)]">Your Name</label>
