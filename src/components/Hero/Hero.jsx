@@ -99,9 +99,9 @@ export default function Hero() {
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               transition={{ delay: 0.6 }} 
-              className="flex flex-col gap-6 mt-24"
+              className="flex flex-col gap-3 mt-24"
             >
-              <span className="text-[var(--text-tertiary)] text-sm font-medium">Connect with me</span>
+              <span className="text-[var(--text-tertiary)] text-base md:text-lg font-semibold">Connect with me</span>
               <div className="flex gap-6">
                 <motion.a
                   href="https://github.com/abishek-vk"
