@@ -43,7 +43,7 @@ export default function Hero() {
   const roles = ["Full Stack Developer", "UI/UX Enthusiast", "Problem Solver", "Tech Innovator"];
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-32 pb-20">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-40 pb-32">
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 animated-gradient opacity-40" />
 
@@ -52,26 +52,55 @@ export default function Hero() {
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-[var(--accent-purple)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl blob opacity-30" />
 
       <div className="container-max relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 lg:gap-24 items-center">
           {/* Left Content */}
-          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="lg:col-span-7 w-full">
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-8 leading-tight">
-              Hi, I'm <span className="gradient-text">Abishek V</span>
-            </motion.h1>
+          <motion.div 
+            initial={{ opacity: 0, x: -40 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.8 }} 
+            className="lg:col-span-7 w-full flex flex-col"
+          >
+            {/* Heading & Role Text Group */}
+            <div className="flex flex-col gap-6">
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ delay: 0.2 }} 
+                className="leading-tight text-4xl md:text-5xl lg:text-6xl font-bold"
+              >
+                Hi, I'm <span className="gradient-text">Abishek V</span>
+              </motion.h1>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-xl md:text-2xl lg:text-3xl font-semibold mb-12 h-auto">
-              <TypingText texts={roles} speed={80} />
-            </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ delay: 0.3 }} 
+                className="text-xl md:text-2xl lg:text-3xl font-semibold"
+              >
+                <TypingText texts={roles} speed={80} />
+              </motion.div>
+            </div>
 
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-[var(--text-secondary)] leading-relaxed mb-16 max-w-2xl">
+            {/* Description Paragraph Block */}
+            <motion.p 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              transition={{ delay: 0.4 }} 
+              className="text-[var(--text-secondary)] leading-relaxed mt-12 max-w-xl text-base md:text-lg"
+            >
               Crafting elegant, scalable solutions through clean code and innovative design. Passionate about building exceptional digital experiences that make an impact.
             </motion.p>
 
-            {/* CTA Buttons */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="flex flex-col sm:flex-row flex-wrap gap-5 md:gap-6 mb-20">
+            {/* CTA Buttons Group */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ delay: 0.5 }} 
+              className="flex flex-row gap-6 mt-12 items-center"
+            >
               <motion.a
                 href="#projects"
-                className="glow-button px-8 md:px-10 py-4 md:py-5 rounded-full font-semibold text-white transition-all duration-300 group text-base md:text-lg"
+                className="glow-button px-8 md:px-12 py-4 md:py-5 rounded-full font-semibold text-white transition-all duration-300 group text-base md:text-lg whitespace-nowrap"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -79,7 +108,7 @@ export default function Hero() {
               </motion.a>
               <motion.a
                 href="#contact"
-                className="px-8 md:px-10 py-4 md:py-5 rounded-full font-semibold text-[var(--text-primary)] border border-white/20 hover:border-[var(--accent-cyan)] hover:glow-text transition-all duration-300 text-base md:text-lg text-center"
+                className="px-8 md:px-12 py-4 md:py-5 rounded-full font-semibold text-[var(--text-primary)] border border-white/20 hover:border-[var(--accent-cyan)] hover:glow-text transition-all duration-300 text-base md:text-lg text-center whitespace-nowrap"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -87,10 +116,15 @@ export default function Hero() {
               </motion.a>
             </motion.div>
 
-            {/* Social Links */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex flex-col sm:flex-row sm:items-center gap-6 md:gap-8 pt-8">
-              <span className="text-[var(--text-tertiary)] text-xs md:text-sm">Connect with me</span>
-              <div className="flex gap-4">
+            {/* Social Icons Group */}
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              transition={{ delay: 0.6 }} 
+              className="flex flex-col gap-6 mt-24"
+            >
+              <span className="text-[var(--text-tertiary)] text-sm font-medium">Connect with me</span>
+              <div className="flex gap-6">
                 <motion.a
                   href="https://github.com/abishek-vk"
                   target="_blank"
@@ -98,7 +132,7 @@ export default function Hero() {
                   className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
                   whileHover={{ y: -4 }}
                 >
-                  <FaGithub className="text-xl text-[var(--accent-cyan)]" />
+                  <FaGithub className="text-2xl text-[var(--accent-cyan)]" />
                 </motion.a>
                 <motion.a
                   href="https://www.linkedin.com/in/vabishek13/"
@@ -107,14 +141,14 @@ export default function Hero() {
                   className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
                   whileHover={{ y: -4 }}
                 >
-                  <FaLinkedin className="text-xl text-[var(--accent-cyan)]" />
+                  <FaLinkedin className="text-2xl text-[var(--accent-cyan)]" />
                 </motion.a>
                 <motion.a
                   href="mailto:abishekvenkatachalam2007@gmail.com"
                   className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
                   whileHover={{ y: -4 }}
                 >
-                  <FaEnvelope className="text-xl text-[var(--accent-cyan)]" />
+                  <FaEnvelope className="text-2xl text-[var(--accent-cyan)]" />
                 </motion.a>
               </div>
             </motion.div>
