@@ -51,29 +51,23 @@ export default function Hero() {
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-[var(--accent-purple)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl blob opacity-30" />
 
       <div className="container-max relative z-10 max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="lg:col-span-7">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="mb-4">
-              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/30">
-                🚀 Welcome to my portfolio
-              </span>
-            </motion.div>
-
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-2 text-3xl md:text-4xl lg:text-5xl">
+            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-6 text-4xl md:text-5xl lg:text-6xl">
               Hi, I'm <span className="gradient-text">Abishek V</span>
             </motion.h1>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 h-auto md:h-10">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-xl md:text-2xl lg:text-3xl font-semibold mb-8 h-auto md:h-10">
               <TypingText texts={roles} speed={80} />
             </motion.div>
 
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-[var(--text-secondary)] text-sm md:text-base lg:text-lg leading-relaxed mb-8 max-w-lg">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-[var(--text-secondary)] text-sm md:text-base lg:text-lg leading-relaxed mb-10 max-w-xl">
               Crafting elegant, scalable solutions through clean code and innovative design. Passionate about building exceptional digital experiences that make an impact.
             </motion.p>
 
             {/* CTA Buttons */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 mb-10">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-5 mb-12">
               <motion.a
                 href="#projects"
                 className="glow-button px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold text-white transition-all duration-300 group text-sm md:text-base"
@@ -93,7 +87,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Social Links */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
               <span className="text-[var(--text-tertiary)] text-xs md:text-sm">Connect with me</span>
               <div className="flex gap-4">
                 <motion.a
@@ -126,13 +120,13 @@ export default function Hero() {
 
             {/* Profile Card */}
             <motion.div
-              className="rounded-3xl p-8 w-72 h-80 flex items-center justify-center relative z-10 border border-white/10"
+              className="rounded-3xl p-8 w-80 h-80 flex items-center justify-center relative z-10 border border-white/10 bg-gradient-to-br from-white/5 to-white/0"
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
               <div className="text-center">
-                <span className="text-8xl block mb-4">👨‍💻</span>
-                <h3 className="font-bold text-lg mb-1">Abishek V</h3>
+                <div className="text-6xl font-bold gradient-text block mb-6">AV</div>
+                <h3 className="font-bold text-xl mb-2">Abishek V</h3>
                 <p className="text-[var(--text-tertiary)] text-sm">Full Stack Developer</p>
               </div>
             </motion.div>
