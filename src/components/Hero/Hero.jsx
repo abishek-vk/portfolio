@@ -92,29 +92,7 @@ export default function Hero() {
             </motion.p>
 
             {/* CTA Buttons Group */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.5 }} 
-              className="flex flex-row gap-6 mt-12 items-center"
-            >
-              <motion.a
-                href="#projects"
-                className="glow-button px-8 md:px-12 py-4 md:py-5 rounded-full font-semibold text-white transition-all duration-300 group text-base md:text-lg whitespace-nowrap"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View My Work
-              </motion.a>
-              <motion.a
-                href="#contact"
-                className="px-8 md:px-12 py-4 md:py-5 rounded-full font-semibold text-[var(--text-primary)] border border-white/20 hover:border-[var(--accent-cyan)] hover:glow-text transition-all duration-300 text-base md:text-lg text-center whitespace-nowrap"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get In Touch
-              </motion.a>
-            </motion.div>
+            {/* Removed - CTA buttons section */}
 
             {/* Social Icons Group */}
             <motion.div 
