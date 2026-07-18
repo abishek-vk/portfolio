@@ -62,44 +62,44 @@ body {
 
 /* Typography Scaling */
 body {
-  font-size: clamp(0.85rem, 0.9vw, 0.95rem);
+  font-size: clamp(0.8rem, 0.85vw, 0.9rem);
   line-height: 1.6;
 }
 
 /* Text Size Utilities */
 .text-sm {
-  font-size: clamp(0.75rem, 0.7vw, 0.85rem);
+  font-size: clamp(0.7rem, 0.65vw, 0.8rem);
 }
 
 .text-base {
-  font-size: clamp(0.85rem, 0.9vw, 1rem);
+  font-size: clamp(0.8rem, 0.85vw, 0.93rem);
 }
 
 .text-lg {
-  font-size: clamp(0.95rem, 1vw, 1.1rem);
+  font-size: clamp(0.88rem, 0.95vw, 1.03rem);
 }
 
 .text-xl {
-  font-size: clamp(1rem, 1.2vw, 1.35rem);
+  font-size: clamp(0.93rem, 1.1vw, 1.25rem);
 }
 
 .text-2xl {
-  font-size: clamp(1.15rem, 1.5vw, 1.65rem);
+  font-size: clamp(1.05rem, 1.35vw, 1.5rem);
 }
 
 .text-3xl {
-  font-size: clamp(1.35rem, 1.9vw, 2rem);
+  font-size: clamp(1.25rem, 1.75vw, 1.85rem);
 }
 
 @layer base {
   h1 {
-    font-size: clamp(1.75rem, 5.5vw, 3.75rem);
+    font-size: clamp(1.6rem, 5vw, 3.5rem);
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
 
   h2 {
-    font-size: clamp(1.5rem, 4.5vw, 2.9rem);
+    font-size: clamp(1.35rem, 4vw, 2.65rem);
     letter-spacing: -0.01em;
     line-height: 1.15;
   }
