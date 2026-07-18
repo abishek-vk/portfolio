@@ -113,7 +113,7 @@ export default function Projects() {
                 <div className="h-px bg-gradient-to-r from-white/10 to-transparent mb-12" />
 
                 {/* Highlights as List */}
-                <div className="mb-16 space-y-5 flex-grow">
+                <div className="mb-8 space-y-5 flex-grow">
                   <p className="text-xs font-semibold text-[var(--text-tertiary)] uppercase tracking-widest">Key Features</p>
                   {project.highlights.map((highlight, j) => (
                     <motion.div 
@@ -134,7 +134,7 @@ export default function Projects() {
                 </div>
 
                 {/* Divider */}
-                <div className="h-px bg-gradient-to-r from-white/10 to-transparent mb-12 mt-auto" />
+                <div className="h-px bg-gradient-to-r from-white/10 to-transparent mb-6 mt-auto" />
 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-3 md:gap-4">
