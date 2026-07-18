@@ -137,12 +137,12 @@ export default function Projects() {
                 <div className="h-px bg-gradient-to-r from-white/10 to-transparent mb-12 mt-auto" />
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-5 md:gap-6">
+                <div className="flex flex-wrap gap-3 md:gap-4">
                   <motion.a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex-1 flex items-center justify-center gap-3 px-7 md:px-9 py-4 md:py-5 rounded-xl bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all font-semibold text-base md:text-lg"
+                    className="w-fit flex items-center justify-center gap-2 px-4 md:px-5 py-2.5 rounded-lg bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all font-semibold text-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -152,7 +152,7 @@ export default function Projects() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex-1 flex items-center justify-center gap-3 px-7 md:px-9 py-4 md:py-5 rounded-xl border border-white/10 text-[var(--text-primary)] hover:border-[var(--accent-cyan)] hover:bg-white/5 transition-all font-semibold text-base md:text-lg"
+                    className="w-fit flex items-center justify-center gap-2 px-4 md:px-5 py-2.5 rounded-lg border border-white/10 text-[var(--text-primary)] hover:border-[var(--accent-cyan)] hover:bg-white/5 transition-all font-semibold text-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >

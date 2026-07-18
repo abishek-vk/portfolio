@@ -74,12 +74,12 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
             onSubmit={handleSubmit}
-            className="md:col-span-2 glass rounded-3xl p-10 md:p-12 lg:p-16 space-y-10 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300"
+            className="w-full max-w-full md:col-span-2 lg:col-span-1 justify-self-start glass rounded-2xl p-4 md:p-5 space-y-4 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300" style={{ maxWidth: "480px" }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Name Input */}
               <div>
-                <label className="block text-sm md:text-base font-semibold mb-3 md:mb-4 text-[var(--text-primary)]">Your Name</label>
+                <label className="block text-sm md:text-base font-semibold mb-2.5 md:mb-3 text-[var(--text-primary)]">Your Name</label>
                 <motion.input
                   type="text"
                   value={form.name}
@@ -87,13 +87,13 @@ export default function Contact() {
                   placeholder="John Doe"
                   required
                   whileFocus={{ scale: 1.01 }}
-                  className="w-full px-4 md:px-5 py-3 md:py-4 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 text-base"
+                  className="w-full px-3.5 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 text-base"
                 />
               </div>
 
               {/* Email Input */}
               <div>
-                <label className="block text-sm md:text-base font-semibold mb-3 md:mb-4 text-[var(--text-primary)]">Your Email</label>
+                <label className="block text-sm md:text-base font-semibold mb-2.5 md:mb-3 text-[var(--text-primary)]">Your Email</label>
                 <motion.input
                   type="email"
                   value={form.email}
@@ -101,29 +101,29 @@ export default function Contact() {
                   placeholder="john@example.com"
                   required
                   whileFocus={{ scale: 1.01 }}
-                  className="w-full px-4 md:px-5 py-3 md:py-4 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 text-base"
+                  className="w-full px-3.5 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 text-base"
                 />
               </div>
             </div>
 
             {/* Message Textarea */}
             <div>
-              <label className="block text-sm md:text-base font-semibold mb-3 md:mb-4 text-[var(--text-primary)]">Message</label>
+              <label className="block text-sm md:text-base font-semibold mb-2.5 md:mb-3 text-[var(--text-primary)]">Message</label>
               <motion.textarea
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 placeholder="Tell me about your project..."
-                rows={5}
+                rows={2}
                 required
                 whileFocus={{ scale: 1.01 }}
-                className="w-full px-4 md:px-5 py-3 md:py-4 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 resize-none text-base leading-relaxed"
+                className="w-full px-3.5 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 resize-none text-base leading-relaxed"
               />
             </div>
 
             {/* Submit Button */}
             <motion.button
               type="submit"
-              className="w-full glow-button px-8 py-5 rounded-lg font-bold text-white text-lg transition-all duration-300 relative overflow-hidden group"
+              className="w-fit glow-button px-5 py-2.5 rounded-lg font-bold text-white text-sm transition-all duration-300 relative overflow-hidden group"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
