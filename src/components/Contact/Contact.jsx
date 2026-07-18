@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaPhone, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -18,7 +18,6 @@ export default function Contact() {
 
   const contactInfo = [
     { icon: FaEnvelope, label: "Email", value: "abishekvenkatachalam2007@gmail.com", href: "mailto:abishekvenkatachalam2007@gmail.com" },
-    { icon: FaPhone, label: "Phone", value: "+91 82203 87244", href: "tel:+918220387244" },
     { icon: FaGithub, label: "GitHub", value: "@abishek-vk", href: "https://github.com/abishek-vk" },
     { icon: FaLinkedin, label: "LinkedIn", value: "@vabishek13", href: "https://www.linkedin.com/in/vabishek13/" }
   ];
