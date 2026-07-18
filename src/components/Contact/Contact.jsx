@@ -44,7 +44,7 @@ export default function Contact() {
         </motion.div>
 
         {/* Content Grid - Fully Responsive */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-14 items-stretch mb-20 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-14 items-center mb-20 w-full max-w-5xl mx-auto">
           {/* Contact Methods */}
           <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="space-y-6">
             {contactInfo.map((info, i) => (
@@ -74,7 +74,7 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
             onSubmit={handleSubmit}
-            className="w-full max-w-full md:col-span-2 lg:col-span-1 justify-self-start glass rounded-2xl p-4 md:p-5 space-y-4 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300" style={{ maxWidth: "480px" }}
+            className="w-full md:col-span-2 justify-self-stretch glass rounded-2xl p-6 md:p-8 space-y-5 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300" style={{ maxWidth: "640px" }}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Name Input */}
