@@ -31,13 +31,20 @@ export default function Skills() {
 
   return (
     <section id="skills" className="py-40 lg:py-48 relative overflow-hidden">
-      {/* Decorative Background */}
+      {/* Decorative Rose & Coral Glow Background */}
       <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        whileInView={{ opacity: 0.2, x: 0 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 0.25, scale: 1 }}
         viewport={defaultViewport}
         transition={{ duration: 1.2 }}
-        className="absolute top-1/3 right-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-cyan)]/10 to-[var(--accent-purple)]/5 rounded-full blur-3xl"
+        className="absolute top-1/3 right-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-rose)]/20 to-[var(--accent-coral)]/10 rounded-full blur-3xl"
+      />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 0.15, scale: 1 }}
+        viewport={defaultViewport}
+        transition={{ duration: 1.2, delay: 0.2 }}
+        className="absolute bottom-10 left-10 w-80 h-80 bg-gradient-to-br from-[var(--accent-amber)]/20 to-[var(--accent-rose)]/10 rounded-full blur-3xl"
       />
 
       <div className="container-max relative z-10 w-full">
@@ -46,36 +53,36 @@ export default function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={defaultViewport}
-          className="mb-32"
+          className="mb-32 text-center max-w-3xl mx-auto"
         >
-          <motion.div variants={badgePop()} className="mb-6">
-            <span className="inline-block px-4 py-2 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-widest border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/5">
+          <motion.div variants={badgePop()} className="mb-6 inline-block">
+            <span className="inline-block px-4 py-2 rounded-full text-xs font-bold text-[var(--accent-rose)] uppercase tracking-widest border border-[var(--accent-rose)]/40 bg-[var(--accent-rose)]/15 shadow-[0_0_15px_rgba(244,63,94,0.2)]">
               Technical Stack
             </span>
           </motion.div>
 
-          <motion.h2 variants={fadeUp(0.05)} className="mb-8">
-            Skills & <span className="gradient-text">Expertise</span>
+          <motion.h2 variants={fadeUp(0.05)} className="mb-8 text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+            Skills & <span className="gradient-rose-text">Expertise</span>
           </motion.h2>
-          <motion.p variants={fadeUp(0.1)} className="text-[var(--text-secondary)] leading-relaxed max-w-4xl">
+          <motion.p variants={fadeUp(0.1)} className="text-white leading-relaxed text-base md:text-lg font-medium">
             A comprehensive toolkit of technologies and expertise for building modern, scalable applications.
           </motion.p>
         </motion.div>
 
-        {/* Skills Layout */}
+        {/* Skills Cards Grid */}
         <motion.div
           variants={staggerContainer(0.15, 0.1)}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "0px 0px -100px 0px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 max-w-3xl mx-auto w-full"
+          viewport={defaultViewport}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto w-full"
         >
           {/* Professional Column 1 */}
           <motion.div
             variants={columnVariants}
-            className="space-y-10"
+            className="p-8 md:p-10 rounded-3xl bg-[#13192b]/95 backdrop-blur-md border border-white/20 hover:border-[var(--accent-rose)]/60 transition-all duration-300 shadow-xl group"
           >
-            <div className="space-y-7">
+            <div className="space-y-6">
               {skillCategories[0].skills.map((skill, i) => (
                 <motion.div
                   key={i}
@@ -83,17 +90,15 @@ export default function Skills() {
                   variants={staggerItem}
                   initial="hidden"
                   whileInView="visible"
-                  whileHover={{ x: 8, transition: { duration: 0.2 } }}
-                  viewport={{ once: true }}
-                  className="flex items-center gap-5 group cursor-default"
+                  whileHover={{ x: 10, transition: { duration: 0.2 } }}
+                  viewport={{ once: false }}
+                  className="flex items-center gap-5 cursor-default p-3.5 rounded-xl bg-white/10 border border-white/20 hover:bg-[var(--accent-rose)]/20 hover:border-[var(--accent-rose)]/50 transition-all"
                 >
                   <motion.span
-                    className="text-[var(--accent-cyan)] font-bold text-xl"
-                    whileHover={{ scale: 1.4, rotate: 90, transition: { duration: 0.3 } }}
-                  >
-                    •
-                  </motion.span>
-                  <span className="text-white/80 group-hover:text-white transition-colors duration-200 text-lg md:text-xl">
+                    className="w-3.5 h-3.5 rounded-full bg-gradient-to-r from-[var(--accent-rose)] to-[var(--accent-coral)] shadow-[0_0_12px_rgba(244,63,94,0.7)]"
+                    whileHover={{ scale: 1.5, transition: { duration: 0.2 } }}
+                  />
+                  <span className="text-white font-bold text-lg md:text-xl">
                     {skill}
                   </span>
                 </motion.div>
@@ -104,9 +109,9 @@ export default function Skills() {
           {/* Professional Column 2 */}
           <motion.div
             variants={columnVariants}
-            className="space-y-10"
+            className="p-8 md:p-10 rounded-3xl bg-[#13192b]/95 backdrop-blur-md border border-white/20 hover:border-[var(--accent-rose)]/60 transition-all duration-300 shadow-xl group"
           >
-            <div className="space-y-7">
+            <div className="space-y-6">
               {skillCategories[1].skills.map((skill, i) => (
                 <motion.div
                   key={i}
@@ -114,17 +119,15 @@ export default function Skills() {
                   variants={staggerItem}
                   initial="hidden"
                   whileInView="visible"
-                  whileHover={{ x: 8, transition: { duration: 0.2 } }}
-                  viewport={{ once: true }}
-                  className="flex items-center gap-5 group cursor-default"
+                  whileHover={{ x: 10, transition: { duration: 0.2 } }}
+                  viewport={{ once: false }}
+                  className="flex items-center gap-5 cursor-default p-3.5 rounded-xl bg-white/10 border border-white/20 hover:bg-[var(--accent-rose)]/20 hover:border-[var(--accent-rose)]/50 transition-all"
                 >
                   <motion.span
-                    className="text-[var(--accent-cyan)] font-bold text-xl"
-                    whileHover={{ scale: 1.4, rotate: 90, transition: { duration: 0.3 } }}
-                  >
-                    •
-                  </motion.span>
-                  <span className="text-white/80 group-hover:text-white transition-colors duration-200 text-lg md:text-xl">
+                    className="w-3.5 h-3.5 rounded-full bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-amber)] shadow-[0_0_12px_rgba(251,113,133,0.7)]"
+                    whileHover={{ scale: 1.5, transition: { duration: 0.2 } }}
+                  />
+                  <span className="text-white font-bold text-lg md:text-xl">
                     {skill}
                   </span>
                 </motion.div>

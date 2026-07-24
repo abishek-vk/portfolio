@@ -16,10 +16,10 @@ function App() {
   useEffect(() => { setTimeout(() => setLoading(false), 2500); }, []);
   if (loading) return <LoadingScreen />;
   return (
-    <div className="relative">
+    <div className="relative bg-[var(--bg-primary)]">
       <ParticleBackground />
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <SectionDivider />
         <About />

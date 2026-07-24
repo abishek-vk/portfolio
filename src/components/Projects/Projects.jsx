@@ -16,9 +16,7 @@ const projects = [
       "Coding labs, quizzes, and automated assessment management",
       "Secure authentication with containerized microservices",
       "Real-time notifications and comprehensive analytics"
-    ],
-    gradient: "from-cyan-500/20 to-blue-500/10",
-    borderColor: "from-cyan-400 to-blue-400"
+    ]
   },
   {
     title: "Bloodflowhub",
@@ -30,9 +28,7 @@ const projects = [
       "Automated alert systems for urgent requests",
       "Modular backend services with responsive frontend",
       "Efficient donor-patient matching algorithm"
-    ],
-    gradient: "from-red-500/20 to-pink-500/10",
-    borderColor: "from-red-400 to-pink-400"
+    ]
   },
   {
     title: "AutoML",
@@ -44,9 +40,7 @@ const projects = [
       "Resource-aware hyperparameter tuning",
       "Interactive dashboards with leaderboard generation",
       "Automated report generation and insights"
-    ],
-    gradient: "from-purple-500/20 to-indigo-500/10",
-    borderColor: "from-purple-400 to-indigo-400"
+    ]
   }
 ];
 
@@ -67,20 +61,20 @@ const featureItemVariants = {
 export default function Projects() {
   return (
     <section id="projects" className="py-40 lg:py-48 relative overflow-hidden">
-      {/* Decorative Backgrounds */}
+      {/* Decorative Background Glows */}
       <motion.div
-        initial={{ opacity: 0, x: -80 }}
-        whileInView={{ opacity: 0.2, x: 0 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 0.2, scale: 1 }}
         viewport={defaultViewport}
         transition={{ duration: 1.2 }}
-        className="absolute -left-32 top-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-cyan)]/10 to-[var(--accent-purple)]/5 rounded-full blur-3xl"
+        className="absolute -left-32 top-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-rose)]/20 to-[var(--accent-coral)]/10 rounded-full blur-3xl"
       />
       <motion.div
-        initial={{ opacity: 0, x: 80 }}
-        whileInView={{ opacity: 0.2, x: 0 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 0.2, scale: 1 }}
         viewport={defaultViewport}
         transition={{ duration: 1.2, delay: 0.2 }}
-        className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-teal)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl"
+        className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-amber)]/20 to-[var(--accent-rose)]/10 rounded-full blur-3xl"
       />
 
       <div className="container-max relative z-10 w-full">
@@ -92,15 +86,15 @@ export default function Projects() {
           className="mb-32"
         >
           <motion.div variants={badgePop()} className="mb-6">
-            <span className="inline-block px-4 py-2 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-widest border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/5">
+            <span className="inline-block px-4 py-2 rounded-full text-xs font-bold text-[var(--accent-rose)] uppercase tracking-widest border border-[var(--accent-rose)]/40 bg-[var(--accent-rose)]/15 shadow-[0_0_15px_rgba(244,63,94,0.2)]">
               Featured Work
             </span>
           </motion.div>
 
-          <motion.h2 variants={fadeUp(0.05)} className="mb-8">
-            Showcase of <span className="gradient-text">Projects</span>
+          <motion.h2 variants={fadeUp(0.05)} className="mb-8 text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+            Showcase of <span className="gradient-rose-text">Projects</span>
           </motion.h2>
-          <motion.p variants={fadeUp(0.1)} className="text-[var(--text-secondary)] leading-relaxed max-w-3xl">
+          <motion.p variants={fadeUp(0.1)} className="text-white leading-relaxed max-w-3xl text-base md:text-lg font-medium">
             Full-stack projects demonstrating expertise in building scalable, user-focused applications with modern architecture.
           </motion.p>
         </motion.div>
@@ -117,31 +111,36 @@ export default function Projects() {
             <motion.div
               key={i}
               variants={cardReveal(i * 0.1)}
-              whileHover={{ y: -6, transition: { duration: 0.25 } }}
-              className="group flex flex-col"
+              whileHover={{ y: -8, transition: { duration: 0.25 } }}
+              className="group flex flex-col p-8 md:p-10 rounded-3xl bg-[#13192b]/95 backdrop-blur-md border border-white/20 hover:border-[var(--accent-rose)]/70 transition-all duration-300 shadow-2xl relative overflow-hidden"
             >
-              <div className="h-full flex flex-col">
+              {/* Top color gradient bar */}
+              <div
+                className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[var(--accent-rose)] via-[var(--accent-coral)] to-[var(--accent-amber)] opacity-80 group-hover:opacity-100 transition-opacity"
+              />
+
+              <div className="h-full flex flex-col pt-2">
                 {/* Title */}
                 <motion.h3
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 group-hover:gradient-text transition-all leading-tight"
+                  className="text-3xl md:text-4xl font-bold mb-6 text-white group-hover:text-[var(--accent-rose)] transition-colors leading-tight"
                 >
                   {project.title}
                 </motion.h3>
 
                 {/* Description */}
-                <p className="text-[var(--text-secondary)] text-lg md:text-xl leading-relaxed mb-12">
+                <p className="text-white text-base md:text-lg leading-relaxed mb-8 font-medium">
                   {project.desc}
                 </p>
 
                 {/* Divider */}
                 <motion.div
                   variants={drawLine(0.1 + i * 0.05)}
-                  className="h-px bg-gradient-to-r from-white/10 to-transparent mb-12 origin-left"
+                  className="h-px bg-gradient-to-r from-white/25 via-[var(--accent-rose)]/50 to-transparent mb-8 origin-left"
                 />
 
                 {/* Highlights as List */}
-                <div className="mb-8 space-y-5 flex-grow">
-                  <p className="text-xs font-semibold text-[var(--text-tertiary)] uppercase tracking-widest">Key Features</p>
+                <div className="mb-8 space-y-4 flex-grow">
+                  <p className="text-xs font-bold text-[var(--accent-rose)] uppercase tracking-widest">Key Features</p>
                   {project.highlights.map((highlight, j) => (
                     <motion.div
                       key={j}
@@ -149,18 +148,18 @@ export default function Projects() {
                       variants={featureItemVariants}
                       initial="hidden"
                       whileInView="visible"
-                      viewport={{ once: true }}
-                      className="flex gap-4 items-start group/feature"
+                      viewport={{ once: false }}
+                      className="flex gap-3.5 items-start group/feature"
                     >
                       <motion.div
-                        className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-gradient-to-r from-[var(--accent-cyan)]/30 to-[var(--accent-teal)]/20 mt-0.5"
+                        className="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-gradient-to-r from-[var(--accent-rose)]/40 to-[var(--accent-coral)]/30 mt-1 border border-[var(--accent-rose)]/50"
                         whileHover={{ scale: 1.3, transition: { duration: 0.2 } }}
                       >
-                        <svg className="w-3.5 h-3.5 text-[var(--accent-cyan)]" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-3 h-3 text-[var(--accent-rose)]" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       </motion.div>
-                      <span className="text-[var(--text-secondary)] text-base md:text-lg leading-relaxed group-hover/feature:text-white/90 transition-colors">{highlight}</span>
+                      <span className="text-white text-sm md:text-base leading-relaxed font-medium group-hover/feature:text-white transition-colors">{highlight}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -168,7 +167,7 @@ export default function Projects() {
                 {/* Divider */}
                 <motion.div
                   variants={drawLine(0.2 + i * 0.05)}
-                  className="h-px bg-gradient-to-r from-white/10 to-transparent mb-6 mt-auto origin-left"
+                  className="h-px bg-gradient-to-r from-white/20 to-transparent mb-6 mt-auto origin-left"
                 />
 
                 {/* Action Buttons */}
@@ -177,7 +176,7 @@ export default function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-fit flex items-center justify-center gap-2 px-4 md:px-5 py-2.5 rounded-lg bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all font-semibold text-sm"
+                    className="w-fit flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[var(--accent-rose)]/25 to-[var(--accent-coral)]/15 border border-[var(--accent-rose)]/50 text-[var(--accent-rose)] hover:border-[var(--accent-rose)] hover:from-[var(--accent-rose)]/35 hover:to-[var(--accent-coral)]/25 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)] transition-all font-bold text-sm"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -187,7 +186,7 @@ export default function Projects() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-fit flex items-center justify-center gap-2 px-4 md:px-5 py-2.5 rounded-lg border border-white/10 text-[var(--text-primary)] hover:border-[var(--accent-cyan)] hover:bg-white/5 transition-all font-semibold text-sm"
+                    className="w-fit flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-white/25 bg-white/10 text-white hover:border-[var(--accent-rose)] hover:bg-white/20 transition-all font-bold text-sm"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >

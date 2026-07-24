@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import {
-  fadeUp, slideLeft, slideRight, badgePop, scaleUp,
+  fadeUp, badgePop, scaleUp,
   staggerContainer, cardReveal, defaultViewport
 } from "../../utils/animations";
 
@@ -56,20 +56,20 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-40 lg:py-48 relative overflow-hidden">
-      {/* Decorative Backgrounds */}
+      {/* Decorative Rose & Sunset Coral Backgrounds */}
       <motion.div
-        initial={{ opacity: 0, x: 80 }}
-        whileInView={{ opacity: 0.2, x: 0 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 0.25, scale: 1 }}
         viewport={defaultViewport}
         transition={{ duration: 1.2 }}
-        className="absolute -right-32 top-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-cyan)]/10 to-[var(--accent-purple)]/5 rounded-full blur-3xl"
+        className="absolute -right-32 top-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-rose)]/20 to-[var(--accent-coral)]/10 rounded-full blur-3xl"
       />
       <motion.div
-        initial={{ opacity: 0, x: -80 }}
-        whileInView={{ opacity: 0.2, x: 0 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 0.2, scale: 1 }}
         viewport={defaultViewport}
         transition={{ duration: 1.2, delay: 0.2 }}
-        className="absolute -left-32 bottom-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-teal)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl"
+        className="absolute -left-32 bottom-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-amber)]/15 to-[var(--accent-rose)]/10 rounded-full blur-3xl"
       />
 
       <div className="container-max relative z-10 w-full">
@@ -81,14 +81,14 @@ export default function Contact() {
           viewport={defaultViewport}
           className="text-center mb-24"
         >
-          <motion.span variants={badgePop()} className="inline-block px-4 py-2 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-widest mb-6 border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/5">
+          <motion.span variants={badgePop()} className="inline-block px-4 py-2 rounded-full text-xs font-bold text-[var(--accent-rose)] uppercase tracking-widest mb-6 border border-[var(--accent-rose)]/40 bg-[var(--accent-rose)]/15 shadow-[0_0_15px_rgba(244,63,94,0.2)]">
             Get In Touch
           </motion.span>
 
-          <motion.h2 variants={fadeUp(0.05)} className="mb-8">
-            Let's Build Something <span className="gradient-text">Amazing Together</span>
+          <motion.h2 variants={fadeUp(0.05)} className="mb-8 text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+            Let's Build Something <span className="gradient-rose-text">Amazing Together</span>
           </motion.h2>
-          <motion.p variants={fadeUp(0.1)} className="text-[var(--text-secondary)] leading-relaxed max-w-3xl mx-auto">
+          <motion.p variants={fadeUp(0.1)} className="text-white leading-relaxed max-w-3xl mx-auto text-base md:text-lg font-medium">
             Open to new opportunities, collaborations, and exciting projects. I'd love to hear from you.
           </motion.p>
         </motion.div>
@@ -112,17 +112,17 @@ export default function Contact() {
                 custom={i}
                 variants={contactCardVariants}
                 whileHover={{ x: 8, transition: { duration: 0.2 } }}
-                className="group rounded-2xl p-7 flex items-start gap-5 cursor-pointer transition-all duration-300 border border-transparent hover:border-[var(--accent-cyan)] hover:glow-text"
+                className="group rounded-2xl p-7 flex items-start gap-5 cursor-pointer transition-all duration-300 bg-[#13192b]/95 border border-white/20 hover:border-[var(--accent-rose)] shadow-xl"
               >
                 <motion.div
-                  className="p-4 rounded-xl bg-gradient-to-br from-[var(--accent-cyan)]/30 to-[var(--accent-teal)]/20 group-hover:from-[var(--accent-cyan)]/50 group-hover:to-[var(--accent-teal)]/30 transition-all group-hover:scale-110 flex-shrink-0"
+                  className="p-4 rounded-xl bg-gradient-to-br from-[var(--accent-rose)]/30 to-[var(--accent-coral)]/20 group-hover:from-[var(--accent-rose)]/50 group-hover:to-[var(--accent-coral)]/40 transition-all group-hover:scale-110 flex-shrink-0"
                   whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
                 >
-                  <info.icon className="text-3xl text-[var(--accent-cyan)]" />
+                  <info.icon className="text-3xl text-[var(--accent-rose)]" />
                 </motion.div>
                 <div>
-                  <p className="text-[var(--text-tertiary)] text-xs font-semibold uppercase tracking-widest mb-2">{info.label}</p>
-                  <p className="font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-cyan)] transition-colors text-base md:text-lg break-all">{info.value}</p>
+                  <p className="text-white text-xs font-bold uppercase tracking-widest mb-2">{info.label}</p>
+                  <p className="font-bold text-white group-hover:text-[var(--accent-rose)] transition-colors text-base md:text-lg break-all">{info.value}</p>
                 </div>
               </motion.a>
             ))}
@@ -135,10 +135,10 @@ export default function Contact() {
             whileInView="visible"
             viewport={defaultViewport}
             onSubmit={handleSubmit}
-            className="w-full md:col-span-2 justify-self-stretch glass rounded-2xl p-6 md:p-8 space-y-5 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300" style={{ maxWidth: "640px" }}
+            className="w-full md:col-span-2 justify-self-stretch rounded-3xl p-6 md:p-8 space-y-6 bg-[#13192b]/95 backdrop-blur-xl border border-white/20 hover:border-[var(--accent-rose)]/60 transition-all duration-300 shadow-2xl" style={{ maxWidth: "640px" }}
           >
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 gap-5"
             >
               {/* Name Input */}
               <motion.div
@@ -146,9 +146,9 @@ export default function Contact() {
                 variants={formFieldVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
+                viewport={{ once: false }}
               >
-                <label className="block text-sm md:text-base font-semibold mb-2.5 md:mb-3 text-[var(--text-primary)]">Your Name</label>
+                <label className="block text-sm md:text-base font-bold mb-2.5 text-white">Your Name</label>
                 <motion.input
                   type="text"
                   value={form.name}
@@ -156,7 +156,7 @@ export default function Contact() {
                   placeholder="John Doe"
                   required
                   whileFocus={{ scale: 1.01 }}
-                  className="w-full px-3.5 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 text-base"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/25 text-white placeholder-white/60 font-semibold focus:outline-none focus:border-[var(--accent-rose)] focus:bg-white/20 focus:shadow-[0_0_20px_rgba(244,63,94,0.35)] transition-all duration-300 text-base"
                 />
               </motion.div>
 
@@ -166,9 +166,9 @@ export default function Contact() {
                 variants={formFieldVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
+                viewport={{ once: false }}
               >
-                <label className="block text-sm md:text-base font-semibold mb-2.5 md:mb-3 text-[var(--text-primary)]">Your Email</label>
+                <label className="block text-sm md:text-base font-bold mb-2.5 text-white">Your Email</label>
                 <motion.input
                   type="email"
                   value={form.email}
@@ -176,7 +176,7 @@ export default function Contact() {
                   placeholder="john@example.com"
                   required
                   whileFocus={{ scale: 1.01 }}
-                  className="w-full px-3.5 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 text-base"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/25 text-white placeholder-white/60 font-semibold focus:outline-none focus:border-[var(--accent-rose)] focus:bg-white/20 focus:shadow-[0_0_20px_rgba(244,63,94,0.35)] transition-all duration-300 text-base"
                 />
               </motion.div>
             </motion.div>
@@ -187,17 +187,17 @@ export default function Contact() {
               variants={formFieldVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
-              <label className="block text-sm md:text-base font-semibold mb-2.5 md:mb-3 text-[var(--text-primary)]">Message</label>
+              <label className="block text-sm md:text-base font-bold mb-2.5 text-white">Message</label>
               <motion.textarea
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 placeholder="Tell me about your project..."
-                rows={2}
+                rows={3}
                 required
                 whileFocus={{ scale: 1.01 }}
-                className="w-full px-3.5 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 resize-none text-base leading-relaxed"
+                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/25 text-white placeholder-white/60 font-semibold focus:outline-none focus:border-[var(--accent-rose)] focus:bg-white/20 focus:shadow-[0_0_20px_rgba(244,63,94,0.35)] transition-all duration-300 resize-none text-base leading-relaxed"
               />
             </motion.div>
 
@@ -207,13 +207,13 @@ export default function Contact() {
               variants={formFieldVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
               <motion.button
                 type="submit"
-                className="w-fit glow-button px-5 py-2.5 rounded-lg font-bold text-white text-sm transition-all duration-300 relative overflow-hidden group"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="w-fit px-7 py-3.5 rounded-xl font-bold text-white text-base bg-gradient-to-r from-[var(--accent-rose)] to-[var(--accent-coral)] shadow-[0_0_20px_rgba(244,63,94,0.45)] hover:shadow-[0_0_35px_rgba(244,63,94,0.7)] transition-all duration-300 relative overflow-hidden group"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
                 <span className="relative z-10">{status || "Send Message"}</span>
               </motion.button>
@@ -221,7 +221,7 @@ export default function Contact() {
 
             {/* Status Message */}
             {status && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center text-base font-medium text-[var(--accent-cyan)]">
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center text-base font-bold text-[var(--accent-rose)]">
                 {status}
               </motion.div>
             )}
@@ -236,14 +236,14 @@ export default function Contact() {
           viewport={defaultViewport}
           className="text-center"
         >
-          <motion.p variants={fadeUp()} className="text-[var(--text-secondary)] mb-8 text-lg">
+          <motion.p variants={fadeUp()} className="text-white mb-8 text-lg font-bold">
             Or connect with me on social platforms
           </motion.p>
           <motion.div
             variants={staggerContainer(0.1, 0.15)}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="flex justify-center gap-6"
           >
             {[
@@ -256,11 +256,11 @@ export default function Contact() {
                 href={social.href}
                 target={social.href.startsWith("http") ? "_blank" : "_self"}
                 rel={social.href.startsWith("http") ? "noreferrer" : ""}
-                className="p-4 glass rounded-full hover:border-[var(--accent-cyan)] transition-all duration-300 group hover:glow-text"
+                className="p-4 rounded-full bg-[#13192b]/95 border border-white/20 hover:border-[var(--accent-rose)] transition-all duration-300 group hover:shadow-[0_0_20px_rgba(244,63,94,0.45)]"
                 variants={scaleUp(i * 0.1)}
                 whileHover={{ scale: 1.1, y: -4 }}
               >
-                <social.icon className="text-2xl text-[var(--accent-cyan)] group-hover:scale-110 transition-transform" />
+                <social.icon className="text-2xl text-[var(--accent-rose)] group-hover:scale-110 transition-transform" />
               </motion.a>
             ))}
           </motion.div>

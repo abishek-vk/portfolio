@@ -26,14 +26,14 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'border-b border-white/10 bg-black/50 py-4 md:py-5' : 'bg-transparent py-7 md:py-8'
+        isScrolled ? 'border-b border-white/20 bg-[#0b0f19]/90 backdrop-blur-lg py-4 md:py-5 shadow-xl' : 'bg-transparent py-7 md:py-8'
       }`}
     >
       <div className="container-max flex justify-between items-center">
         {/* Logo */}
         <motion.a
           href="#home"
-          className="text-3xl md:text-4xl font-bold gradient-text"
+          className="text-3xl md:text-4xl font-bold gradient-rose-text"
           whileHover={{ scale: 1.05 }}
         >
           Abishek V
@@ -45,11 +45,11 @@ export default function Navbar() {
             <motion.a
               key={link.name}
               href={link.href}
-              className="px-1 py-2 text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors relative group"
+              className="px-1 py-2 text-base font-bold text-white hover:text-[var(--accent-rose)] transition-colors relative group"
               whileHover={{ y: -2 }}
             >
               {link.name}
-              <span className="absolute bottom-0 left-1 right-1 h-0.5 bg-gradient-to-r from-[var(--accent-cyan)] to-[var(--accent-teal)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <span className="absolute bottom-0 left-1 right-1 h-0.5 bg-gradient-to-r from-[var(--accent-rose)] to-[var(--accent-coral)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </motion.a>
           ))}
         </div>
@@ -57,7 +57,7 @@ export default function Navbar() {
         {/* CTA Button */}
         <motion.a
           href="#contact"
-          className="hidden md:block px-7 py-3 rounded-full text-base font-semibold bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)]/60 hover:bg-gradient-to-r hover:from-[var(--accent-cyan)]/30 hover:to-[var(--accent-teal)]/20 transition-all duration-300"
+          className="hidden md:block px-7 py-3 rounded-full text-base font-bold bg-gradient-to-r from-[var(--accent-rose)]/30 to-[var(--accent-coral)]/20 border border-[var(--accent-rose)]/50 text-[var(--accent-rose)] hover:border-[var(--accent-rose)] hover:bg-gradient-to-r hover:from-[var(--accent-rose)]/40 hover:to-[var(--accent-coral)]/30 hover:shadow-[0_0_20px_rgba(244,63,94,0.4)] transition-all duration-300"
           whileHover={{ scale: 1.05 }}
         >
           Get In Touch
@@ -65,7 +65,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-2xl text-[var(--text-primary)]"
+          className="md:hidden text-2xl text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
@@ -79,14 +79,14 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border border-white/10 bg-black/50 mt-2 mx-4 rounded-xl overflow-hidden"
+            className="md:hidden border border-white/20 bg-[#0b0f19]/95 backdrop-blur-lg mt-2 mx-4 rounded-xl overflow-hidden shadow-2xl"
           >
             <div className="py-4 px-6 flex flex-col gap-3">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-lg font-medium text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors"
+                  className="text-lg font-bold text-white hover:text-[var(--accent-rose)] transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
@@ -94,7 +94,7 @@ export default function Navbar() {
               ))}
               <motion.a
                 href="#contact"
-                className="px-6 py-2.5 rounded-full text-sm font-semibold bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)] text-center"
+                className="px-6 py-2.5 rounded-full text-sm font-bold bg-gradient-to-r from-[var(--accent-rose)]/30 to-[var(--accent-coral)]/20 border border-[var(--accent-rose)]/50 text-[var(--accent-rose)] text-center"
                 whileHover={{ scale: 1.05 }}
               >
                 Get In Touch

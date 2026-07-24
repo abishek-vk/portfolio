@@ -178,6 +178,6 @@ export const numberPop = (delay = 0) => ({
   }
 });
 
-// ── Shared viewport config ──
-export const defaultViewport = { once: true, margin: "0px 0px -80px 0px" };
-export const earlyViewport = { once: true, margin: "0px 0px -150px 0px" };
+// ── Shared viewport config (set to once: false so animations trigger every time on scroll) ──
+export const defaultViewport = { once: false, margin: "0px 0px -60px 0px" };
+export const earlyViewport = { once: false, margin: "0px 0px -100px 0px" };
