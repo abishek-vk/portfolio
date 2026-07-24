@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaEnvelope, FaArrowDown, FaLinkedin } from "react-icons/fa";
 import abiImage from "../../assets/abi image.jpeg";
+import { fadeUp, slideLeft, slideRight, scaleUp, badgePop, staggerContainer } from "../../utils/animations";
 
 const TypingText = ({ texts, speed = 80 }) => {
   const [displayText, setDisplayText] = useState("");
@@ -48,33 +49,42 @@ export default function Hero() {
       <div className="absolute inset-0 animated-gradient opacity-40" />
 
       {/* Floating Blobs */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[var(--accent-cyan)]/10 to-[var(--accent-teal)]/5 rounded-full blur-3xl blob opacity-40" />
-      <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-[var(--accent-purple)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl blob opacity-30" />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 0.4, scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[var(--accent-cyan)]/10 to-[var(--accent-teal)]/5 rounded-full blur-3xl blob"
+      />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 0.3, scale: 1 }}
+        transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
+        className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-[var(--accent-purple)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl blob"
+      />
 
-      <div className="container-max relative z-10 w-full">
+      <motion.div
+        variants={staggerContainer(0.15, 0.1)}
+        initial="hidden"
+        animate="visible"
+        className="container-max relative z-10 w-full"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 lg:gap-24 items-center">
           {/* Left Content */}
-          <motion.div 
-            initial={{ opacity: 0, x: -40 }} 
-            animate={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.8 }} 
+          <motion.div
+            variants={slideLeft()}
             className="lg:col-span-7 w-full flex flex-col"
           >
             {/* Heading & Role Text Group */}
             <div className="flex flex-col gap-6">
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ delay: 0.2 }} 
+              <motion.h1
+                variants={fadeUp(0.1)}
                 className="leading-tight text-4xl md:text-5xl lg:text-6xl font-bold"
               >
                 Hi, I'm <span className="gradient-text">Abishek V</span>
               </motion.h1>
 
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ delay: 0.3 }} 
+              <motion.div
+                variants={fadeUp(0.2)}
                 className="text-xl md:text-2xl lg:text-3xl font-semibold"
               >
                 <TypingText texts={roles} speed={80} />
@@ -82,10 +92,8 @@ export default function Hero() {
             </div>
 
             {/* Description Paragraph Block */}
-            <motion.p 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              transition={{ delay: 0.4 }} 
+            <motion.p
+              variants={fadeUp(0.3)}
               className="text-[var(--text-secondary)] leading-relaxed mt-12 max-w-xl text-base md:text-lg"
             >
               Crafting elegant, scalable solutions through clean code and innovative design. Passionate about building exceptional digital experiences that make an impact.
@@ -95,49 +103,55 @@ export default function Hero() {
             {/* Removed - CTA buttons section */}
 
             {/* Social Icons Group */}
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              transition={{ delay: 0.6 }} 
+            <motion.div
+              variants={fadeUp(0.45)}
               className="flex flex-col gap-3 mt-24"
             >
               <span className="text-[var(--text-tertiary)] text-base md:text-lg font-semibold">Connect with me</span>
-              <div className="flex gap-6">
-                <motion.a
-                  href="https://github.com/abishek-vk"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
-                  whileHover={{ y: -4 }}
-                >
-                  <FaGithub className="text-2xl text-[var(--accent-cyan)]" />
-                </motion.a>
-                <motion.a
-                  href="https://www.linkedin.com/in/vabishek13/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
-                  whileHover={{ y: -4 }}
-                >
-                  <FaLinkedin className="text-2xl text-[var(--accent-cyan)]" />
-                </motion.a>
-                <motion.a
-                  href="mailto:abishekvenkatachalam2007@gmail.com"
-                  className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
-                  whileHover={{ y: -4 }}
-                >
-                  <FaEnvelope className="text-2xl text-[var(--accent-cyan)]" />
-                </motion.a>
-              </div>
+              <motion.div
+                variants={staggerContainer(0.1, 0)}
+                initial="hidden"
+                animate="visible"
+                className="flex gap-6"
+              >
+                {[
+                  { href: "https://github.com/abishek-vk", icon: FaGithub },
+                  { href: "https://www.linkedin.com/in/vabishek13/", icon: FaLinkedin },
+                  { href: "mailto:abishekvenkatachalam2007@gmail.com", icon: FaEnvelope }
+                ].map((social, i) => (
+                  <motion.a
+                    key={i}
+                    href={social.href}
+                    target={social.href.startsWith("http") ? "_blank" : "_self"}
+                    rel={social.href.startsWith("http") ? "noreferrer" : ""}
+                    className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
+                    variants={badgePop(0.5 + i * 0.1)}
+                    whileHover={{ y: -4, scale: 1.1 }}
+                  >
+                    <social.icon className="text-2xl text-[var(--accent-cyan)]" />
+                  </motion.a>
+                ))}
+              </motion.div>
             </motion.div>
           </motion.div>
 
           {/* Right - Profile Image */}
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative hidden lg:flex justify-center items-center lg:col-span-5">
+          <motion.div
+            variants={scaleUp(0.3)}
+            className="relative hidden lg:flex justify-center items-center lg:col-span-5"
+          >
             {/* Glowing Ring */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div className="absolute w-80 h-80 border border-[var(--accent-cyan)]/30 rounded-full glow-pulse" animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} />
-              <motion.div className="absolute w-96 h-96 border border-[var(--accent-teal)]/20 rounded-full" animate={{ rotate: -360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} />
+              <motion.div
+                className="absolute w-80 h-80 border border-[var(--accent-cyan)]/30 rounded-full glow-pulse"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              />
+              <motion.div
+                className="absolute w-96 h-96 border border-[var(--accent-teal)]/20 rounded-full"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              />
             </div>
 
             {/* Profile Card */}
@@ -154,13 +168,18 @@ export default function Hero() {
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: [0, 10, 0] }}
+          transition={{ opacity: { delay: 1.2, duration: 0.6 }, y: { delay: 1.2, duration: 2, repeat: Infinity } }}
+          className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2"
+        >
           <div className="flex flex-col items-center gap-2">
             <span className="text-[var(--text-tertiary)] text-xs md:text-sm">Scroll to explore</span>
             <FaArrowDown className="text-[var(--accent-cyan)] animate-pulse" />
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
