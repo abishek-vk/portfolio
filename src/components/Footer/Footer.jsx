@@ -14,7 +14,7 @@ export default function Footer() {
 
   return (
     <footer className="relative border-t border-white/20 bg-gradient-to-b from-transparent to-[var(--bg-secondary)]/50">
-      <div className="container-max py-20 md:py-24 lg:py-28 w-full">
+      <div className="container-max pt-20 md:pt-28 pb-20 md:pb-24 w-full">
         <motion.div
           variants={staggerContainer(0.15, 0.1)}
           initial="hidden"
@@ -33,7 +33,7 @@ export default function Footer() {
           {/* Quick Links */}
           <motion.div variants={fadeUp(0.1)}>
             <h4 className="font-bold text-xl mb-8 text-white">Quick Links</h4>
-            <div className="space-y-4">
+            <div className="flex flex-col gap-4 md:gap-5">
               {[
                 { name: "Home", href: "#home" },
                 { name: "About", href: "#about" },

@@ -111,15 +111,10 @@ export default function Projects() {
             <motion.div
               key={i}
               variants={cardReveal(i * 0.1)}
-              whileHover={{ y: -8, transition: { duration: 0.25 } }}
-              className="group flex flex-col p-8 md:p-10 rounded-3xl bg-[#13192b]/95 backdrop-blur-md border border-white/20 hover:border-[var(--accent-rose)]/70 transition-all duration-300 shadow-2xl relative overflow-hidden"
+              whileHover={{ y: -4, transition: { duration: 0.25 } }}
+              className="group flex flex-col relative"
             >
-              {/* Top color gradient bar */}
-              <div
-                className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[var(--accent-rose)] via-[var(--accent-coral)] to-[var(--accent-amber)] opacity-80 group-hover:opacity-100 transition-opacity"
-              />
-
-              <div className="h-full flex flex-col pt-2">
+              <div className="h-full flex flex-col">
                 {/* Title */}
                 <motion.h3
                   className="text-3xl md:text-4xl font-bold mb-6 text-white group-hover:text-[var(--accent-rose)] transition-colors leading-tight"
@@ -139,7 +134,7 @@ export default function Projects() {
                 />
 
                 {/* Highlights as List */}
-                <div className="mb-8 space-y-4 flex-grow">
+                <div className="mb-8 flex flex-col gap-4 flex-grow">
                   <p className="text-xs font-bold text-[var(--accent-rose)] uppercase tracking-widest">Key Features</p>
                   {project.highlights.map((highlight, j) => (
                     <motion.div

@@ -101,7 +101,7 @@ export default function Contact() {
             initial="hidden"
             whileInView="visible"
             viewport={defaultViewport}
-            className="space-y-6"
+            className="flex flex-col gap-6"
           >
             {contactInfo.map((info, i) => (
               <motion.a
@@ -135,7 +135,7 @@ export default function Contact() {
             whileInView="visible"
             viewport={defaultViewport}
             onSubmit={handleSubmit}
-            className="w-full md:col-span-2 justify-self-stretch rounded-3xl p-6 md:p-8 space-y-6 bg-[#13192b]/95 backdrop-blur-xl border border-white/20 hover:border-[var(--accent-rose)]/60 transition-all duration-300 shadow-2xl" style={{ maxWidth: "640px" }}
+            className="w-full md:col-span-2 justify-self-stretch rounded-3xl p-6 md:p-8 flex flex-col gap-6 bg-[#13192b]/95 backdrop-blur-xl border border-white/20 hover:border-[var(--accent-rose)]/60 transition-all duration-300 shadow-2xl" style={{ maxWidth: "640px" }}
           >
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 gap-5"

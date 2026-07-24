@@ -179,7 +179,8 @@ body {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 clamp(1rem, 5vw, 4rem);
+  padding-left: clamp(1rem, 5vw, 4rem);
+  padding-right: clamp(1rem, 5vw, 4rem);
   box-sizing: border-box;
 }
 

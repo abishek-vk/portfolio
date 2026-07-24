@@ -65,7 +65,7 @@ export default function About() {
               Crafting Digital <span className="gradient-rose-text">Excellence</span>
             </motion.h2>
 
-            <motion.div variants={fadeUp(0.1)} className="space-y-8 mb-16">
+            <motion.div variants={fadeUp(0.1)} className="flex flex-col gap-6 md:gap-8 mb-16">
               <p className="text-white leading-relaxed text-base md:text-lg font-medium">
                 I'm an aspiring Software Developer with a passion for web development and building modern, user-centric applications. With hands-on experience in React, TypeScript, Python, and UI/UX design principles, I focus on delivering responsive interfaces and seamless experiences.
               </p>

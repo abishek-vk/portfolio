@@ -82,7 +82,7 @@ export default function Skills() {
             variants={columnVariants}
             className="p-8 md:p-10 rounded-3xl bg-[#13192b]/95 backdrop-blur-md border border-white/20 hover:border-[var(--accent-rose)]/60 transition-all duration-300 shadow-xl group"
           >
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6">
               {skillCategories[0].skills.map((skill, i) => (
                 <motion.div
                   key={i}
@@ -111,7 +111,7 @@ export default function Skills() {
             variants={columnVariants}
             className="p-8 md:p-10 rounded-3xl bg-[#13192b]/95 backdrop-blur-md border border-white/20 hover:border-[var(--accent-rose)]/60 transition-all duration-300 shadow-xl group"
           >
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6">
               {skillCategories[1].skills.map((skill, i) => (
                 <motion.div
                   key={i}
