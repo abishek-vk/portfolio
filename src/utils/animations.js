@@ -1,183 +1,90 @@
 /**
- * Shared animation variants for consistent scroll-triggered animations.
- * Used across all section components via framer-motion.
+ * Declarative scroll animations.
+ *
+ * Instead of wiring GSAP by hand in every section, components tag elements
+ * with data attributes and `initScrollAnimations()` (called once from App)
+ * turns them into ScrollTriggers. This keeps the timing, easing and stagger
+ * identical across the whole site.
+ *
+ *   data-reveal="chars"   split-text headline, letters rise from a mask
+ *   data-reveal="words"   split-text, words rise from a mask
+ *   data-reveal="up"      fade + rise (default for copy / blocks)
+ *   data-reveal="fade"    opacity only
+ *   data-reveal="line"    hairline draws left → right
+ *   data-reveal="clip"    image / panel wipes up from its bottom edge
+ *   data-reveal="stagger" children marked [data-reveal-item] rise in sequence
+ *   data-delay="0.2"      optional delay in seconds
+ *   data-speed="0.3"      parallax depth (positive = slower than scroll)
+ *
+ * Elements stay fully visible if JS fails or the user prefers reduced motion,
+ * because hidden states are only ever applied by GSAP, never by CSS.
  */
+import { gsap, REDUCED_MOTION, EASE, DUR, STAGGER } from "../lib/motion";
 
-// ── Section wrapper: fades in the entire section container ──
-export const sectionVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-      staggerChildren: 0.12,
-      delayChildren: 0.1
-    }
-  }
+const START = "top 85%";
+
+const builders = {
+  chars: (el, delay) =>
+    gsap.from(el.querySelectorAll(".split-char-inner"), {
+      yPercent: 115,
+      rotate: 4,
+      duration: DUR.slow,
+      ease: EASE.expo,
+      stagger: STAGGER.chars,
+      delay,
+      scrollTrigger: { trigger: el, start: START },
+    }),
+  words: (el, delay) =>
+    gsap.from(el.querySelectorAll(".split-word-inner"), {
+      yPercent: 115,
+      duration: DUR.slow,
+      ease: EASE.expo,
+      stagger: STAGGER.words,
+      delay,
+      scrollTrigger: { trigger: el, start: START },
+    }),
+  up: (el, delay) =>
+    gsap.from(el, { autoAlpha: 0, y: 48, duration: DUR.base, delay, scrollTrigger: { trigger: el, start: START } }),
+  fade: (el, delay) =>
+    gsap.from(el, { autoAlpha: 0, duration: DUR.slow, delay, scrollTrigger: { trigger: el, start: START } }),
+  line: (el, delay) =>
+    gsap.from(el, { scaleX: 0, duration: DUR.slow, ease: EASE.expo, delay, scrollTrigger: { trigger: el, start: START } }),
+  clip: (el, delay) =>
+    gsap.fromTo(
+      el,
+      { clipPath: "inset(100% 0% 0% 0%)" },
+      { clipPath: "inset(0% 0% 0% 0%)", duration: DUR.slow, ease: EASE.inOut, delay, scrollTrigger: { trigger: el, start: START } }
+    ),
+  stagger: (el, delay) =>
+    gsap.from(el.querySelectorAll("[data-reveal-item]"), {
+      autoAlpha: 0,
+      y: 40,
+      duration: DUR.base,
+      stagger: STAGGER.items,
+      delay,
+      scrollTrigger: { trigger: el, start: START },
+    }),
 };
 
-// ── Stagger container for groups of children ──
-export const staggerContainer = (staggerDelay = 0.1, childDelay = 0.15) => ({
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: staggerDelay,
-      delayChildren: childDelay
-    }
-  }
-});
+export function initScrollAnimations(root = document) {
+  if (REDUCED_MOTION) return;
 
-// ── Fade up (default for most elements) ──
-export const fadeUp = (delay = 0) => ({
-  hidden: { opacity: 0, y: 40, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.7,
-      delay,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }
-  }
-});
+  root.querySelectorAll("[data-reveal]").forEach((el) => {
+    const build = builders[el.dataset.reveal];
+    if (build) build(el, parseFloat(el.dataset.delay || 0));
+  });
 
-// ── Fade down ──
-export const fadeDown = (delay = 0) => ({
-  hidden: { opacity: 0, y: -40, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.7,
-      delay,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }
-  }
-});
-
-// ── Slide in from left ──
-export const slideLeft = (delay = 0) => ({
-  hidden: { opacity: 0, x: -60, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    x: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.7,
-      delay,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }
-  }
-});
-
-// ── Slide in from right ──
-export const slideRight = (delay = 0) => ({
-  hidden: { opacity: 0, x: 60, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    x: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.7,
-      delay,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }
-  }
-});
-
-// ── Scale up (for cards, images, icons) ──
-export const scaleUp = (delay = 0) => ({
-  hidden: { opacity: 0, scale: 0.85, filter: "blur(6px)" },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.6,
-      delay,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }
-  }
-});
-
-// ── Badge / tag pill animation ──
-export const badgePop = (delay = 0) => ({
-  hidden: { opacity: 0, scale: 0.7, y: 10 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      delay,
-      ease: [0.34, 1.56, 0.64, 1] // overshoot spring
-    }
-  }
-});
-
-// ── Staggered list item (used with custom index) ──
-export const staggerItem = {
-  hidden: { opacity: 0, x: -20, filter: "blur(2px)" },
-  visible: (i) => ({
-    opacity: 1,
-    x: 0,
-    filter: "blur(0px)",
-    transition: {
-      delay: i * 0.08,
-      duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }
-  })
-};
-
-// ── Card variant with lift ──
-export const cardReveal = (delay = 0) => ({
-  hidden: { opacity: 0, y: 50, scale: 0.97 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.7,
-      delay,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }
-  }
-});
-
-// ── Divider / line draw animation ──
-export const drawLine = (delay = 0) => ({
-  hidden: { scaleX: 0, opacity: 0 },
-  visible: {
-    scaleX: 1,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      delay,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }
-  }
-});
-
-// ── Counter / stat number pop ──
-export const numberPop = (delay = 0) => ({
-  hidden: { opacity: 0, scale: 0.5, y: 20 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      delay,
-      ease: [0.34, 1.56, 0.64, 1]
-    }
-  }
-});
-
-// ── Shared viewport config ──
-export const defaultViewport = { once: true, margin: "0px 0px -80px 0px" };
-export const earlyViewport = { once: true, margin: "0px 0px -150px 0px" };
+  // Parallax depth layers: each element drifts against the scroll by its speed.
+  root.querySelectorAll("[data-speed]").forEach((el) => {
+    const speed = parseFloat(el.dataset.speed);
+    gsap.fromTo(
+      el,
+      { yPercent: speed * 40 },
+      {
+        yPercent: -speed * 40,
+        ease: "none",
+        scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true },
+      }
+    );
+  });
+}

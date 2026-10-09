@@ -1,179 +1,111 @@
-import { motion } from "framer-motion";
-import { FaGraduationCap, FaSchool } from "react-icons/fa";
-import {
-  fadeUp, badgePop, slideLeft, scaleUp, staggerContainer,
-  defaultViewport
-} from "../../utils/animations";
+import { useRef } from "react";
+import { gsap, useGSAP, ScrollTrigger, REDUCED_MOTION } from "../../lib/motion";
+import { FaCertificate } from "react-icons/fa";
+import { timeline, certifications } from "../../data/portfolio";
+import SectionHeading from "../ui/SectionHeading";
 
-const timeline = [
-  {
-    icon: FaSchool,
-    title: "High School",
-    org: "EKHN Higher Secondary School",
-    period: "2010 - 2024",
-    desc: "Developed analytical thinking, communication skills, teamwork, and problem-solving abilities through academics and extracurricular activities."
-  },
-  {
-    icon: FaGraduationCap,
-    title: "Bachelor of Technology",
-    org: "Karunya University",
-    period: "2024 - 2028",
-    desc: "Pursuing a degree in Computer Science and Engineering with focus on software development, web technologies, and innovative project development."
-  }
-];
-
-const timelineCardVariants = {
-  hidden: { opacity: 0, x: -50, filter: "blur(6px)" },
-  visible: (i) => ({
-    opacity: 1,
-    x: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.7,
-      delay: i * 0.2,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }
-  })
-};
-
-const timelineLineVariants = {
-  hidden: { scaleY: 0, opacity: 0 },
-  visible: {
-    scaleY: 1,
-    opacity: 1,
-    transition: {
-      duration: 1,
-      delay: 0.3,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }
-  }
-};
-
+/**
+ * Education timeline + certifications.
+ *  - Heading column stays sticky while the timeline scrolls past it.
+ *  - The rail fills with light as you scroll (scrubbed).
+ *  - Each node ignites as it crosses the reading line.
+ */
 export default function Experience() {
+  const root = useRef(null);
+
+  useGSAP(
+    () => {
+      if (REDUCED_MOTION) return;
+
+      gsap.fromTo(
+        ".tl-fill",
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: { trigger: ".tl-list", start: "top 60%", end: "bottom 60%", scrub: true },
+        }
+      );
+
+      gsap.utils.toArray(".tl-item").forEach((item) => {
+        const node = item.querySelector(".tl-node");
+        node.classList.remove("is-active");
+        ScrollTrigger.create({
+          trigger: item,
+          start: "top 60%",
+          onEnter: () => node.classList.add("is-active"),
+          onLeaveBack: () => node.classList.remove("is-active"),
+        });
+        gsap.from(item.querySelector(".tl-year"), {
+          xPercent: 12,
+          autoAlpha: 0,
+          duration: 1.2,
+          ease: "expo.out",
+          scrollTrigger: { trigger: item, start: "top 80%" },
+        });
+      });
+    },
+    { scope: root }
+  );
+
   return (
-    <section id="experience" className="py-40 lg:py-48 relative overflow-hidden">
-      {/* Decorative Background */}
-      <motion.div
-        initial={{ scaleY: 0, opacity: 0 }}
-        whileInView={{ scaleY: 1, opacity: 0.2 }}
-        viewport={defaultViewport}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[var(--accent-cyan)]/50 via-[var(--accent-teal)]/30 to-transparent origin-top"
-      />
-      <motion.div
-        initial={{ opacity: 0, x: 80 }}
-        whileInView={{ opacity: 0.2, x: 0 }}
-        viewport={defaultViewport}
-        transition={{ duration: 1.2 }}
-        className="absolute -right-40 top-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-br from-[var(--accent-teal)]/10 to-[var(--accent-purple)]/5 rounded-full blur-3xl"
-      />
+    <section id="experience" ref={root} className="section" aria-labelledby="experience-title">
+      <div aria-hidden="true" data-speed="0.5" className="orb right-[-12%] top-[30%] h-[45vmin] w-[45vmin] bg-[radial-gradient(circle,var(--color-accent-3),transparent_65%)]" />
 
-      <div className="container-max relative z-10 w-full">
-        <motion.div
-          variants={staggerContainer(0.1, 0.05)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
-          className="mb-32"
-        >
-          <motion.div variants={badgePop()} className="mb-8">
-            <span className="inline-block px-4 py-2 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-widest border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/5">
-              Learning Path
-            </span>
-          </motion.div>
+      <div className="shell relative grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-5">
+          <div className="lg:sticky lg:top-32">
+            {/* Narrower column, so the headline steps down one size */}
+            <SectionHeading className="[--step-display:clamp(2.75rem,5vw,5.25rem)]" id="experience-title" index={4} eyebrow="Learning path" title="Education &" accent="background.">
+              My academic journey and continuous learning path in Computer Science and technology.
+            </SectionHeading>
+          </div>
+        </div>
 
-          <motion.h2 variants={fadeUp(0.05)} className="mb-8">
-            Education & <span className="gradient-text">Background</span>
-          </motion.h2>
-          <motion.p variants={fadeUp(0.1)} className="text-[var(--text-secondary)] leading-relaxed max-w-3xl">
-            My academic journey and continuous learning path in Computer Science and technology.
-          </motion.p>
-        </motion.div>
+        <div className="lg:col-span-6 lg:col-start-7">
+          <ol className="tl-list relative">
+            {/* Rail + scrubbed light fill */}
+            <span aria-hidden="true" className="absolute bottom-0 left-6 top-0 w-px bg-line" />
+            <span aria-hidden="true" className="tl-fill absolute bottom-0 left-6 top-0 w-px origin-top bg-gradient-to-b from-accent via-accent-2 to-accent" />
 
-        <div className="relative max-w-4xl mx-auto">
-          {timeline.map((item, i) => (
-            <motion.div
-              key={i}
-              custom={i}
-              variants={timelineCardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={defaultViewport}
-              className="relative mb-20 last:mb-0 group"
-            >
-              {/* Timeline Node */}
-              <div className="absolute -left-12 top-8 flex items-center justify-center">
-                <motion.div
-                  className="relative w-10 h-10 rounded-full bg-gradient-to-br from-[var(--accent-cyan)] to-[var(--accent-teal)] flex items-center justify-center text-white border-4 border-[var(--bg-primary)] z-10 glow-pulse"
-                  initial={{ scale: 0, rotate: -180 }}
-                  whileInView={{ scale: 1, rotate: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 + i * 0.2, ease: [0.34, 1.56, 0.64, 1] }}
-                  whileHover={{ scale: 1.2 }}
+            {timeline.map(({ icon: Icon, title, org, period, note, desc }) => (
+              <li key={title} className="tl-item relative pb-20 pl-20 last:pb-0 md:pl-24">
+                <span
+                  aria-hidden="true"
+                  className="tl-node is-active absolute left-0 top-1 grid h-12 w-12 place-items-center rounded-full border border-line-strong bg-ink text-lg text-muted transition-all duration-700 [&.is-active]:border-accent [&.is-active]:bg-accent [&.is-active]:text-ink [&.is-active]:shadow-[var(--shadow-glow)]"
                 >
-                  <item.icon className="text-lg" />
-                </motion.div>
+                  <Icon />
+                </span>
 
-                {/* Connecting Line to Next Item */}
-                {i < timeline.length - 1 && (
-                  <motion.div
-                    variants={timelineLineVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="absolute top-10 left-4 w-0.5 h-40 bg-gradient-to-b from-[var(--accent-cyan)]/50 to-transparent origin-top"
-                  />
-                )}
-              </div>
+                <p className="tl-year font-display text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-none tracking-[-0.05em]">
+                  {period[0]}
+                  <span className="mx-3 text-accent">—</span>
+                  <span className="text-outline">{period[1]}</span>
+                </p>
+                {note && <p className="label mt-3">({note})</p>}
 
-              {/* Content Card */}
-              <motion.div
-                className="ml-12 rounded-2xl p-10 md:p-12 border border-white/10 group-hover:border-[var(--accent-cyan)] transition-all duration-300"
-                whileHover={{ x: 8, transition: { duration: 0.25 } }}
-              >
-                <div className="flex items-start justify-between mb-6 gap-4">
-                  <div>
-                    <motion.h3
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + i * 0.15 }}
-                      className="text-3xl md:text-4xl font-bold mb-3 leading-tight"
-                    >
-                      {item.title}
-                    </motion.h3>
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.4 + i * 0.15 }}
-                      className="text-[var(--accent-cyan)] font-bold text-lg"
-                    >
-                      {item.org}
-                    </motion.p>
-                  </div>
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.35 + i * 0.15, ease: [0.34, 1.56, 0.64, 1] }}
-                    className="px-5 py-3 rounded-lg text-xs font-bold bg-gradient-to-r from-[var(--accent-cyan)]/20 to-[var(--accent-teal)]/10 text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/30 whitespace-nowrap"
-                  >
-                    {item.period}
-                  </motion.span>
-                </div>
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.45 + i * 0.15 }}
-                  className="text-[var(--text-secondary)] leading-relaxed text-lg"
-                >
-                  {item.desc}
-                </motion.p>
-              </motion.div>
-            </motion.div>
-          ))}
+                <article className="glass mt-8 p-7 md:p-9" data-reveal="up">
+                  <h3 className="font-display text-[length:var(--step-h3)] font-semibold tracking-[-0.035em]">{title}</h3>
+                  <p className="label mt-3 !text-accent">{org}</p>
+                  <p className="mt-5 text-muted">{desc}</p>
+                </article>
+              </li>
+            ))}
+          </ol>
+
+          {/* ---- Certifications ---- */}
+          <div className="mt-24 md:pl-24">
+            <p className="label mb-6" data-reveal="fade">Certifications</p>
+            <ul className="border-t border-line" data-reveal="stagger">
+              {certifications.map(({ title, issuer }) => (
+                <li key={title} data-reveal-item className="group flex items-center gap-5 border-b border-line py-5">
+                  <FaCertificate aria-hidden="true" className="shrink-0 text-xl text-subtle transition-colors duration-500 group-hover:text-accent" />
+                  <span className="min-w-0 flex-1 font-display text-xl font-medium tracking-[-0.02em] md:text-2xl">{title}</span>
+                  <span className="label shrink-0 !text-accent">{issuer}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

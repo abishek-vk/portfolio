@@ -1,270 +1,132 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
-import {
-  fadeUp, slideLeft, slideRight, badgePop, scaleUp,
-  staggerContainer, cardReveal, defaultViewport
-} from "../../utils/animations";
+import { FaArrowRight } from "react-icons/fa";
+import { profile, socials } from "../../data/portfolio";
+import SplitText from "../ui/SplitText";
+import Magnetic from "../ui/Magnetic";
 
+/** Floating-label field: the label sits inside the input and lifts on focus / when filled. */
+function Field({ id, label, as = "input", ...props }) {
+  const Tag = as;
+  return (
+    <div className="group relative">
+      <Tag
+        id={id}
+        name={id}
+        placeholder=" "
+        required
+        className="peer w-full resize-none border-b border-line-strong bg-transparent pb-3 pt-7 text-lg text-fg outline-none transition-colors duration-500 focus:border-accent"
+        {...props}
+      />
+      <label
+        htmlFor={id}
+        className="pointer-events-none absolute left-0 top-0 text-xs uppercase tracking-[0.16em] text-subtle transition-all duration-500 ease-[var(--ease-out-expo)] peer-placeholder-shown:top-7 peer-placeholder-shown:text-lg peer-placeholder-shown:normal-case peer-placeholder-shown:tracking-normal peer-focus:top-0 peer-focus:text-xs peer-focus:uppercase peer-focus:tracking-[0.16em] peer-focus:text-accent"
+      >
+        {label}
+      </label>
+      {/* focus underline that draws from the left */}
+      <span aria-hidden="true" className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-700 ease-[var(--ease-out-expo)] peer-focus:scale-x-100" />
+    </div>
+  );
+}
+
+/**
+ * Contact: oversized kinetic invitation, a magnetic "say hello" orb,
+ * contact rows with animated arrows, and a glass form.
+ *
+ * The site has no backend, so the form composes a pre-filled email in the
+ * visitor's mail app instead of pretending to send.
+ */
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
+  const update = (key) => (e) => setForm({ ...form, [key]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus("Sending...");
-    setTimeout(() => {
-      setStatus("Message sent successfully!");
-      setForm({ name: "", email: "", message: "" });
-      setTimeout(() => setStatus(""), 3000);
-    }, 1500);
-  };
-
-  const contactInfo = [
-    { icon: FaEnvelope, label: "Email", value: "abishekvenkatachalam2007@gmail.com", href: "mailto:abishekvenkatachalam2007@gmail.com" },
-    { icon: FaGithub, label: "GitHub", value: "@abishek-vk", href: "https://github.com/abishek-vk" },
-    { icon: FaLinkedin, label: "LinkedIn", value: "@vabishek13", href: "https://www.linkedin.com/in/vabishek13/" }
-  ];
-
-  const contactCardVariants = {
-    hidden: { opacity: 0, x: -30, filter: "blur(4px)" },
-    visible: (i) => ({
-      opacity: 1,
-      x: 0,
-      filter: "blur(0px)",
-      transition: {
-        delay: i * 0.12,
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    })
-  };
-
-  const formFieldVariants = {
-    hidden: { opacity: 0, y: 20, filter: "blur(2px)" },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        delay: 0.2 + i * 0.1,
-        duration: 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    })
+    const subject = encodeURIComponent(`Portfolio enquiry from ${form.name}`);
+    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
+    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+    setStatus("Opening your email app…");
+    setTimeout(() => setStatus(""), 4000);
   };
 
   return (
-    <section id="contact" className="py-40 lg:py-48 relative overflow-hidden">
-      {/* Decorative Backgrounds */}
-      <motion.div
-        initial={{ opacity: 0, x: 80 }}
-        whileInView={{ opacity: 0.2, x: 0 }}
-        viewport={defaultViewport}
-        transition={{ duration: 1.2 }}
-        className="absolute -right-32 top-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-cyan)]/10 to-[var(--accent-purple)]/5 rounded-full blur-3xl"
-      />
-      <motion.div
-        initial={{ opacity: 0, x: -80 }}
-        whileInView={{ opacity: 0.2, x: 0 }}
-        viewport={defaultViewport}
-        transition={{ duration: 1.2, delay: 0.2 }}
-        className="absolute -left-32 bottom-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-teal)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl"
-      />
+    <section id="contact" className="section overflow-hidden" aria-labelledby="contact-title">
+      <div aria-hidden="true" data-speed="0.4" className="orb left-1/2 top-[10%] h-[70vmin] w-[70vmin] -translate-x-1/2 bg-[radial-gradient(circle,var(--color-accent),transparent_60%)] !opacity-20" />
 
-      <div className="container-max relative z-10 w-full">
-        {/* Header */}
-        <motion.div
-          variants={staggerContainer(0.1, 0.05)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
-          className="text-center mb-24"
-        >
-          <motion.span variants={badgePop()} className="inline-block px-4 py-2 rounded-full text-xs font-semibold text-[var(--accent-cyan)] uppercase tracking-widest mb-6 border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/5">
-            Get In Touch
-          </motion.span>
+      <div className="shell relative">
+        <p className="eyebrow mb-8" data-reveal="fade">
+          <span className="text-accent">(05)</span> Get in touch
+        </p>
+        <h2 id="contact-title" className="font-display text-[clamp(3rem,9vw,9.5rem)] font-semibold leading-[0.9] tracking-[-0.05em]" data-reveal="words">
+          <SplitText type="words" text="Let's build something" />{" "}
+          <SplitText type="words" text="amazing together." className="text-accent" />
+        </h2>
+        <p className="mt-8 max-w-xl text-[length:var(--step-lead)] leading-snug text-muted" data-reveal="up">
+          Open to new opportunities, collaborations, and exciting projects. I'd love to hear from you.
+        </p>
 
-          <motion.h2 variants={fadeUp(0.05)} className="mb-8">
-            Let's Build Something <span className="gradient-text">Amazing Together</span>
-          </motion.h2>
-          <motion.p variants={fadeUp(0.1)} className="text-[var(--text-secondary)] leading-relaxed max-w-3xl mx-auto">
-            Open to new opportunities, collaborations, and exciting projects. I'd love to hear from you.
-          </motion.p>
-        </motion.div>
-
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-14 items-center mb-20 w-full max-w-5xl mx-auto">
-          {/* Contact Methods */}
-          <motion.div
-            variants={staggerContainer(0.12, 0.1)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={defaultViewport}
-            className="space-y-6"
-          >
-            {contactInfo.map((info, i) => (
-              <motion.a
-                key={i}
-                href={info.href}
-                target={info.href.startsWith("http") ? "_blank" : "_self"}
-                rel={info.href.startsWith("http") ? "noreferrer" : ""}
-                custom={i}
-                variants={contactCardVariants}
-                whileHover={{ x: 8, transition: { duration: 0.2 } }}
-                className="group rounded-2xl p-7 flex items-start gap-5 cursor-pointer transition-all duration-300 border border-transparent hover:border-[var(--accent-cyan)] hover:glow-text"
-              >
-                <motion.div
-                  className="p-4 rounded-xl bg-gradient-to-br from-[var(--accent-cyan)]/30 to-[var(--accent-teal)]/20 group-hover:from-[var(--accent-cyan)]/50 group-hover:to-[var(--accent-teal)]/30 transition-all group-hover:scale-110 flex-shrink-0"
-                  whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
+        <div className="mt-20 grid grid-cols-1 gap-16 lg:mt-28 lg:grid-cols-12 lg:gap-10">
+          {/* ---- Direct contact ---- */}
+          <div className="lg:col-span-5">
+            <div data-reveal="up">
+              <Magnetic strength={0.3}>
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="group relative grid h-40 w-40 place-items-center overflow-hidden rounded-full bg-accent font-display text-lg font-semibold text-ink shadow-[var(--shadow-glow)] md:h-48 md:w-48"
                 >
-                  <info.icon className="text-3xl text-[var(--accent-cyan)]" />
-                </motion.div>
-                <div>
-                  <p className="text-[var(--text-tertiary)] text-xs font-semibold uppercase tracking-widest mb-2">{info.label}</p>
-                  <p className="font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-cyan)] transition-colors text-base md:text-lg break-all">{info.value}</p>
-                </div>
-              </motion.a>
-            ))}
-          </motion.div>
+                  <span className="absolute inset-0 translate-y-full rounded-full bg-fg transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:translate-y-0" />
+                  <span className="relative flex items-center gap-2">
+                    Say hello <FaArrowRight aria-hidden="true" className="-rotate-45 transition-transform duration-500 group-hover:rotate-0" />
+                  </span>
+                </a>
+              </Magnetic>
+            </div>
 
-          {/* Contact Form */}
-          <motion.form
-            variants={cardReveal(0.15)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={defaultViewport}
-            onSubmit={handleSubmit}
-            className="w-full md:col-span-2 justify-self-stretch glass rounded-2xl p-6 md:p-8 space-y-5 border border-white/10 hover:border-[var(--accent-cyan)]/30 transition-all duration-300" style={{ maxWidth: "640px" }}
-          >
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
-            >
-              {/* Name Input */}
-              <motion.div
-                custom={0}
-                variants={formFieldVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <label className="block text-sm md:text-base font-semibold mb-2.5 md:mb-3 text-[var(--text-primary)]">Your Name</label>
-                <motion.input
-                  type="text"
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="John Doe"
-                  required
-                  whileFocus={{ scale: 1.01 }}
-                  className="w-full px-3.5 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 text-base"
-                />
-              </motion.div>
+            <ul className="mt-14 border-t border-line" data-reveal="stagger">
+              {socials.map(({ label, handle, href, icon: Icon }) => (
+                <li key={label} data-reveal-item className="border-b border-line">
+                  <a
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noreferrer" : undefined}
+                    className="group flex items-center justify-between gap-4 py-5"
+                  >
+                    <span className="flex min-w-0 items-center gap-4">
+                      <Icon aria-hidden="true" className="shrink-0 text-xl text-subtle transition-colors group-hover:text-accent" />
+                      <span className="min-w-0">
+                        <span className="label block">{label}</span>
+                        <span className="block truncate text-fg transition-colors group-hover:text-accent">{handle}</span>
+                      </span>
+                    </span>
+                    <FaArrowRight aria-hidden="true" className="shrink-0 -rotate-45 text-subtle transition-all duration-500 group-hover:rotate-0 group-hover:text-accent" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-              {/* Email Input */}
-              <motion.div
-                custom={1}
-                variants={formFieldVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <label className="block text-sm md:text-base font-semibold mb-2.5 md:mb-3 text-[var(--text-primary)]">Your Email</label>
-                <motion.input
-                  type="email"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  placeholder="john@example.com"
-                  required
-                  whileFocus={{ scale: 1.01 }}
-                  className="w-full px-3.5 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 text-base"
-                />
-              </motion.div>
-            </motion.div>
+          {/* ---- Form ---- */}
+          <form onSubmit={handleSubmit} className="glass space-y-8 p-7 md:p-10 lg:col-span-6 lg:col-start-7" data-reveal="up" data-delay="0.1">
+            <p className="label">Or send a message</p>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <Field id="name" label="Your Name" type="text" autoComplete="name" value={form.name} onChange={update("name")} />
+              <Field id="email" label="Your Email" type="email" autoComplete="email" value={form.email} onChange={update("email")} />
+            </div>
+            <Field id="message" label="Message" as="textarea" rows={4} value={form.message} onChange={update("message")} />
 
-            {/* Message Textarea */}
-            <motion.div
-              custom={2}
-              variants={formFieldVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <label className="block text-sm md:text-base font-semibold mb-2.5 md:mb-3 text-[var(--text-primary)]">Message</label>
-              <motion.textarea
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                placeholder="Tell me about your project..."
-                rows={2}
-                required
-                whileFocus={{ scale: 1.01 }}
-                className="w-full px-3.5 md:px-4 py-2.5 md:py-3 rounded-lg bg-white/5 border border-[var(--glass-border)] text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-cyan)] focus:bg-white/10 focus:shadow-[0_0_20px_rgba(0,217,255,0.2)] transition-all duration-300 resize-none text-base leading-relaxed"
-              />
-            </motion.div>
-
-            {/* Submit Button */}
-            <motion.div
-              custom={3}
-              variants={formFieldVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <motion.button
-                type="submit"
-                className="w-fit glow-button px-5 py-2.5 rounded-lg font-bold text-white text-sm transition-all duration-300 relative overflow-hidden group"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="relative z-10">{status || "Send Message"}</span>
-              </motion.button>
-            </motion.div>
-
-            {/* Status Message */}
-            {status && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center text-base font-medium text-[var(--accent-cyan)]">
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+              <Magnetic strength={0.25}>
+                <button type="submit" className="btn btn-solid">
+                  Send Message <FaArrowRight aria-hidden="true" />
+                </button>
+              </Magnetic>
+              <p role="status" aria-live="polite" className="text-sm text-accent">
                 {status}
-              </motion.div>
-            )}
-          </motion.form>
+              </p>
+            </div>
+          </form>
         </div>
-
-        {/* CTA Section */}
-        <motion.div
-          variants={staggerContainer(0.1, 0.1)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
-          className="text-center"
-        >
-          <motion.p variants={fadeUp()} className="text-[var(--text-secondary)] mb-8 text-lg">
-            Or connect with me on social platforms
-          </motion.p>
-          <motion.div
-            variants={staggerContainer(0.1, 0.15)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="flex justify-center gap-6"
-          >
-            {[
-              { href: "https://github.com/abishek-vk", icon: FaGithub },
-              { href: "https://www.linkedin.com/in/vabishek13/", icon: FaLinkedin },
-              { href: "mailto:abishekvenkatachalam2007@gmail.com", icon: FaEnvelope }
-            ].map((social, i) => (
-              <motion.a
-                key={i}
-                href={social.href}
-                target={social.href.startsWith("http") ? "_blank" : "_self"}
-                rel={social.href.startsWith("http") ? "noreferrer" : ""}
-                className="p-4 glass rounded-full hover:border-[var(--accent-cyan)] transition-all duration-300 group hover:glow-text"
-                variants={scaleUp(i * 0.1)}
-                whileHover={{ scale: 1.1, y: -4 }}
-              >
-                <social.icon className="text-2xl text-[var(--accent-cyan)] group-hover:scale-110 transition-transform" />
-              </motion.a>
-            ))}
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );

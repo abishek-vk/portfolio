@@ -1,132 +1,98 @@
-import { motion } from "framer-motion";
-import { FaGithub, FaEnvelope, FaArrowUp, FaLinkedin } from "react-icons/fa";
-import {
-  fadeUp, slideLeft, scaleUp, drawLine, staggerContainer,
-  defaultViewport
-} from "../../utils/animations";
+import { useRef } from "react";
+import { FaArrowUp } from "react-icons/fa";
+import { gsap, useGSAP, REDUCED_MOTION, scrollTo } from "../../lib/motion";
+import { profile, socials } from "../../data/portfolio";
+import Magnetic from "../ui/Magnetic";
 
+const quickLinks = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Projects", href: "#projects" },
+  { name: "Contact", href: "#contact" },
+];
+
+/**
+ * Footer: info row plus a giant wordmark that rises out of the page bottom
+ * as you reach the end (scrubbed to scroll).
+ */
 export default function Footer() {
-  const year = new Date().getFullYear();
+  const root = useRef(null);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  useGSAP(
+    () => {
+      if (REDUCED_MOTION) return;
+      gsap.from(".footer-mark", {
+        yPercent: 60,
+        ease: "none",
+        scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom bottom", scrub: true },
+      });
+    },
+    { scope: root }
+  );
 
   return (
-    <footer className="relative border-t border-[var(--glass-border)] bg-gradient-to-b from-transparent to-[var(--bg-secondary)]/30">
-      <div className="container-max py-20 md:py-24 lg:py-28 w-full">
-        <motion.div
-          variants={staggerContainer(0.15, 0.1)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
-          className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 lg:gap-20 mb-20 w-full"
-        >
-          {/* Branding */}
-          <motion.div variants={fadeUp()}>
-            <h3 className="text-3xl md:text-4xl font-bold gradient-text mb-6">Abishek V</h3>
-            <p className="text-[var(--text-secondary)] text-base md:text-lg leading-relaxed max-w-xs">
-              Full Stack Developer passionate about building beautiful, functional solutions that make an impact.
-            </p>
-          </motion.div>
+    <footer ref={root} className="relative overflow-hidden border-t border-line">
+      <div className="shell grid grid-cols-1 gap-12 pt-20 md:grid-cols-12 md:pt-24">
+        <div className="md:col-span-5">
+          <p className="font-display text-3xl font-semibold tracking-[-0.03em]">{profile.name}</p>
+          <p className="mt-4 max-w-xs text-muted">{profile.footerBlurb}</p>
+        </div>
 
-          {/* Quick Links */}
-          <motion.div variants={fadeUp(0.1)}>
-            <h4 className="font-bold text-lg mb-8 text-[var(--text-primary)]">Quick Links</h4>
-            <div className="space-y-4">
-              {[
-                { name: "Home", href: "#home" },
-                { name: "About", href: "#about" },
-                { name: "Projects", href: "#projects" },
-                { name: "Contact", href: "#contact" }
-              ].map((link, i) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  className="block text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors text-base font-medium"
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.06 }}
-                  whileHover={{ x: 6, transition: { duration: 0.2 } }}
+        <nav aria-label="Footer" className="md:col-span-3 md:col-start-7">
+          <p className="label mb-5">Quick Links</p>
+          <ul className="space-y-2">
+            {quickLinks.map((link) => (
+              <li key={link.name}>
+                <a href={link.href} className="roll">
+                  <span>{link.name}</span>
+                  <span aria-hidden="true">{link.name}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="md:col-span-3">
+          <p className="label mb-5">Connect</p>
+          <ul className="space-y-2">
+            {socials.map((s) => (
+              <li key={s.label}>
+                <a
+                  href={s.href}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel={s.href.startsWith("http") ? "noreferrer" : undefined}
+                  className="roll"
                 >
-                  {link.name}
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div variants={fadeUp(0.2)}>
-            <h4 className="font-bold text-lg mb-8 text-[var(--text-primary)]">Connect</h4>
-            <motion.div
-              variants={staggerContainer(0.1, 0.1)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="flex gap-5"
-            >
-              {[
-                { href: "https://github.com/abishek-vk", icon: FaGithub },
-                { href: "https://www.linkedin.com/in/vabishek13/", icon: FaLinkedin },
-                { href: "mailto:abishekvenkatachalam2007@gmail.com", icon: FaEnvelope }
-              ].map((social, i) => (
-                <motion.a
-                  key={i}
-                  href={social.href}
-                  target={social.href.startsWith("http") ? "_blank" : "_self"}
-                  rel={social.href.startsWith("http") ? "noreferrer" : ""}
-                  className="p-4 rounded-full text-[var(--accent-cyan)] border border-white/10 hover:border-[var(--accent-cyan)] hover:bg-white/10 transition-all"
-                  variants={scaleUp(i * 0.08)}
-                  whileHover={{ y: -4, scale: 1.1 }}
-                >
-                  <social.icon className="text-xl" />
-                </motion.a>
-              ))}
-            </motion.div>
-          </motion.div>
-        </motion.div>
-
-        {/* Divider */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          whileInView={{ scaleX: 1, opacity: 0.3 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="h-px bg-gradient-to-r from-transparent via-[var(--glass-border)] to-transparent mb-12 origin-center"
-        />
-
-        {/* Bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-base text-[var(--text-tertiary)]"
-          >
-            &copy; {year} Abishek V. All rights reserved.
-          </motion.p>
-
-          <motion.button
-            onClick={scrollToTop}
-            className="p-4 rounded-full text-[var(--accent-cyan)] border border-white/10 hover:border-[var(--accent-cyan)] hover:bg-white/10 transition-all"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
-            whileHover={{ y: -4, scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FaArrowUp className="text-xl" />
-          </motion.button>
+                  <span>{s.label}</span>
+                  <span aria-hidden="true">{s.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      {/* Glow Effect */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -bottom-40 right-0 w-96 h-96 bg-gradient-to-br from-[var(--accent-cyan)]/5 to-[var(--accent-teal)]/0 rounded-full blur-3xl" />
+      <div className="shell mt-16 flex items-center justify-between gap-6 border-t border-line py-6">
+        <p className="text-sm text-subtle">&copy; {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
+        <Magnetic>
+          <button
+            type="button"
+            onClick={() => scrollTo(0)}
+            aria-label="Back to top"
+            className="grid h-12 w-12 place-items-center rounded-full border border-line-strong transition-colors duration-500 hover:border-accent hover:bg-accent hover:text-ink"
+          >
+            <FaArrowUp />
+          </button>
+        </Magnetic>
       </div>
+
+      {/* Giant wordmark */}
+      <p
+        aria-hidden="true"
+        className="footer-mark select-none whitespace-nowrap bg-gradient-to-b from-white/[0.14] to-transparent bg-clip-text px-[var(--gutter)] pb-2 text-center font-display text-[17vw] font-semibold leading-[0.8] tracking-[-0.06em] text-transparent"
+      >
+        {profile.name.toUpperCase()}
+      </p>
     </footer>
   );
 }

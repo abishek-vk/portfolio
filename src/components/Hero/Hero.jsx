@@ -1,185 +1,158 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { FaGithub, FaEnvelope, FaArrowDown, FaLinkedin } from "react-icons/fa";
-import abiImage from "../../assets/abi image.jpeg";
-import { fadeUp, slideLeft, slideRight, scaleUp, badgePop, staggerContainer } from "../../utils/animations";
+import { lazy, Suspense, useRef } from "react";
+import { gsap, useGSAP, REDUCED_MOTION, EASE, STAGGER } from "../../lib/motion";
+import { profile, socials } from "../../data/portfolio";
+import SplitText from "../ui/SplitText";
+import Magnetic from "../ui/Magnetic";
 
-const TypingText = ({ texts, speed = 80 }) => {
-  const [displayText, setDisplayText] = useState("");
-  const [textIndex, setTextIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+// three.js is ~150 KB gz: load it in its own chunk, after first paint.
+const HeroScene = lazy(() => import("./HeroScene"));
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        if (charIndex < texts[textIndex].length) {
-          setDisplayText(texts[textIndex].substring(0, charIndex + 1));
-          setCharIndex(charIndex + 1);
-        } else {
-          setTimeout(() => setIsDeleting(true), 2000);
-        }
-      } else {
-        if (charIndex > 0) {
-          setDisplayText(texts[textIndex].substring(0, charIndex - 1));
-          setCharIndex(charIndex - 1);
-        } else {
-          setIsDeleting(false);
-          setTextIndex((prev) => (prev + 1) % texts.length);
-        }
+/**
+ * Hero: oversized kinetic name over an interactive WebGL object.
+ * The intro timeline waits for `ready` (fired as the loader curtain lifts),
+ * then scroll progress drives both the scene and the content exit.
+ */
+export default function Hero({ ready }) {
+  const root = useRef(null);
+  const roleList = useRef(null);
+  // Shared with the WebGL scene each frame; a ref avoids React re-renders.
+  const sceneState = useRef({ scroll: 0, intro: REDUCED_MOTION ? 1 : 0 });
+
+  useGSAP(
+    () => {
+      if (!ready || REDUCED_MOTION) return;
+
+      /* ---- Intro: name rises letter by letter, then the supporting UI ---- */
+      const tl = gsap.timeline({ defaults: { ease: EASE.expo } });
+      tl.to(sceneState.current, { intro: 1, duration: 2.4 }, 0)
+        .from(".hero-char .split-char-inner", { yPercent: 120, rotate: 6, duration: 1.3, stagger: STAGGER.chars * 1.5 }, 0.1)
+        .from("[data-hero='fade']", { autoAlpha: 0, y: 24, duration: 1, stagger: 0.08, ease: EASE.out }, 0.6)
+        .from("[data-hero='line']", { scaleX: 0, duration: 1.2 }, 0.5);
+
+      /* ---- Rotating role: slot-machine roll through each title ---- */
+      const n = profile.roles.length;
+      const roll = gsap.timeline({ repeat: -1, delay: 2 });
+      for (let i = 1; i <= n; i++) {
+        roll.to(roleList.current, { yPercent: (-100 / (n + 1)) * i, duration: 0.9, ease: EASE.inOut }, "+=1.8");
       }
-    }, speed);
-    return () => clearTimeout(timer);
-  }, [charIndex, isDeleting, textIndex, texts, speed]);
+      roll.set(roleList.current, { yPercent: 0 });
 
-  return (
-    <span className="gradient-text font-semibold">
-      {displayText}
-      <span className="inline-block w-1 h-6 bg-gradient-to-b from-[var(--accent-cyan)] to-[var(--accent-teal)] ml-1 animate-pulse" />
-    </span>
+      /* ---- Scroll out: content drifts up & fades, scene reads progress ---- */
+      gsap.to(".hero-content", {
+        yPercent: -18,
+        autoAlpha: 0,
+        ease: "none",
+        scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: true },
+      });
+      gsap.to(sceneState.current, {
+        scroll: 1,
+        ease: "none",
+        scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: true },
+      });
+    },
+    { scope: root, dependencies: [ready] }
   );
-};
-
-export default function Hero() {
-  const roles = ["Full Stack Developer", "UI/UX Enthusiast", "Problem Solver", "Tech Innovator"];
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-40 pb-32">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 animated-gradient opacity-40" />
-
-      {/* Floating Blobs */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 0.4, scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[var(--accent-cyan)]/10 to-[var(--accent-teal)]/5 rounded-full blur-3xl blob"
+    <section id="home" ref={root} className="relative min-h-[100svh] overflow-hidden" aria-label="Introduction">
+      {/* ---- Depth layers: grid → glow → WebGL → vignette ---- */}
+      <div className="grid-bg absolute inset-0" aria-hidden="true" />
+      <div
+        aria-hidden="true"
+        className="orb right-[-10%] top-[10%] h-[60vmin] w-[60vmin] bg-[radial-gradient(circle,var(--color-accent-2),transparent_65%)]"
       />
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 0.3, scale: 1 }}
-        transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
-        className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-[var(--accent-purple)]/10 to-[var(--accent-cyan)]/5 rounded-full blur-3xl blob"
+      <Suspense fallback={null}>
+        <HeroScene state={sceneState} />
+      </Suspense>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink to-transparent"
       />
 
-      <motion.div
-        variants={staggerContainer(0.15, 0.1)}
-        initial="hidden"
-        animate="visible"
-        className="container-max relative z-10 w-full"
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 lg:gap-24 items-center">
-          {/* Left Content */}
-          <motion.div
-            variants={slideLeft()}
-            className="lg:col-span-7 w-full flex flex-col"
-          >
-            {/* Heading & Role Text Group */}
-            <div className="flex flex-col gap-6">
-              <motion.h1
-                variants={fadeUp(0.1)}
-                className="leading-tight text-4xl md:text-5xl lg:text-6xl font-bold"
-              >
-                Hi, I'm <span className="gradient-text">Abishek V</span>
-              </motion.h1>
-
-              <motion.div
-                variants={fadeUp(0.2)}
-                className="text-xl md:text-2xl lg:text-3xl font-semibold"
-              >
-                <TypingText texts={roles} speed={80} />
-              </motion.div>
-            </div>
-
-            {/* Description Paragraph Block */}
-            <motion.p
-              variants={fadeUp(0.3)}
-              className="text-[var(--text-secondary)] leading-relaxed mt-12 max-w-xl text-base md:text-lg"
-            >
-              Crafting elegant, scalable solutions through clean code and innovative design. Passionate about building exceptional digital experiences that make an impact.
-            </motion.p>
-
-            {/* CTA Buttons Group */}
-            {/* Removed - CTA buttons section */}
-
-            {/* Social Icons Group */}
-            <motion.div
-              variants={fadeUp(0.45)}
-              className="flex flex-col gap-3 mt-24"
-            >
-              <span className="text-[var(--text-tertiary)] text-base md:text-lg font-semibold">Connect with me</span>
-              <motion.div
-                variants={staggerContainer(0.1, 0)}
-                initial="hidden"
-                animate="visible"
-                className="flex gap-6"
-              >
-                {[
-                  { href: "https://github.com/abishek-vk", icon: FaGithub },
-                  { href: "https://www.linkedin.com/in/vabishek13/", icon: FaLinkedin },
-                  { href: "mailto:abishekvenkatachalam2007@gmail.com", icon: FaEnvelope }
-                ].map((social, i) => (
-                  <motion.a
-                    key={i}
-                    href={social.href}
-                    target={social.href.startsWith("http") ? "_blank" : "_self"}
-                    rel={social.href.startsWith("http") ? "noreferrer" : ""}
-                    className="p-3 rounded-full border border-white/10 hover:glow-border hover:border-[var(--accent-cyan)] transition-all duration-300"
-                    variants={badgePop(0.5 + i * 0.1)}
-                    whileHover={{ y: -4, scale: 1.1 }}
-                  >
-                    <social.icon className="text-2xl text-[var(--accent-cyan)]" />
-                  </motion.a>
-                ))}
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right - Profile Image */}
-          <motion.div
-            variants={scaleUp(0.3)}
-            className="relative hidden lg:flex justify-center items-center lg:col-span-5"
-          >
-            {/* Glowing Ring */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                className="absolute w-80 h-80 border border-[var(--accent-cyan)]/30 rounded-full glow-pulse"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div
-                className="absolute w-96 h-96 border border-[var(--accent-teal)]/20 rounded-full"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              />
-            </div>
-
-            {/* Profile Card */}
-            <motion.div
-              className="rounded-3xl p-8 w-80 h-80 flex items-center justify-center relative z-10 border border-white/10 bg-gradient-to-br from-white/5 to-white/0 overflow-hidden"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <div className="text-center w-full h-full flex flex-col items-center justify-center">
-                <img src={abiImage} alt="Abishek V" className="w-64 h-64 object-cover rounded-full mb-4 border-2 border-[var(--accent-cyan)]/30" />
-              </div>
-            </motion.div>
-          </motion.div>
+      <div className="hero-content shell relative z-10 flex min-h-[100svh] flex-col justify-between pb-8 pt-28 md:pb-10 md:pt-36">
+        {/* Top meta row */}
+        <div className="flex items-start justify-between gap-6">
+          <p className="label" data-hero="fade">
+            {profile.tagline}
+          </p>
+          <p className="label hidden text-right sm:block" data-hero="fade">
+            Portfolio <span className="text-accent">©{new Date().getFullYear()}</span>
+          </p>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: [0, 10, 0] }}
-          transition={{ opacity: { delay: 1.2, duration: 0.6 }, y: { delay: 1.2, duration: 2, repeat: Infinity } }}
-          className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-[var(--text-tertiary)] text-xs md:text-sm">Scroll to explore</span>
-            <FaArrowDown className="text-[var(--accent-cyan)] animate-pulse" />
+        {/* Headline */}
+        <div className="my-auto pt-[28vh] sm:pt-[18vh] lg:pt-0">
+          <h1 className="font-display font-semibold leading-[0.82] tracking-[-0.055em]">
+            <span className="label mb-4 block !tracking-[0.3em] md:mb-6" data-hero="fade">
+              Hi, I'm
+            </span>
+            <span className="hero-char block text-[length:var(--step-hero)]">
+              <SplitText text={profile.firstName} />
+            </span>
+            <span className="flex flex-wrap items-end gap-x-[3vw] gap-y-4 pl-[8vw] md:pl-[16vw]">
+              <span className="hero-char text-[length:var(--step-hero)] text-accent">
+                <SplitText text="V." />
+              </span>
+              {/* Rotating role (decorative; the full list is announced once for screen readers) */}
+              <span className="mb-[0.6em] block" data-hero="fade">
+                <span className="sr-only">{profile.roles.join(", ")}</span>
+                <span
+                  aria-hidden="true"
+                  className="block h-[1.15em] overflow-hidden text-[length:var(--step-h3)] font-medium tracking-[-0.02em] text-fg"
+                >
+                  <span ref={roleList} className="block">
+                    {[...profile.roles, profile.roles[0]].map((role, i) => (
+                      <span key={i} className="block h-[1.15em] leading-[1.15em]">
+                        {role}
+                      </span>
+                    ))}
+                  </span>
+                </span>
+              </span>
+            </span>
+          </h1>
+        </div>
+
+        {/* Bottom row: intro / socials / scroll cue */}
+        <div className="mt-12 grid grid-cols-1 items-end gap-8 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <div className="hairline mb-6 w-24 bg-accent" data-hero="line" />
+            <p className="max-w-md text-muted" data-hero="fade">
+              {profile.intro}
+            </p>
           </div>
-        </motion.div>
-      </motion.div>
+
+          <div className="md:col-span-4 md:col-start-7" data-hero="fade">
+            <p className="label mb-3">Connect with me</p>
+            <ul className="flex gap-3">
+              {socials.map(({ label, href, icon: Icon }) => (
+                <li key={label}>
+                  <Magnetic strength={0.5}>
+                    <a
+                      href={href}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noreferrer" : undefined}
+                      aria-label={label}
+                      className="grid h-12 w-12 place-items-center rounded-full border border-line-strong text-lg text-fg transition-colors duration-500 hover:border-accent hover:bg-accent hover:text-ink"
+                    >
+                      <Icon />
+                    </a>
+                  </Magnetic>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="hidden md:col-span-2 md:col-start-11 md:flex md:justify-end" data-hero="fade">
+            <a href="#about" className="group flex flex-col items-center gap-3">
+              <span className="label [writing-mode:vertical-rl]">Scroll to explore</span>
+              <span className="relative block h-16 w-px overflow-hidden bg-line-strong">
+                <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_2s_var(--ease-in-out)_infinite] bg-accent" />
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
