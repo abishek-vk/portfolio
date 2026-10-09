@@ -82,7 +82,7 @@ export default function About() {
 
           {/* ---- Copy + stats ---- */}
           <div className="lg:col-span-6 lg:col-start-7">
-            <p className="scrub-lead font-display text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.2] tracking-[-0.02em]">
+            <p className="scrub-lead font-display text-[clamp(1.5rem,1.8vw,1.875rem)] font-medium leading-[1.2] tracking-[-0.02em]">
               {lead.split(" ").map((word, i) => (
                 <span key={i} className="scrub-word">
                   {word}{" "}
@@ -97,7 +97,7 @@ export default function About() {
               {about.stats.map((s) => (
                 <div key={s.label} data-reveal-item className="flex flex-col-reverse">
                   <dt className="label mt-3">{s.label}</dt>
-                  <dd className="font-display text-[clamp(2.75rem,5vw,4.5rem)] font-semibold leading-none tracking-[-0.04em]">
+                  <dd className="font-display text-[clamp(2.75rem,3.8vw,3.5rem)] font-semibold leading-none tracking-[-0.04em]">
                     <span data-count={s.value}>{s.value}</span>
                     <span className="text-accent">{s.suffix}</span>
                   </dd>
@@ -121,7 +121,7 @@ export default function About() {
                 className="group relative grid grid-cols-[3rem_1fr] items-start gap-x-6 gap-y-3 border-b border-line py-8 transition-colors duration-500 hover:bg-glass md:grid-cols-[5rem_1fr_1fr_3rem] md:items-center md:py-10"
               >
                 <span className="label pt-2 transition-colors group-hover:text-accent md:pt-0">0{i + 1}</span>
-                <h4 className="font-display text-[clamp(1.5rem,3vw,2.75rem)] font-medium transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:translate-x-3 group-hover:text-accent">
+                <h4 className="font-display text-[clamp(1.5rem,2.2vw,2.25rem)] font-medium transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:translate-x-3 group-hover:text-accent">
                   {title}
                 </h4>
                 <p className="col-start-2 max-w-md text-muted md:col-start-3">{desc}</p>

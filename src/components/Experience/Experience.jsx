@@ -49,7 +49,7 @@ export default function Experience() {
   );
 
   return (
-    <section id="experience" ref={root} className="section" aria-labelledby="experience-title">
+    <section id="experience" ref={root} className="section overflow-x-clip" aria-labelledby="experience-title">
       <div aria-hidden="true" data-speed="0.5" className="orb right-[-12%] top-[30%] h-[45vmin] w-[45vmin] bg-[radial-gradient(circle,var(--color-accent-3),transparent_65%)]" />
 
       <div className="shell relative grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-10">
@@ -77,7 +77,7 @@ export default function Experience() {
                   <Icon />
                 </span>
 
-                <p className="tl-year font-display text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-none tracking-[-0.05em]">
+                <p className="tl-year font-display text-[clamp(2.5rem,4.5vw,4rem)] font-semibold leading-none tracking-[-0.05em]">
                   {period[0]}
                   <span className="mx-3 text-accent">—</span>
                   <span className="text-outline">{period[1]}</span>

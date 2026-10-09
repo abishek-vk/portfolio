@@ -58,7 +58,7 @@ export default function Contact() {
         <p className="eyebrow mb-8" data-reveal="fade">
           <span className="text-accent">(05)</span> Get in touch
         </p>
-        <h2 id="contact-title" className="font-display text-[clamp(3rem,9vw,9.5rem)] font-semibold leading-[0.9] tracking-[-0.05em]" data-reveal="words">
+        <h2 id="contact-title" className="font-display text-[clamp(3rem,6vw,6.5rem)] font-semibold leading-[0.9] tracking-[-0.05em]" data-reveal="words">
           <SplitText type="words" text="Let's build something" />{" "}
           <SplitText type="words" text="amazing together." className="text-accent" />
         </h2>

@@ -34,7 +34,7 @@ function ProjectCover({ project, index }) {
       <div className="grid-bg absolute inset-0 opacity-60" />
 
       {/* Giant index numeral */}
-      <span className="text-outline absolute -bottom-[0.18em] right-4 font-display text-[clamp(8rem,16vw,15rem)] font-semibold leading-none">
+      <span className="text-outline absolute -bottom-[0.18em] right-4 font-display text-[clamp(8rem,11vw,10rem)] font-semibold leading-none">
         0{index + 1}
       </span>
 
@@ -68,7 +68,7 @@ function ProjectCover({ project, index }) {
       {/* Floating headline metric (or title chip), highest layer */}
       {project.metric ? (
         <div className="glass absolute bottom-[7%] left-[6%] max-w-[60%] !rounded-[var(--radius-md)] px-5 py-3 [transform:translateZ(90px)]">
-          <span className="block font-display text-[clamp(1.75rem,3vw,2.75rem)] font-semibold leading-none tracking-[-0.04em] text-[color:var(--c1)]">
+          <span className="block font-display text-[clamp(1.75rem,2.2vw,2.25rem)] font-semibold leading-none tracking-[-0.04em] text-[color:var(--c1)]">
             {project.metric.value}
           </span>
           <span className="label mt-1 block normal-case tracking-normal text-fg">{project.metric.label}</span>
@@ -206,7 +206,7 @@ export default function Projects() {
                 <p className="label mb-5" data-panel-item>
                   Case study <span className="text-accent">0{i + 1}</span> / 0{projects.length}
                 </p>
-                <h3 id={`project-${i}`} className="font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-semibold tracking-[-0.045em]" data-panel-item>
+                <h3 id={`project-${i}`} className="font-display text-[clamp(2.25rem,2.6vw,2.75rem)] font-semibold tracking-[-0.045em]" data-panel-item>
                   {breakCamel(project.title)}
                 </h3>
                 <p className="label mt-4 !text-accent" data-panel-item>

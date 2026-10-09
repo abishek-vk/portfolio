@@ -159,7 +159,7 @@ export default function SkillSphere({ skills, labels = {}, active }) {
         <span
           key={skill}
           ref={(node) => (items.current[i] = node)}
-          className="absolute left-1/2 top-1/2 whitespace-nowrap font-display text-[clamp(0.85rem,1.4vw,1.2rem)] font-medium tracking-[-0.02em] text-fg transition-[color,text-shadow] duration-500 will-change-transform data-[on=true]:text-accent data-[on=true]:[text-shadow:0_0_24px_rgb(0_217_255/0.6)]"
+          className="absolute left-1/2 top-1/2 whitespace-nowrap font-display text-[clamp(0.85rem,1vw,1rem)] font-medium tracking-[-0.02em] text-fg transition-[color,text-shadow] duration-500 will-change-transform data-[on=true]:text-accent data-[on=true]:[text-shadow:0_0_24px_rgb(0_217_255/0.6)]"
         >
           {labels[skill] ?? skill}
         </span>

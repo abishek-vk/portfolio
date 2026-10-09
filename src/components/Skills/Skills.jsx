@@ -77,7 +77,7 @@ export default function Skills() {
                         <span className="flex items-baseline gap-5">
                           <span className={`label transition-colors ${on ? "text-accent" : ""}`}>0{i + 1}</span>
                           <span
-                            className={`font-display text-[clamp(1.5rem,2.6vw,2.25rem)] font-medium tracking-[-0.03em] transition-all duration-500 ease-[var(--ease-out-expo)] ${
+                            className={`font-display text-[clamp(1.5rem,1.8vw,1.875rem)] font-medium tracking-[-0.03em] transition-all duration-500 ease-[var(--ease-out-expo)] ${
                               on ? "translate-x-2 text-accent" : "text-fg"
                             }`}
                           >
@@ -122,7 +122,7 @@ export default function Skills() {
           {[0, 1].map((copy) => (
             <div key={copy} className="flex shrink-0 items-center">
               {allSkills.map((skill, i) => (
-                <span key={skill} className="flex items-center font-display text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-none tracking-[-0.04em]">
+                <span key={skill} className="flex items-center font-display text-[clamp(2.5rem,4.5vw,4rem)] font-semibold leading-none tracking-[-0.04em]">
                   <span className={i % 2 ? "text-outline" : "text-fg"}>{skill}</span>
                   <span className="mx-8 text-[0.5em] text-accent">✦</span>
                 </span>

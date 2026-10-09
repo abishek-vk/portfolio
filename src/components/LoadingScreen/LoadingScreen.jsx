@@ -48,7 +48,7 @@ export default function LoadingScreen({ onReveal, onDone }) {
       className="fixed inset-0 z-[150] flex items-center justify-center overflow-hidden bg-ink-2"
     >
       <div className="loader-inner flex w-[min(80vw,420px)] flex-col items-center">
-        <p className="mb-8 flex overflow-hidden font-display text-[clamp(4rem,12vw,8rem)] font-semibold leading-none tracking-[-0.06em]">
+        <p className="mb-8 flex overflow-hidden font-display text-[clamp(4rem,8vw,6rem)] font-semibold leading-none tracking-[-0.06em]">
           {[...profile.initials].map((ch, i) => (
             <span key={i} className={`loader-char inline-block ${i === 1 ? "text-accent" : ""}`}>
               {ch}

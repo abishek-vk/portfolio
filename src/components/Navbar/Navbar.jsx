@@ -162,7 +162,7 @@ export default function Navbar({ ready }) {
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="menu-link-inner group flex items-baseline gap-6 py-2 font-display text-[clamp(2.5rem,7vw,6rem)] font-semibold leading-[1.05] tracking-[-0.04em] transition-colors duration-500 hover:text-accent md:py-3"
+                  className="menu-link-inner group flex items-baseline gap-6 py-2 font-display text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.04em] transition-colors duration-500 hover:text-accent md:py-3"
                 >
                   <span className="label w-8 shrink-0 transition-colors group-hover:text-accent">0{i}</span>
                   <span className="transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:translate-x-6">
