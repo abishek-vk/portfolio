@@ -234,6 +234,38 @@ html { scrollbar-width: thin; scrollbar-color: rgb(255 255 255 / 0.18) transpare
   100% { transform: translateY(200%); }
 }
 
+/* Hero avatar (components/Hero/HeroAvatar.jsx): float, synced floor shadow,
+   platform pulse and particle drift. Looping motion only when allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .avatar-float { animation: avatar-float 6s var(--ease-in-out) infinite; }
+  .avatar-shadow { animation: avatar-shadow 6s var(--ease-in-out) infinite; }
+  .avatar-pulse { animation: avatar-pulse 3.2s ease-out infinite; }
+  .avatar-drift { animation: avatar-drift var(--dur, 9s) ease-in-out var(--delay, 0s) infinite alternate; }
+}
+@keyframes avatar-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes avatar-shadow {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(0.82); opacity: 0.55; }
+}
+@keyframes avatar-pulse {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+@keyframes avatar-drift {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(var(--dx, 10px), var(--dy, -18px), 0); }
+}
+/* Rim light that follows the PNG's alpha edge: cyan on one side, violet on the other */
+.avatar-rim {
+  filter:
+    drop-shadow(0 0 1.5px rgb(0 217 255 / 0.55))
+    drop-shadow(-10px 0 28px rgb(139 92 246 / 0.28))
+    drop-shadow(10px 0 28px rgb(0 217 255 / 0.22));
+}
+
 /* Faint blueprint grid that sits behind the hero */
 .grid-bg {
   background-image:

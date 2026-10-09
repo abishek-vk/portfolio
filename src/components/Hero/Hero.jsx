@@ -1,22 +1,18 @@
-import { lazy, Suspense, useRef } from "react";
+import { useRef } from "react";
 import { gsap, useGSAP, REDUCED_MOTION, EASE, STAGGER } from "../../lib/motion";
 import { profile, socials } from "../../data/portfolio";
 import SplitText from "../ui/SplitText";
 import Magnetic from "../ui/Magnetic";
-
-// three.js is ~150 KB gz: load it in its own chunk, after first paint.
-const HeroScene = lazy(() => import("./HeroScene"));
+import HeroAvatar from "./HeroAvatar";
 
 /**
- * Hero: oversized kinetic name over an interactive WebGL object.
+ * Hero: oversized kinetic name (left ~55%) beside a floating 3D-styled avatar.
  * The intro timeline waits for `ready` (fired as the loader curtain lifts),
- * then scroll progress drives both the scene and the content exit.
+ * then scroll progress drives both the avatar and the content exit.
  */
 export default function Hero({ ready }) {
   const root = useRef(null);
   const roleList = useRef(null);
-  // Shared with the WebGL scene each frame; a ref avoids React re-renders.
-  const sceneState = useRef({ scroll: 0, intro: REDUCED_MOTION ? 1 : 0 });
 
   useGSAP(
     () => {
@@ -24,7 +20,7 @@ export default function Hero({ ready }) {
 
       /* ---- Intro: name rises letter by letter, then the supporting UI ---- */
       const tl = gsap.timeline({ defaults: { ease: EASE.expo } });
-      tl.to(sceneState.current, { intro: 1, duration: 2.4 }, 0)
+      tl.from(".hero-avatar-stage", { autoAlpha: 0, scale: 0.86, y: 40, duration: 1.8 }, 0.2)
         .from(".hero-char .split-char-inner", { yPercent: 120, rotate: 6, duration: 1.3, stagger: STAGGER.chars * 1.5 }, 0.1)
         .from("[data-hero='fade']", { autoAlpha: 0, y: 24, duration: 1, stagger: 0.08, ease: EASE.out }, 0.6)
         .from("[data-hero='line']", { scaleX: 0, duration: 1.2 }, 0.5);
@@ -37,15 +33,16 @@ export default function Hero({ ready }) {
       }
       roll.set(roleList.current, { yPercent: 0 });
 
-      /* ---- Scroll out: content drifts up & fades, scene reads progress ---- */
+      /* ---- Scroll out: content and avatar drift up & fade ---- */
       gsap.to(".hero-content", {
         yPercent: -18,
         autoAlpha: 0,
         ease: "none",
         scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: true },
       });
-      gsap.to(sceneState.current, {
-        scroll: 1,
+      gsap.to(".hero-avatar", {
+        yPercent: -12,
+        autoAlpha: 0,
         ease: "none",
         scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: true },
       });
@@ -55,19 +52,18 @@ export default function Hero({ ready }) {
 
   return (
     <section id="home" ref={root} className="relative min-h-[100svh] overflow-hidden" aria-label="Introduction">
-      {/* ---- Depth layers: grid → glow → WebGL → vignette ---- */}
+      {/* ---- Depth layers: grid → glow → vignette → avatar ---- */}
       <div className="grid-bg absolute inset-0" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="orb right-[-10%] top-[10%] h-[60vmin] w-[60vmin] bg-[radial-gradient(circle,var(--color-accent-2),transparent_65%)]"
       />
-      <Suspense fallback={null}>
-        <HeroScene state={sceneState} />
-      </Suspense>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink to-transparent"
       />
+      {/* Above the headline on small screens; right column (aligned to the shell) from lg */}
+      <HeroAvatar className="absolute left-1/2 top-[19svh] z-[1] h-[27svh] w-[80vw] -translate-x-1/2 lg:bottom-[8vh] lg:left-auto lg:right-[max(var(--gutter),calc((100vw-1680px)/2+var(--gutter)))] lg:top-[clamp(5.5rem,14vh,8.5rem)] lg:h-auto lg:w-[40%] lg:translate-x-0" />
 
       <div className="hero-content shell relative z-10 flex min-h-[100svh] flex-col justify-between pb-8 pt-28 md:pb-10 md:pt-36">
         {/* Top meta row */}
@@ -81,7 +77,7 @@ export default function Hero({ ready }) {
         </div>
 
         {/* Headline */}
-        <div className="my-auto pt-[28vh] sm:pt-[18vh] lg:pt-0">
+        <div className="my-auto pt-[34svh] sm:pt-[32svh] lg:max-w-[55%] lg:pt-0">
           <h1 className="font-display font-semibold leading-[0.82] tracking-[-0.055em]">
             <span className="label mb-4 block !tracking-[0.3em] md:mb-6" data-hero="fade">
               Hi, I'm
@@ -114,8 +110,8 @@ export default function Hero({ ready }) {
         </div>
 
         {/* Bottom row: intro / socials / scroll cue */}
-        <div className="mt-12 grid grid-cols-1 items-end gap-8 md:grid-cols-12">
-          <div className="md:col-span-5">
+        <div className="mt-12 grid grid-cols-1 items-end gap-8 md:grid-cols-12 lg:max-w-[55%]">
+          <div className="md:col-span-5 lg:col-span-6">
             <div className="hairline mb-6 w-24 bg-accent" data-hero="line" />
             <p className="max-w-md text-muted" data-hero="fade">
               {profile.intro}
