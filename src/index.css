@@ -10,10 +10,10 @@
 @custom-variant stage (@media (min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference));
 
 @theme {
-  /* Color: deep ink base, electric cyan brand accent, violet secondary */
-  --color-ink: #07080c;
-  --color-ink-2: #0c0e15;
-  --color-ink-3: #131622;
+  /* Color: pure black base, electric cyan brand accent, violet secondary */
+  --color-ink: #000000;
+  --color-ink-2: #0a0a0a;
+  --color-ink-3: #141414;
   --color-fg: #f2f4f8;
   --color-muted: #9aa3b5; /* 7.9:1 on ink */
   --color-subtle: #7a8296; /* 5.0:1 on ink, still AA for body text */
