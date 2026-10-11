@@ -5,7 +5,7 @@ import { profile } from "../../data/portfolio";
 /** Resolves once the font stylesheets (loaded async in index.html) and the display/body faces are in. */
 const waitForFonts = () =>
   Promise.resolve(window.fontCss).then(() =>
-    Promise.all(['600 1em "Clash Display"', '400 1em "Satoshi"'].map((f) => document.fonts?.load(f)))
+    Promise.all(['600 1em "Clash Display"', '400 1em "Satoshi"', '400 1em "JetBrains Mono"'].map((f) => document.fonts?.load(f)))
   );
 
 /**

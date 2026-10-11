@@ -17,6 +17,8 @@
     <!-- Loaded without blocking first paint. window.fontCss resolves once both
          stylesheets have settled; the intro loader waits on it (LoadingScreen.jsx). -->
     <script>
+      // Hide font-dependent content until the loader lifts (see .fonts-pending in index.css)
+      document.documentElement.classList.add("fonts-pending");
       window.fontCss = new Promise(function (r) { var n = 2; window.__fontCssDone = function () { if (--n === 0) r(); }; });
     </script>
     <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap" onload="this.onload=null;this.rel='stylesheet';__fontCssDone()" onerror="__fontCssDone()" />
@@ -28,10 +30,22 @@
 
     <!-- Hero avatar is the LCP image: fetch it alongside the JS bundle (keep in sync with HeroAvatar.jsx) -->
     <link rel="preload" as="image" type="image/webp" fetchpriority="high"
-      imagesrcset="/images/avatar-334.webp 334w, /images/avatar-480.webp 480w, /images/avatar-668.webp 668w"
-      imagesizes="(min-width: 1024px) 38vh, 13vh" />
+      imagesrcset="/images/avatar-200.webp 200w, /images/avatar-260.webp 260w, /images/avatar-360.webp 360w, /images/avatar-480.webp 480w, /images/avatar-668.webp 668w"
+      imagesizes="(min-width: 1024px) 35vh, 12vh" />
   </head>
   <body>
+    <!-- Static first frame of LoadingScreen so the page paints before the JS
+         bundle arrives. Mirrors its markup; App removes it once React mounts. -->
+    <div id="boot" aria-hidden="true" class="fixed inset-0 z-[150] flex items-center justify-center overflow-hidden bg-ink-2">
+      <div class="flex w-[min(80vw,420px)] flex-col items-center">
+        <p class="invisible mb-8 font-display text-[clamp(4rem,8vw,6rem)] font-semibold leading-none tracking-[-0.06em]">AV</p>
+        <div class="hairline w-full origin-left bg-accent" style="transform: scaleX(0)"></div>
+        <div class="mt-4 flex w-full justify-between">
+          <span class="label">Abishek V — Portfolio</span>
+          <span class="label tabular-nums text-fg">000</span>
+        </div>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

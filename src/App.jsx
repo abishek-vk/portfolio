@@ -24,6 +24,8 @@ function App() {
 
   /* Smooth scroll + always start at the top so the intro is seen */
   useEffect(() => {
+    // React's loader (or the site, under reduced motion) is painted: drop the static one from index.html
+    document.getElementById("boot")?.remove();
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
     initSmoothScroll();
@@ -34,6 +36,7 @@ function App() {
   useEffect(() => {
     lockScroll(!ready);
     if (!ready) return;
+    document.documentElement.classList.remove("fonts-pending");
     // Fonts / layout may have shifted during loading: re-measure triggers
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
   }, [ready]);

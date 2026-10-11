@@ -17,8 +17,8 @@ import { gsap, useGSAP, FINE_POINTER, REDUCED_MOTION } from "../../lib/motion";
  */
 // Keep in sync with the <link rel="preload"> in index.html. The image is
 // ~0.48:1 and fills the stage height, so its width tracks viewport height.
-const AVATAR_SRCSET = "/images/avatar-334.webp 334w, /images/avatar-480.webp 480w, /images/avatar-668.webp 668w";
-const AVATAR_SIZES = "(min-width: 1024px) 38vh, 13vh";
+const AVATAR_SRCSET = "/images/avatar-200.webp 200w, /images/avatar-260.webp 260w, /images/avatar-360.webp 360w, /images/avatar-480.webp 480w, /images/avatar-668.webp 668w";
+const AVATAR_SIZES = "(min-width: 1024px) 35vh, 12vh";
 
 const ITEMS = [
   { Icon: SiReact, x: 12, y: 24, d: 1.3 },

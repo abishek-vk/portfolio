@@ -120,6 +120,14 @@
   img { display: block; max-width: 100%; }
 }
 
+/* Set by index.html, cleared by App when the loader lifts. Web fonts load
+   asynchronously behind the loader; keeping the text invisible until then
+   means the fallback→web font swap can't register as layout shift. The
+   avatar is absolutely positioned (unaffected by text reflow) and stays
+   visible so it can still paint as the LCP image. */
+html.fonts-pending :is(#main, header) { visibility: hidden; }
+html.fonts-pending .hero-avatar { visibility: visible; }
+
 /* Thin, quiet scrollbar */
 html { scrollbar-width: thin; scrollbar-color: rgb(255 255 255 / 0.18) transparent; }
 ::-webkit-scrollbar { width: 8px; }
