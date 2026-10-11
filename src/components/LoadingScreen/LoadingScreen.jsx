@@ -2,8 +2,14 @@ import { useRef } from "react";
 import { gsap, useGSAP, EASE } from "../../lib/motion";
 import { profile } from "../../data/portfolio";
 
+/** Resolves once the font stylesheets (loaded async in index.html) and the display/body faces are in. */
+const waitForFonts = () =>
+  Promise.resolve(window.fontCss).then(() =>
+    Promise.all(['600 1em "Clash Display"', '400 1em "Satoshi"'].map((f) => document.fonts?.load(f)))
+  );
+
 /**
- * Intro loader (~2s): monogram rises, a counter runs to 100 while a hairline
+ * Intro loader (~1.5s): monogram rises, a counter runs to 100 while a hairline
  * fills, then the panel lifts like a curtain to reveal the hero.
  *
  *   onReveal → fired as the curtain starts lifting (hero intro begins)
@@ -20,22 +26,22 @@ export default function LoadingScreen({ onReveal, onDone }) {
       const counter = { v: 0 };
       const tl = gsap.timeline({ onComplete: onDone });
 
-      tl.from(".loader-char", { yPercent: 110, duration: 1, stagger: 0.08, ease: EASE.expo })
+      tl.from(".loader-char", { yPercent: 110, duration: 0.8, stagger: 0.08, ease: EASE.expo })
         .to(counter, {
           v: 100,
-          duration: 1.4,
+          duration: 0.9,
           ease: "power2.inOut",
           onUpdate: () => (count.current.textContent = String(Math.round(counter.v)).padStart(3, "0")),
-        }, 0.2)
-        .from(".loader-bar", { scaleX: 0, duration: 1.4, ease: "power2.inOut" }, 0.2)
+        }, 0.15)
+        .from(".loader-bar", { scaleX: 0, duration: 0.9, ease: "power2.inOut" }, 0.15)
         .add(() => {
-          // Wait for fonts (max 1.5s) before lifting the curtain
+          // Wait for fonts (max 1s) before lifting the curtain
           tl.pause();
-          Promise.race([document.fonts?.ready, new Promise((r) => setTimeout(r, 1500))]).then(() => tl.play());
+          Promise.race([waitForFonts(), new Promise((r) => setTimeout(r, 1000))]).then(() => tl.play());
         })
-        .to(".loader-inner", { yPercent: -40, autoAlpha: 0, duration: 0.7, ease: EASE.inOut })
-        .add(() => onReveal?.(), "-=0.3")
-        .to(root.current, { yPercent: -100, duration: 1.1, ease: "expo.inOut" }, "<");
+        .to(".loader-inner", { yPercent: -40, autoAlpha: 0, duration: 0.5, ease: EASE.inOut })
+        .add(() => onReveal?.(), "-=0.25")
+        .to(root.current, { yPercent: -100, duration: 0.9, ease: "expo.inOut" }, "<");
     },
     { scope: root }
   );

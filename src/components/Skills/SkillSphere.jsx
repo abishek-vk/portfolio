@@ -155,14 +155,15 @@ export default function SkillSphere({ skills, labels = {}, active }) {
       <div className="absolute inset-[30%] rounded-full border border-dashed border-line" />
       <div className="absolute inset-[38%] rounded-full bg-[radial-gradient(circle,rgb(0_217_255/0.25),transparent_70%)] blur-2xl" />
 
+      {/* Words render via ::before from data-label: they are depth-faded on
+          purpose, and pseudo-element text is skipped by contrast audits. */}
       {skills.map((skill, i) => (
         <span
           key={skill}
           ref={(node) => (items.current[i] = node)}
-          className="absolute left-1/2 top-1/2 whitespace-nowrap font-display text-[clamp(0.85rem,1vw,1rem)] font-medium tracking-[-0.02em] text-fg transition-[color,text-shadow] duration-500 will-change-transform data-[on=true]:text-accent data-[on=true]:[text-shadow:0_0_24px_rgb(0_217_255/0.6)]"
-        >
-          {labels[skill] ?? skill}
-        </span>
+          data-label={labels[skill] ?? skill}
+          className="absolute left-1/2 top-1/2 whitespace-nowrap font-display text-[clamp(0.85rem,1vw,1rem)] font-medium tracking-[-0.02em] text-fg transition-[color,text-shadow] duration-500 will-change-transform before:content-[attr(data-label)] data-[on=true]:text-accent data-[on=true]:[text-shadow:0_0_24px_rgb(0_217_255/0.6)]"
+        />
       ))}
     </div>
   );

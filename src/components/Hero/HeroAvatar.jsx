@@ -15,6 +15,11 @@ import { gsap, useGSAP, FINE_POINTER, REDUCED_MOTION } from "../../lib/motion";
  * .hero-avatar). Pointer effects need a fine pointer; all looping motion is
  * CSS and switched off under prefers-reduced-motion (see index.css).
  */
+// Keep in sync with the <link rel="preload"> in index.html. The image is
+// ~0.48:1 and fills the stage height, so its width tracks viewport height.
+const AVATAR_SRCSET = "/images/avatar-334.webp 334w, /images/avatar-480.webp 480w, /images/avatar-668.webp 668w";
+const AVATAR_SIZES = "(min-width: 1024px) 38vh, 13vh";
+
 const ITEMS = [
   { Icon: SiReact, x: 12, y: 24, d: 1.3 },
   { Icon: SiPython, x: 84, y: 32, d: 0.8 },
@@ -45,8 +50,7 @@ function Floater({ item, i }) {
         style={{
           "--dur": `${7 + (i % 4) * 1.6}s`,
           "--delay": `${-i * 1.3}s`,
-          "--dx": `${(i % 2 ? -1 : 1) * (6 + d * 8)}px`,
-          "--dy": `${-(10 + d * 10)}px`,
+          "--drift": `drift-${d >= 1 ? "near" : "far"}-${i % 2 ? "l" : "r"}`,
           opacity: far ? 0.5 : 0.9,
           filter: far ? "blur(1px)" : undefined,
         }}
@@ -139,7 +143,11 @@ export default function HeroAvatar({ className = "" }) {
         >
           <div className="avatar-float h-full will-change-transform">
             <img
-              src="/images/avatar.png"
+              src="/images/avatar-668.webp"
+              srcSet={AVATAR_SRCSET}
+              sizes={AVATAR_SIZES}
+              width="668"
+              height="1404"
               alt=""
               draggable="false"
               decoding="async"

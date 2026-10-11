@@ -14,8 +14,22 @@
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Loaded without blocking first paint. window.fontCss resolves once both
+         stylesheets have settled; the intro loader waits on it (LoadingScreen.jsx). -->
+    <script>
+      window.fontCss = new Promise(function (r) { var n = 2; window.__fontCssDone = function () { if (--n === 0) r(); }; });
+    </script>
+    <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap" onload="this.onload=null;this.rel='stylesheet';__fontCssDone()" onerror="__fontCssDone()" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet';__fontCssDone()" onerror="__fontCssDone()" />
+    <noscript>
+      <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    </noscript>
+
+    <!-- Hero avatar is the LCP image: fetch it alongside the JS bundle (keep in sync with HeroAvatar.jsx) -->
+    <link rel="preload" as="image" type="image/webp" fetchpriority="high"
+      imagesrcset="/images/avatar-334.webp 334w, /images/avatar-480.webp 480w, /images/avatar-668.webp 668w"
+      imagesizes="(min-width: 1024px) 38vh, 13vh" />
   </head>
   <body>
     <div id="root"></div>

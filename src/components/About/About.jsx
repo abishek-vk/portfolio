@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { gsap, useGSAP, REDUCED_MOTION } from "../../lib/motion";
 import { about, profile } from "../../data/portfolio";
-import abiImage from "../../assets/abi image.jpeg";
+import abiImage from "../../assets/abi-portrait.webp";
 import SectionHeading from "../ui/SectionHeading";
 
 /**
@@ -63,6 +63,8 @@ export default function About() {
                 <img
                   src={abiImage}
                   alt="Portrait of Abishek V"
+                  width="720"
+                  height="1600"
                   loading="lazy"
                   decoding="async"
                   data-speed="0.25"
